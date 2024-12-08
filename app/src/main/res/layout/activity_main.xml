@@ -27,8 +27,6 @@
             android:layout_height="40sp"
             android:text="hello"
             android:gravity="center"
-            app:neumorph_shadowColorLight="@color/black"
-            app:neumorph_shadowColorDark="@color/black"
             app:neumorph_shapeType="flat"/>
 
         <soup.neumorphism.NeumorphCardView
