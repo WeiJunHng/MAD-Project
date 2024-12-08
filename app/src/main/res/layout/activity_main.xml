@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="40sp"
+    android:paddingStart="40sp"
+    android:paddingEnd="40sp"
+    tools:context=".MainActivity">
+
+
+        <TextView
+            android:id="@+id/LoginTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:fontFamily=""/>
+
+        <soup.neumorphism.NeumorphButton
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:text="hello"
+            android:gravity="center"
+            app:neumorph_shadowColorLight="@color/black"
+            app:neumorph_shadowColorDark="@color/black"
+            app:neumorph_shapeType="flat"/>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:neumorph_shadowColorLight="#FFFFFF"
+            app:neumorph_shadowColorDark="#AAAAAA"
+            app:neumorph_shapeType="flat">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ETEmail"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#EEF6E1"
+                app:boxStrokeWidth="0sp"
+                app:boxCornerRadiusBottomEnd="5sp"
+                app:boxCornerRadiusBottomStart="5sp"
+                app:boxCornerRadiusTopEnd="5sp"
+                app:boxCornerRadiusTopStart="5sp"
+                android:hint="@string/email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:background="#EEF6E1"
+                    android:hint="@string/email"
+                    android:textSize="20sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+
+
+        <EditText
+            android:id="@+id/ETPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:autofillHints="Password}"
+            android:hint="@string/password"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/TVForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/BtnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textSize="20sp" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/TVNoAcc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dont_have_an_account"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/TVSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7sp"
+                android:text="@string/sign_up"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
