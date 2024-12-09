@@ -28,9 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="hello"
-            app:neumorph_shadowElevation="6sp"
-            app:neumorph_shadowColorLight="@color/black"
-            app:neumorph_shadowColorDark="@color/black" />
+            app:neumorph_shadowElevation="6sp"/>
 
         <soup.neumorphism.NeumorphCardView
             android:layout_width="match_parent"
