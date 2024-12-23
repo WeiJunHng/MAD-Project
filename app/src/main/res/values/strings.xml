@@ -3,8 +3,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="login">Login</string>
     <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="cancel">Cancel</string>
+    <string name="i_agree_to_the">I agree to the</string>
+    <string name="community_guidelines"><u>Community Guidelines</u></string>
+    <string name="terms_of_service"><u>Terms of Service</u></string>
 </resources>
