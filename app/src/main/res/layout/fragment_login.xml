@@ -27,7 +27,7 @@
         <soup.neumorphism.NeumorphButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="bye"
+            android:text="hello"
             app:neumorph_shadowElevation="6sp"/>
 
         <soup.neumorphism.NeumorphCardView
