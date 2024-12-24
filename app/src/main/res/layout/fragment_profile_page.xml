@@ -53,7 +53,7 @@
         android:id="@+id/BtnEditProfileIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="250dp"
+        android:layout_marginStart="260dp"
         android:layout_marginTop="230dp"
         android:background="@drawable/ic_edit_profile"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,8 +103,8 @@
         android:text="Edit Profile"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="12dp"
+        android:textStyle="bold"
         app:cornerRadius="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,12 +131,12 @@
         android:id="@+id/AccountSettingsList"
         android:layout_width="330dp"
         android:layout_height="330dp"
-        android:divider="@null"
-        android:scrollbars="none"
         android:layout_marginStart="30dp"
         android:layout_marginTop="420dp"
+        android:divider="@null"
+        android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 
