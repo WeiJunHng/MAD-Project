@@ -1,0 +1,95 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/CLPostItem"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.madproject.PostFragment">
+
+    <ImageButton
+        android:id="@+id/IBBoldText"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:contentDescription="Bold Text"
+        android:src="@drawable/text_bold_button"
+        app:layout_constraintStart_toEndOf="@+id/IBLocation"
+        app:layout_constraintTop_toBottomOf="@+id/ETText" />
+
+    <ImageButton
+        android:id="@+id/IBLocation"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:contentDescription="Location"
+        android:src="@drawable/location_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ETText" />
+
+    <Button
+        android:id="@+id/BtnPost"
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="28dp"
+        android:text="Post"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <EditText
+    android:id="@+id/ETText"
+    android:layout_width="385dp"
+    android:layout_height="405dp"
+    android:layout_marginTop="24dp"
+    android:ems="10"
+    android:gravity="top"
+    android:hint="Text..."
+    android:inputType="text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/BtnPost" />
+
+    <ImageButton
+        android:id="@+id/IBLink"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:contentDescription="Link"
+        app:layout_constraintStart_toEndOf="@+id/IBBoldText"
+        app:layout_constraintTop_toBottomOf="@+id/ETText"
+        app:srcCompat="@drawable/link_button" />
+
+    <ImageButton
+        android:id="@+id/IBTagUser"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:background="@null"
+        android:contentDescription="Tag User"
+        app:layout_constraintStart_toEndOf="@+id/IBLink"
+        app:layout_constraintTop_toBottomOf="@+id/ETText"
+        app:srcCompat="@drawable/tag_user_button" />
+
+    <ImageButton
+        android:id="@+id/IBGallery"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:background="@null"
+        android:contentDescription="Choose Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/IBTagUser"
+        app:layout_constraintTop_toBottomOf="@+id/ETText"
+        app:srcCompat="@drawable/gallery_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>

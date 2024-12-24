@@ -53,6 +53,8 @@ dependencies {
 
     // Room
     implementation(libs.room.runtime)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     annotationProcessor(libs.room.compiler)
 
     implementation(libs.annotation)
@@ -62,4 +64,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("androidx.cardview:cardview:1.0.0")
 }
