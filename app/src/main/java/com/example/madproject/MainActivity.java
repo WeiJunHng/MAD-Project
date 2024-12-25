@@ -2,61 +2,46 @@ package com.example.madproject;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.example.madproject.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        //Load discussion forum fragment
-        if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.FLFragmentContainer, new DiscussionForum())
-                    .commit();
-        }
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.BNVNavigationBar);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
+        NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.FCVMain);
+        NavController navController = host.getNavController();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-            switch (item.getItemId()) {
-//                case R.id.nav_news:
-//                    selectedFragment = new NewsFragment(); // Navigate to NewsFragment
-//                    break;
-
-                case R.id.nav_precaution:
-                    selectedFragment = new Precaution(); // Navigate to PrecautionFragment
-                    break;
-
-//                case R.id.nav_home:
-//                    selectedFragment = new HomeFragment(); // Navigate to HomeFragment
-//                    break;
-
-                case R.id.nav_posts:
-                    selectedFragment = new DiscussionForum(); // Navigate to DiscussionForum
-                    break;
-
-//                case R.id.nav_profile:
-//                    selectedFragment = new ProfileFragment(); // Navigate to ProfileFragment
-//                    break;
-            }
-
-            if (selectedFragment != null) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.FLFragmentContainer, selectedFragment)
-                        .commit();
-            }
-
-            return true;
-        });
-
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.BottomNavView, navController);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        try {
+            Navigation.findNavController(this, R.id.FCVMain).navigate(item.getItemId());
+            return true;
+        } catch (Exception ex) {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

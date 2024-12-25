@@ -15,4 +15,23 @@
     <string name="i_agree_to_the">I agree to the</string>
     <string name="community_guidelines"><u>Community Guidelines</u></string>
     <string name="terms_of_service"><u>Terms of Service</u></string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="gender"><u>Gender</u></string>
+    <string name="birthday"><u>Birthday</u></string>
+    <string name="complete_your_profile">Complete Your Profile</string>
+    <string name="continue_text">Continue</string>
+    <string name="back">Back</string>
+    <string name="guidelines_welcome">Welcome to <b>Soluna</b>, a platform dedicated to empowering individuals, supporting gender equality, and promoting women’s health. We’ve created a space where everyone is encouraged to learn, share, and grow while maintaining a safe and respectful environment. These Community Guidelines will help us protect the values that make <b>Soluna</b> unique. By using <b>Soluna</b>, you agree to adhere to these guidelines and our Terms of Use. We ask you to actively help maintain our supportive, inclusive, and respectful community.</string>
+    <string name="guidelines_respect_users">Our community thrives on diversity, and we are committed to fostering an environment where everyone feels safe, respected, and empowered. <b>Soluna</b> is built to support discussions, education, and advocacy around <b>gender equality</b>, <b>women\'s health</b>, and <b>female empowerment</b>. We do not tolerate any form of discrimination or harassment based on gender, sexual orientation, race, ethnicity, religion, nationality, or any other identity characteristic.</string>
+    <string name="guidelines_sharing_content"><b>Soluna</b> is a space to share personal experiences, educational resources, and support. We encourage you to share content related to gender equality, female health, and important issues affecting women and marginalized genders. However, all content must align with these guidelines:</string>
+    <string name="guidelines_interactions">We want <b>Soluna</b> to be a place for positive, meaningful conversations that help raise awareness, educate, and support one another. Please follow these guidelines to help us maintain a healthy community:</string>
+    <string name="guidelines_respect_intellectual">You retain ownership of your content on <b>Soluna</b>, but you must respect the intellectual property of others. Share only content you have the right to post. Do not post copyrighted materials (e.g., images, videos, and text) without permission.</string>
+    <string name="guidelines_compliance"><b>Soluna</b> is a place for fostering knowledge and sharing information. We do not tolerate illegal or harmful activities.</string>
+    <string name="guidelines_violence">We are committed to creating a supportive environment. We do not tolerate hate speech, violence, or threats of harm based on gender, race, sexuality, or any personal characteristic.</string>
+    <string name="guidelines_respect_newsworthy">We understand that important events and news related to gender equality and women’s health are shared on <b>Soluna</b>. While we encourage education and awareness, please be mindful of the following:</string>
+    <string name="guidelines_support">We are all part of the <b>Soluna</b> community. If you see content that may violate these guidelines, please report it using the app’s reporting feature. Our team will review the report and take action as necessary to maintain a safe and respectful environment.</string>
+    <string name="guidelines_conclusion">We want <b>Soluna</b> to be a safe and empowering platform for everyone. These guidelines are here to help us protect and nurture our community. Together, we can foster an environment where everyone can engage, learn, and grow in the pursuit of gender equality and better health for all. Thank you for being part of the <b>Soluna</b> community.</string>
+    <string name="guidelines_ending">By adhering to these guidelines, you are contributing to a supportive space where gender equality, women’s health, and safety are prioritized. We are grateful for your participation in creating a positive and empowering environment for all.</string>
 </resources>
