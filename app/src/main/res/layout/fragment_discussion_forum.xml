@@ -1,0 +1,81 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/CLmain"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.madproject.DiscussionForum">
+
+<TextView
+    android:id="@+id/TVForumPostTitle"
+    android:layout_width="181dp"
+    android:layout_height="62dp"
+    android:layout_marginTop="12dp"
+    android:gravity="center_horizontal"
+    android:text="Post"
+    android:textSize="40sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/IBForumPostButton" />
+
+<ImageButton
+    android:id="@+id/IBForumPostButton"
+    android:layout_width="70dp"
+    android:layout_height="60dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="4dp"
+    android:contentDescription="Post"
+    android:background="@null"
+    app:layout_constraintEnd_toStartOf="@+id/IBForumSearchButton"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/forum_post_button" />
+
+    <ImageButton
+        android:id="@+id/IBForumSearchButton"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:contentDescription="Search"
+        app:layout_constraintEnd_toStartOf="@+id/IBForumChatButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/search_post_button" />
+
+    <ImageButton
+        android:id="@+id/IBForumChatButton"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:background="@null"
+        android:contentDescription="Chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chat_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVPosts"
+        android:layout_width="410dp"
+        android:layout_height="499dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVForumPostTitle" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BNVNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="2dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RVPosts"
+        app:menu="@menu/bottom_navigation_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
