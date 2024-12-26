@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">News</string>
     <string name="api_key">887ae6858ab3422cbda2f44c8251f610</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
