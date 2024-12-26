@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#93BEA3</color>
+    <color name="nav_bar">#6B39A4</color>
+    <color name="icon_active">#C8FF6F</color>
+    <color name="icon_inactive">#E38DFF</color>
+    <color name="text">#000000</color>
+    <color name="title">#EEF6E1</color>
+</resources>
