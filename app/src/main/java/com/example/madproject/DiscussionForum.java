@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,6 +82,11 @@ public class DiscussionForum extends Fragment implements OnPostClickListener{
         postListAdapter = new PostListAdapter(postList, this);
         recyclerView.setAdapter(postListAdapter);
 
+        // Navigate to Chat List when the chat button is clicked
+        view.findViewById(R.id.IBForumChatButton).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_discussionForum_to_chatListFragment);
+        });
+
         return view;
     }
 
@@ -90,7 +96,7 @@ public class DiscussionForum extends Fragment implements OnPostClickListener{
         DetailPost detailPostFragment = DetailPost.newInstance(post.getImageUrl(), post.getContent());
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.FLFragmentContainer, detailPostFragment)
+                .replace(R.id.CLmain, detailPostFragment)
                 .addToBackStack(null)
                 .commit();
     }

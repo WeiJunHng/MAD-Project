@@ -1,20 +1,21 @@
 package com.example.madproject;
 
 public class User {
-    private final String name;
-    private final int profileImage;
+    private String username;
+    private int profileImageResId;
 
-    public User(String name, int profileImage) {
-        this.name = name;
-        this.profileImage = profileImage;
+    public User(String username, int profileImageResId) {
+        this.username = username;
+        this.profileImageResId = profileImageResId;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public int getProfileImage() {
-        return profileImage;
+    public int getProfileImageResId() {
+        return profileImageResId;
     }
 }
+
 
