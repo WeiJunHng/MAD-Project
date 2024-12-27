@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350sp"
+    android:layout_height="607sp"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/light_background"
+    tools:context=".ui.signup.GuidelinesFragment">
+
+    <ImageButton
+        android:id="@+id/BtnClose"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/close_icon"
+        android:contentDescription="Close" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="12sp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:text="Soluna Community Guidelines"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/introduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_welcome"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp" />
+
+            <!-- Respect for All Users Section -->
+            <TextView
+                android:id="@+id/respect_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Respect for All Users"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/respect_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_respect_users"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <!-- Bulleted Section Example -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVRespectUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Sharing Content Responsibility section -->
+            <TextView
+                android:id="@+id/bulleted_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sharing Content Responsibly"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_sharing_content"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVSharingContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Meaningful and Genuine Interactions section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meaningful and Genuine Interactions"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_interactions"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVInteractions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Respect for Intellectual Property section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Respect for Intellectual Property"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_respect_intellectual"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVIntellectual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Safety and Legal Compliance section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Safety and Legal Compliance"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_compliance"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVCompliance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- No Hate Speech or Violence section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Hate Speech or Violence"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_violence"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVViolence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Respect for Newsworthy Content section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Respect for Newsworthy Content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_respect_newsworthy"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVNewsworthy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Support and Reporting section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Support and Reporting"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_support"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+
+            <!-- Support and Reporting section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="In Conclusion"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_conclusion"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guidelines_ending"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:justificationMode="inter_word"
+                android:paddingBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thank you,"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The Soluna Team"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:paddingBottom="32dp" />
+
+            <!-- Agree section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingBottom="16dp">
+
+                <CheckBox
+                    android:id="@+id/CBoxAgree"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5sp"
+                    android:text="I agree to the Community Guidelines"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
