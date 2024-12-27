@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.precaution;
 
 public class PrecautionItem {
     private String title;

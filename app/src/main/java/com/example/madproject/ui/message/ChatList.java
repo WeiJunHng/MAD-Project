@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.message;
 
 import android.os.Bundle;
 
@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.madproject.R;
+import com.example.madproject.User;
+import com.example.madproject.UserAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
