@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.precaution;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.madproject.R;
 
 /**
  * A simple {@link Fragment} subclass.

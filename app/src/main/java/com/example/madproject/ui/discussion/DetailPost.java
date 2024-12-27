@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.discussion;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.madproject.R;
 
 import java.util.ArrayList;
 import java.util.List;

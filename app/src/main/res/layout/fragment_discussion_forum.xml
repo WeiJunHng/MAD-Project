@@ -4,7 +4,7 @@
     android:id="@+id/CLmain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madproject.DiscussionForum">
+    tools:context="com.example.madproject.ui.discussion.DiscussionForum">
 
     <TextView
         android:id="@+id/TVForumPostTitle"

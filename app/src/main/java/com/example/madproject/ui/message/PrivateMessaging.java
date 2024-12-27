@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.message;
 
 import android.os.Bundle;
 
@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.madproject.R;
 
 import java.util.ArrayList;
 import java.util.List;

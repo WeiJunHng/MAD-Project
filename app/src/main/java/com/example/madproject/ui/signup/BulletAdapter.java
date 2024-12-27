@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madproject.R;
+import com.example.madproject.databinding.ItemBulletBinding;
 
 import java.util.List;
 
@@ -52,11 +53,12 @@ public class BulletAdapter extends RecyclerView.Adapter<BulletAdapter.BulletView
     }
 
     public static class BulletViewHolder extends RecyclerView.ViewHolder {
-        TextView bulletDescription;
-
+        final TextView bulletDescription;
+        private final ItemBulletBinding binding;
         public BulletViewHolder(@NonNull View itemView) {
             super(itemView);
-            bulletDescription = itemView.findViewById(R.id.bullet_description);
+            binding = ItemBulletBinding.bind(itemView);
+            bulletDescription = binding.bulletDescription;
         }
     }
 }
