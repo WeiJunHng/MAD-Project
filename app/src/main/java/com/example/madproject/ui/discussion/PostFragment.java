@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.discussion;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +23,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.madproject.R;
 
 import java.io.IOException;
 

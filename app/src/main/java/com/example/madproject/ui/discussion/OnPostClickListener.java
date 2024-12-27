@@ -1,6 +1,5 @@
-package com.example.madproject;
+package com.example.madproject.ui.discussion;
 
-import com.example.madproject.Post;
 public interface OnPostClickListener {
     void onPostClick(Post post); // Handle navigation to Post Details
 }

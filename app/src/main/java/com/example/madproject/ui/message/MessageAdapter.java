@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.message;
 //List of all chats
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.madproject.R;
 
 import java.util.List;
 

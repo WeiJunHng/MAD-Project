@@ -52,7 +52,7 @@ public class PrecautionFragment extends Fragment {
 //import androidx.fragment.app.Fragment;
 //import androidx.navigation.Navigation;
 //
-//import com.example.madproject.PrecautionItem;
+//import com.example.madproject.ui.precaution.PrecautionItem;
 //import com.example.madproject.R;
 //
 //import java.util.ArrayList;

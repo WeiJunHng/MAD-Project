@@ -1,5 +1,5 @@
 
-package com.example.madproject;
+package com.example.madproject.ui.precaution;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+
+import com.example.madproject.R;
 
 import java.util.ArrayList;
 import java.util.List;

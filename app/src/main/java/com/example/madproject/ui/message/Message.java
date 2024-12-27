@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.message;
 
 public class Message {
     private String sender;

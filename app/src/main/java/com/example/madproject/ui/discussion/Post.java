@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.discussion;
 
 public class Post {
     private String content;
