@@ -8,9 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,11 @@ public class DetailPost extends Fragment {
 
     // Track like status
     private boolean isLiked = false;
+    private boolean isReportConfirmationVisible = false;
+
+    private RecyclerView commentsRecyclerView;
+    private CommentAdapter commentAdapter;
+    private List<String> commentsList;
 
     public DetailPost() {
         // Required empty public constructor
@@ -69,6 +81,9 @@ public class DetailPost extends Fragment {
         ImageView imageView = view.findViewById(R.id.IVPostImage);
         TextView contentTextView = view.findViewById(R.id.TVPosttext);
         ImageButton likeButton = view.findViewById(R.id.IBLike);
+        ImageButton reportButton = view.findViewById(R.id.IBReport);
+        View confirmReportButton = view.findViewById(R.id.ConfirmReportButton);
+        commentsRecyclerView = view.findViewById(R.id.RVComments);
 
         // Load image using URI or set as drawable resource
         if (image != null) {
@@ -80,6 +95,13 @@ public class DetailPost extends Fragment {
         if (content != null) {
             contentTextView.setText(content);
         }
+
+        // Initialize comments list and adapter
+        commentsList = new ArrayList<>();
+        populateDummyComments(); // Add some dummy comments
+        commentAdapter = new CommentAdapter(commentsList);
+        commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        commentsRecyclerView.setAdapter(commentAdapter);
 
         // Like button toggle logic
         likeButton.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +118,30 @@ public class DetailPost extends Fragment {
             }
         });
 
+        // Report button logic
+        reportButton.setOnClickListener(v -> {
+            if (!isReportConfirmationVisible) {
+                confirmReportButton.setVisibility(View.VISIBLE);
+                isReportConfirmationVisible = true;
+            }
+        });
+
+        // Confirm report button logic
+        confirmReportButton.setOnClickListener(v -> {
+            confirmReportButton.setVisibility(View.GONE);
+            isReportConfirmationVisible = false;
+            Toast.makeText(getContext(), "Report Successful", Toast.LENGTH_SHORT).show();
+        });
+
         return view;
+    }
+
+    // Add dummy comments to the list
+    private void populateDummyComments() {
+        commentsList.add("This is a great post!");
+        commentsList.add("Thanks for sharing.");
+        commentsList.add("Amazing content, keep it up!");
+        commentsList.add("Really insightful post.");
+        commentsList.add("Great work!");
     }
 }

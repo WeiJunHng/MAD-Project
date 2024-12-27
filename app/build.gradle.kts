@@ -56,12 +56,12 @@ dependencies {
     implementation(libs.neumorphism)
 
     // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
-    implementation(libs.firebase.auth.v2111)
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore:25.1.1")
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-auth")
 
     // Email
 //    implementation(libs.android.mail)

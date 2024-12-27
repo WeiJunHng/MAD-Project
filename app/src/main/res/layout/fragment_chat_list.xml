@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatList">
+
+    <ImageButton
+        android:id="@+id/IBBackToDiscussion"
+        android:layout_width="57dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:contentDescription="Back Arrow"
+        android:src="@drawable/arrow_left_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVUserChatListName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Username"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@id/IBBackToDiscussion"
+        app:layout_constraintTop_toTopOf="@id/IBBackToDiscussion"
+        app:layout_constraintBottom_toBottomOf="@id/IBBackToDiscussion" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVChatList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/BNVNavigationBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/IBBackToDiscussion" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BNVNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
+</androidx.constraintlayout.widget.ConstraintLayout>

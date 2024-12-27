@@ -82,4 +82,15 @@
         app:layout_constraintTop_toBottomOf="@+id/IBComment"
         app:layout_constraintVertical_bias="0.695" />
 
+    <Button
+        android:id="@+id/ConfirmReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Report"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/IBReport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

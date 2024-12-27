@@ -8,6 +8,42 @@
     <fragment
         android:id="@+id/discussionForum"
         android:name="com.example.madproject.DiscussionForum"
-        android:label="fragment_discussion_forum"
-        tools:layout="@layout/fragment_discussion_forum" />
+        android:label="Discussion Forum"
+        tools:layout="@layout/fragment_discussion_forum">
+        <action
+            android:id="@+id/action_discussionForum_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.example.madproject.ChatList"
+        android:label="Chat List"
+        tools:layout="@layout/fragment_chat_list">
+        <action
+            android:id="@+id/action_chatListFragment_to_privateMessagingFragment"
+            app:destination="@id/privateMessagingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/privateMessagingFragment"
+        android:name="com.example.madproject.PrivateMessaging"
+        android:label="Private Messaging"
+        tools:layout="@layout/fragment_private_messaging" />
+
+    <fragment
+        android:id="@+id/precautionFragment"
+        android:name="com.example.madproject.Precaution"
+        android:label="Precaution"
+        tools:layout="@layout/fragment_precaution">
+        <action
+            android:id="@+id/action_precautionFragment_to_precautionDetailFragment"
+            app:destination="@id/precautionDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/precautionDetailFragment"
+        android:name="com.example.madproject.PrecautionDetail"
+        android:label="Precaution Detail"
+        tools:layout="@layout/fragment_precaution_detail" />
 </navigation>

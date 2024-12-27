@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Use ViewBinding for accessing views
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -36,7 +39,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        // Enable navigating up
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.FCVMain);
+        NavController navController = navHostFragment.getNavController();
+        return navController.navigateUp() || super.onSupportNavigateUp();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle menu item selections for navigation
         try {
             Navigation.findNavController(this, R.id.FCVMain).navigate(item.getItemId());
             return true;
