@@ -1,14 +1,24 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.news"
+    namespace = "com.example.madproject"
     compileSdk = 34
 
+    packaging {
+        resources {
+            pickFirsts.add("META-INF/NOTICE.md")
+            pickFirsts.add("META-INF/LICENSE.md")
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.example.news"
-        minSdk = 26
+        applicationId = "com.example.madproject"
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -25,10 +35,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
@@ -37,15 +53,40 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation ("com.github.KwabenBerko:News-API-Java:1.0.2")
-    implementation ("com.github.fornewid:neumorphism:0.3.0")
-    implementation ("com.squareup.picasso:picasso:2.8")
-    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.5")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.8.5")
+    implementation(libs.neumorphism)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth.v2111)
+
+    // Email
+//    implementation(libs.android.mail)
+//    implementation(libs.android.activation)
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
+
+    // Mailgun
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Room
+    implementation(libs.room.runtime)
     implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    annotationProcessor(libs.room.compiler)
+
+    implementation(libs.annotation)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("androidx.cardview:cardview:1.0.0")
 }

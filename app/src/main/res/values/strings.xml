@@ -1,95 +1,51 @@
 <resources>
-    <string name="app_name">News</string>
-    <string name="api_key">887ae6858ab3422cbda2f44c8251f610</string>
+    <string name="app_name">MAD Project</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="cancel">Cancel</string>
+    <string name="i_agree_to_the">I agree to the</string>
+    <string name="community_guidelines"><u>Community Guidelines</u></string>
+    <string name="terms_of_service"><u>Terms of Service</u></string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
+    <string name="title_activity_main">MainActivity</string>
+    <string name="gender"><u>Gender</u></string>
+    <string name="birthday"><u>Birthday</u></string>
+    <string name="complete_your_profile">Complete Your Profile</string>
+    <string name="continue_text">Continue</string>
+    <string name="back">Back</string>
 
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
+    <string name="guidelines_welcome">Welcome to <b>Soluna</b>, a platform dedicated to empowering individuals, supporting gender equality, and promoting women’s health. We’ve created a space where everyone is encouraged to learn, share, and grow while maintaining a safe and respectful environment. These Community Guidelines will help us protect the values that make <b>Soluna</b> unique. By using <b>Soluna</b>, you agree to adhere to these guidelines and our Terms of Use. We ask you to actively help maintain our supportive, inclusive, and respectful community.</string>
+    <string name="guidelines_respect_users">Our community thrives on diversity, and we are committed to fostering an environment where everyone feels safe, respected, and empowered. <b>Soluna</b> is built to support discussions, education, and advocacy around <b>gender equality</b>, <b>women\'s health</b>, and <b>female empowerment</b>. We do not tolerate any form of discrimination or harassment based on gender, sexual orientation, race, ethnicity, religion, nationality, or any other identity characteristic.</string>
+    <string name="guidelines_sharing_content"><b>Soluna</b> is a space to share personal experiences, educational resources, and support. We encourage you to share content related to gender equality, female health, and important issues affecting women and marginalized genders. However, all content must align with these guidelines:</string>
+    <string name="guidelines_interactions">We want <b>Soluna</b> to be a place for positive, meaningful conversations that help raise awareness, educate, and support one another. Please follow these guidelines to help us maintain a healthy community:</string>
+    <string name="guidelines_respect_intellectual">You retain ownership of your content on <b>Soluna</b>, but you must respect the intellectual property of others. Share only content you have the right to post. Do not post copyrighted materials (e.g., images, videos, and text) without permission.</string>
+    <string name="guidelines_compliance"><b>Soluna</b> is a place for fostering knowledge and sharing information. We do not tolerate illegal or harmful activities.</string>
+    <string name="guidelines_violence">We are committed to creating a supportive environment. We do not tolerate hate speech, violence, or threats of harm based on gender, race, sexuality, or any personal characteristic.</string>
+    <string name="guidelines_respect_newsworthy">We understand that important events and news related to gender equality and women’s health are shared on <b>Soluna</b>. While we encourage education and awareness, please be mindful of the following:</string>
+    <string name="guidelines_support">We are all part of the <b>Soluna</b> community. If you see content that may violate these guidelines, please report it using the app’s reporting feature. Our team will review the report and take action as necessary to maintain a safe and respectful environment.</string>
+    <string name="guidelines_conclusion">We want <b>Soluna</b> to be a safe and empowering platform for everyone. These guidelines are here to help us protect and nurture our community. Together, we can foster an environment where everyone can engage, learn, and grow in the pursuit of gender equality and better health for all. Thank you for being part of the <b>Soluna</b> community.</string>
+    <string name="guidelines_ending">By adhering to these guidelines, you are contributing to a supportive space where gender equality, women’s health, and safety are prioritized. We are grateful for your participation in creating a positive and empowering environment for all.</string>
 
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
+    <string name="terms_welcome">Welcome to <b>Soluna</b>! These Terms of Service ("Terms") govern your access to and use of the <b>Soluna</b> platform, including our website, mobile application, and other online services (collectively referred to as the "Service"). By accessing or using the Service, you agree to comply with these Terms and our Community Guidelines. If you do not agree, you may not use the Service.</string>
+    <string name="terms_acceptance">By creating an account or using the Service, you confirm that you are at least 13 years old and legally capable of entering into these Terms. If you are under 18, you must have the consent of a parent or guardian.</string>
+    <string name="terms_creation">To use certain features of <b>Soluna</b>, you must create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</string>
+    <string name="terms_participation">By using <b>Soluna</b>, you agree to follow our Community Guidelines. These guidelines are designed to create a respectful and empowering environment for all users.</string>
+    <string name="terms_content">You retain ownership of the content you post on <b>Soluna</b>. By posting, you grant <b>Soluna</b> a worldwide, non-exclusive, royalty-free license to use, distribute, modify, and display your content as necessary to operate the Service.</string>
+    <string name="terms_reporting">If you believe content violates your rights or our guidelines, you may report it using the app’s reporting feature.</string>
+    <string name="terms_privacy"><b>Soluna</b> collects and uses personal data as described in our Privacy Policy. By using the Service, you consent to our data practices.</string>
+    <string name="terms_termination">We reserve the right to suspend or terminate your account if you violate these Terms, our Community Guidelines, or any applicable law. You may also terminate your account at any time by contacting our support team.</string>
+    <string name="terms_dispute">If disputes arise, they will be resolved through binding arbitration, subject to the laws of the jurisdiction where <b>Soluna</b> operates.</string>
+    <string name="terms_changes">We may update these Terms from time to time. Changes will be effective immediately upon posting. Continued use of the Service constitutes acceptance of the updated Terms.</string>
+    <string name="terms_contact">For questions about these Terms, you can reach us at support@<b>Soluna</b>.com.</string>
+    <string name="terms_thanks">Thank you for being a part of the <b>Soluna</b> community. Together, we’re creating a supportive and empowering space for all.</string>
 </resources>
