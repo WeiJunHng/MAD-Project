@@ -3,11 +3,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/discussionForum">
+    app:startDestination="@id/fragmentHome">
 
     <fragment
-        android:id="@+id/discussionForum"
-        android:name="com.example.madproject.DiscussionForum"
-        android:label="fragment_discussion_forum"
-        tools:layout="@layout/fragment_discussion_forum" />
+        android:id="@+id/fragmentNews"
+        android:name="com.example.news.FragmentNews"
+        android:label="News"
+        tools:layout="@layout/fragment_news">
+
+        <action
+            android:id="@+id/action_fragmentNews_to_fragmentHome"
+            app:destination="@+id/fragmentHome"/>
+        <action
+            android:id="@+id/action_fragmentNews_to_fragmentPrecaution"
+            app:destination="@+id/fragmentPrecaution"/>
+        <action
+            android:id="@+id/action_fragmentNews_to_fragmentPost"
+            app:destination="@+id/fragmentPost"/>
+        <action
+            android:id="@+id/action_fragmentNews_to_fragmentProfile"
+            app:destination="@+id/fragmentProfile"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPrecaution"
+        android:name="com.example.news.FragmentPrecaution"
+        android:label="Precaution"
+        tools:layout="@layout/fragment_precaution">
+
+        <action
+            android:id="@+id/action_fragmentPrecaution_to_fragmentHome"
+            app:destination="@+id/fragmentHome"/>
+        <action
+            android:id="@+id/action_fragmentPrecaution_to_fragmentNews"
+            app:destination="@+id/fragmentNews"/>
+        <action
+            android:id="@+id/action_fragmentPrecaution_to_fragmentPost"
+            app:destination="@+id/fragmentPost"/>
+        <action
+            android:id="@+id/action_fragmentPrecaution_to_fragmentProfile"
+            app:destination="@+id/fragmentProfile"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.example.news.FragmentHome"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentNews"
+            app:destination="@+id/fragmentNews"/>
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentPrecaution"
+            app:destination="@+id/fragmentPrecaution"/>
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentPost"
+            app:destination="@+id/fragmentPost"/>
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentProfile"
+            app:destination="@+id/fragmentProfile"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentPost"
+        android:name="com.example.news.FragmentPost"
+        android:label="Post"
+        tools:layout="@layout/fragment_post">
+
+        <action
+            android:id="@+id/action_fragmentPost_to_fragmentNews"
+            app:destination="@+id/fragmentNews"/>
+        <action
+            android:id="@+id/action_fragmentPost_to_fragmentPrecaution"
+            app:destination="@+id/fragmentPrecaution"/>
+        <action
+            android:id="@+id/action_fragmentPost_to_fragmentHome"
+            app:destination="@+id/fragmentHome"/>
+        <action
+            android:id="@+id/action_fragmentPost_to_fragmentProfile"
+            app:destination="@+id/fragmentProfile"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.example.news.FragmentProfile"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentNews"
+            app:destination="@+id/fragmentNews"/>
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentPrecaution"
+            app:destination="@+id/fragmentPrecaution"/>
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentHome"
+            app:destination="@+id/fragmentHome"/>
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentPost"
+            app:destination="@+id/fragmentPost"/>
+
+    </fragment>
 </navigation>

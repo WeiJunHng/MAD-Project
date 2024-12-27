@@ -8,16 +8,353 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/light_background"
-    tools:context=".ui.signup.SignUpActivity">
+    tools:context=".SignUpActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/SignUpFCV"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="30sp"
         android:layout_marginEnd="30sp"
-        android:gravity="center"
-        tools:layout="@layout/fragment_sign_up_main"/>
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/LoginTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17sp"
+            android:layout_marginEnd="12sp"
+            android:text="@string/sign_up"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:fontFamily=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:paddingStart="10sp"
+                app:neumorph_shadowColorDark="#CAD3BB"
+                app:neumorph_shadowColorLight="#EFEFEF"
+                app:neumorph_shadowElevation="4sp"
+                app:neumorph_shapeType="flat"
+                android:layout_weight="1">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0sp"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ETFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#EEF6E1"
+                        android:hint="@string/first_name"
+                        android:textColorHint="#7FA68E"
+                        android:textColor="#7FA68E"
+                        android:imeOptions="actionDone"
+                        android:importantForAccessibility="yes"
+                        android:inputType="textEmailAddress"
+                        android:textSize="22sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:paddingEnd="10sp"
+                app:neumorph_shadowColorDark="#CAD3BB"
+                app:neumorph_shadowColorLight="#EFEFEF"
+                app:neumorph_shadowElevation="4sp"
+                app:neumorph_shapeType="flat"
+                android:layout_weight="1">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0sp"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ETLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="18sp"
+                        android:background="#EEF6E1"
+                        android:hint="@string/last_name"
+                        android:textColorHint="#7FA68E"
+                        android:textColor="#7FA68E"
+                        android:imeOptions="actionDone"
+                        android:importantForAccessibility="yes"
+                        android:inputType="textEmailAddress"
+                        android:textSize="22sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </soup.neumorphism.NeumorphCardView>
+
+        </LinearLayout>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowElevation="4sp"
+            app:neumorph_shapeType="flat">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0sp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ETUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEF6E1"
+                    android:hint="@string/username"
+                    android:textColorHint="#7FA68E"
+                    android:textColor="#7FA68E"
+                    android:imeOptions="actionDone"
+                    android:importantForAccessibility="yes"
+                    android:inputType="textEmailAddress"
+                    android:textSize="22sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowElevation="4sp"
+            app:neumorph_shapeType="flat">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0sp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ETEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEF6E1"
+                    android:hint="@string/email"
+                    android:textColorHint="#7FA68E"
+                    android:textColor="#7FA68E"
+                    android:imeOptions="actionDone"
+                    android:importantForAccessibility="yes"
+                    android:inputType="textEmailAddress"
+                    android:textSize="22sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowElevation="4sp"
+            app:neumorph_shapeType="flat"
+            android:padding="5sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0sp"
+                app:endIconMode="password_toggle"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ETPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEF6E1"
+                    android:hint="@string/password"
+                    android:textColorHint="#7FA68E"
+                    android:textColor="#7FA68E"
+                    android:inputType="textPassword"
+                    android:textSize="22sp"
+                    android:importantForAccessibility="yes"
+                    android:imeOptions="actionDone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowElevation="4sp"
+            app:neumorph_shapeType="flat"
+            android:padding="5sp"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="0sp"
+                app:endIconMode="password_toggle"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ETConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEF6E1"
+                    android:hint="@string/confirm_password"
+                    android:textColorHint="#7FA68E"
+                    android:textColor="#7FA68E"
+                    android:inputType="textPassword"
+                    android:textSize="22sp"
+                    android:importantForAccessibility="yes"
+                    android:imeOptions="actionDone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginStart="19sp"
+            android:layout_marginEnd="19sp">
+
+            <CheckBox
+                android:id="@+id/CBoxGuidelines"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_marginTop="2sp"/>
+
+            <TextView
+                android:id="@+id/TV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:text="@string/i_agree_to_the"
+                android:textSize="15sp"
+                android:textColor="#93BEA3"
+                android:layout_toEndOf="@id/CBoxGuidelines"
+                android:layout_alignTop="@id/CBoxGuidelines"/>
+
+            <TextView
+                android:id="@+id/TVGuidelines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:layout_marginEnd="4sp"
+                android:text="@string/community_guidelines"
+                android:textSize="17sp"
+                android:textColor="#93BEA3"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/TV1"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginTop="3sp"
+            android:layout_marginStart="19sp"
+            android:layout_marginEnd="19sp">
+
+            <CheckBox
+                android:id="@+id/CBoxTerms"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_marginTop="2sp"/>
+
+            <TextView
+                android:id="@+id/TV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:text="@string/i_agree_to_the"
+                android:textSize="15sp"
+                android:textColor="#93BEA3"
+                android:layout_toEndOf="@id/CBoxTerms"
+                android:layout_alignTop="@id/CBoxTerms"/>
+
+            <TextView
+                android:id="@+id/TVTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4sp"
+                android:layout_marginEnd="4sp"
+                android:text="@string/terms_of_service"
+                android:textSize="17sp"
+                android:textColor="#93BEA3"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/TV2"/>
+
+        </RelativeLayout>
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/BtnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20sp"
+            app:neumorph_backgroundColor="#C1A0E7"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowElevation="3sp"
+            android:text="@string/sign_up"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"/>
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/BtnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="20sp"
+            app:neumorph_strokeColor="#C1A0E7"
+            app:neumorph_strokeWidth="3sp"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowElevation="3sp"
+            android:text="@string/cancel"
+            android:textSize="25sp"
+            android:textColor="#C1A0E7"
+            android:textStyle="bold"
+            android:translationY="-10sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
