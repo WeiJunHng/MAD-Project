@@ -64,15 +64,15 @@ dependencies {
     implementation(libs.firebase.auth.v2111)
 
     // Email
-    implementation(libs.android.mail)
-    implementation(libs.android.activation)
-//    implementation("com.sun.mail:android-mail:1.6.7")
-//    implementation("com.sun.mail:android-activation:1.6.7")
+//    implementation(libs.android.mail)
+//    implementation(libs.android.activation)
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 
     // Mailgun
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp)
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Room
     implementation(libs.room.runtime)
