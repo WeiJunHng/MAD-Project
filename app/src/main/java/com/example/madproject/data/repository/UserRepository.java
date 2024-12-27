@@ -31,4 +31,25 @@ public class UserRepository {
     public void updateUserInFirestore(User user) {
         firestoreManager.executeAction(FirestoreManager.Action.UPDATE, "user", user, context);
     }
+
+    public boolean emailExist(String email) {
+        return userDAO.emailExists(email);
+    }
+
+    public boolean usernameExist(String username) {
+        return userDAO.usernameExists(username);
+    }
+
+    public String createUserId() {
+        fetchUsers();
+        String userId = userDAO.getLastUserId();
+        if(userId == null) {
+            return String.format("U%06d", 1);
+        }
+        return String.format("U%06d", userDAO.getUserCount() + 1);
+    }
+
+    public void insertUserToFirestore(User user) {
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "user", user, context);
+    }
 }
