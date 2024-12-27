@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/discussionForum"
-        android:name="com.example.madproject.DiscussionForum"
+        android:name="com.example.madproject.ui.discussion.DiscussionForum"
         android:label="Discussion Forum"
         tools:layout="@layout/fragment_discussion_forum">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/chatListFragment"
-        android:name="com.example.madproject.ChatList"
+        android:name="com.example.madproject.ui.message.ChatList"
         android:label="Chat List"
         tools:layout="@layout/fragment_chat_list">
         <action
@@ -27,13 +27,13 @@
 
     <fragment
         android:id="@+id/privateMessagingFragment"
-        android:name="com.example.madproject.PrivateMessaging"
+        android:name="com.example.madproject.ui.message.PrivateMessaging"
         android:label="Private Messaging"
         tools:layout="@layout/fragment_private_messaging" />
 
     <fragment
         android:id="@+id/precautionFragment"
-        android:name="com.example.madproject.Precaution"
+        android:name="com.example.madproject.ui.precaution.Precaution"
         android:label="Precaution"
         tools:layout="@layout/fragment_precaution">
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/precautionDetailFragment"
-        android:name="com.example.madproject.PrecautionDetail"
+        android:name="com.example.madproject.ui.precaution.PrecautionDetail"
         android:label="Precaution Detail"
         tools:layout="@layout/fragment_precaution_detail" />
 </navigation>

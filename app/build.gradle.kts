@@ -70,15 +70,17 @@ dependencies {
     implementation("com.sun.mail:android-activation:1.6.7")
 
     // Mailgun
-    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Room
     implementation(libs.room.runtime)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     annotationProcessor(libs.room.compiler)
+
+    implementation("com.squareup.picasso:picasso:2.8")
 
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
