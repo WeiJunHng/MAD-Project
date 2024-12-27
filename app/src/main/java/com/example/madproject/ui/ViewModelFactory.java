@@ -2,6 +2,7 @@ package com.example.madproject.ui;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,6 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         userRepository = new UserRepository(context);
     }
 
+    @NonNull
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {

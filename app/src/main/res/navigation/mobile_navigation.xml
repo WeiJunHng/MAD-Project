@@ -22,4 +22,10 @@
         android:name="com.example.madproject.ui.news.NewsFragment"
         android:label="NewsFragment"
         tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/DestPost"
+        android:name="com.example.madproject.DiscussionForum"
+        android:label="PostFragment"
+        tools:layout="@layout/fragment_discussion_forum" />
 </navigation>

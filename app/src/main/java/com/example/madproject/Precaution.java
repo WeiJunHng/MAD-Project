@@ -74,6 +74,6 @@ public class Precaution extends Fragment {
         bundle.putString("PRECAUTION_DESCRIPTION", selectedItem.getDescription());
         bundle.putInt("PRECAUTION_IMAGE_RES_ID", selectedItem.getImageResId());
 
-        Navigation.findNavController(view).navigate(R.id.FLFragmentContainer, bundle);
+//        Navigation.findNavController(view).navigate(R.id.FLFragmentContainer, bundle);
     }
 }

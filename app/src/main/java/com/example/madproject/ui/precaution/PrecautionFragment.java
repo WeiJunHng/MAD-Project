@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,8 +26,9 @@ public class PrecautionFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        precautionViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textDashboard;
+//        precautionViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        Toast.makeText(getContext(), "Precaution Fragment", Toast.LENGTH_SHORT).show();
         return root;
     }
 

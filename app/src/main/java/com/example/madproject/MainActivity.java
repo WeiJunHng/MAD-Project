@@ -6,6 +6,8 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -41,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ex) {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.FCVMain, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }
