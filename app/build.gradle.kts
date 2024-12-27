@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -6,6 +8,13 @@ plugins {
 android {
     namespace = "com.example.madproject"
     compileSdk = 34
+
+    packaging {
+        resources {
+            pickFirsts.add("META-INF/NOTICE.md")
+            pickFirsts.add("META-INF/LICENSE.md")
+        }
+    }
 
     defaultConfig {
         applicationId = "com.example.madproject"
@@ -26,13 +35,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -50,6 +62,17 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.auth.v2111)
+
+    // Email
+    implementation(libs.android.mail)
+    implementation(libs.android.activation)
+//    implementation("com.sun.mail:android-mail:1.6.7")
+//    implementation("com.sun.mail:android-activation:1.6.7")
+
+    // Mailgun
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
 
     // Room
     implementation(libs.room.runtime)
