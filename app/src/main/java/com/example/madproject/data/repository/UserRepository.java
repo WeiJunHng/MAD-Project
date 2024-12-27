@@ -24,32 +24,41 @@ public class UserRepository {
         return userDAO.getByEmail(email); // Fetch from SQLite database
     }
 
-    public void fetchUsers(){
-        firestoreManager.syncUserTable();
+    public String getLastUserId() {
+        return userDAO.getLastUserId();
     }
 
-    public void updateUserInFirestore(User user) {
-        firestoreManager.executeAction(FirestoreManager.Action.UPDATE, "user", user, context);
-    }
-
-    public boolean emailExist(String email) {
-        return userDAO.emailExists(email);
-    }
-
-    public boolean usernameExist(String username) {
-        return userDAO.usernameExists(username);
+    public int getUserCount() {
+        return userDAO.getUserCount();
     }
 
     public String createUserId() {
         fetchUsers();
-        String userId = userDAO.getLastUserId();
-        if(userId == null) {
+        String lastId = getLastUserId();
+        if(lastId == null) {
             return String.format("U%06d", 1);
         }
-        return String.format("U%06d", userDAO.getUserCount() + 1);
+        int numId = getUserCount();
+        return String.format("U%06d", numId+1);
+    }
+
+    public boolean emailExist(String email) {
+        return userDAO.emailExist(email);
+    }
+
+    public boolean usernameExist(String username) {
+        return userDAO.usernameExist(username);
+    }
+
+    public void fetchUsers(){
+        firestoreManager.syncUserTable();
     }
 
     public void insertUserToFirestore(User user) {
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "user", user, context);
+    }
+
+    public void updateUserInFirestore(User user) {
+        firestoreManager.executeAction(FirestoreManager.Action.UPDATE, "user", user, context);
     }
 }
