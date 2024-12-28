@@ -5,30 +5,19 @@
     android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/light_background"
     tools:context=".ProfilePage">
-
-    <View
-        android:id="@+id/background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#EEF6E1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/TVProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/iceberg"
         android:shadowColor="#F44336"
         android:shadowDx="10"
         android:shadowDy="10"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textColor="#314F3C"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -36,25 +25,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/IVProfile"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="120dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="200dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:strokeColor="#6B39A4"
-        app:strokeWidth="0dp"
-        tools:srcCompat="@drawable/ic_profile" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/IVProfilePic"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/profile_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#6B39A4"
+            app:strokeWidth="0dp" />
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/BtnEditProfileIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="250dp"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/ic_edit_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,12 +60,12 @@
         android:id="@+id/TVProfileUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="225dp"
         android:fontFamily="@font/iceberg"
         android:shadowColor="#F44336"
         android:shadowDx="10"
         android:shadowDy="10"
-        android:text="Username"
+        android:text="@string/username"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -80,7 +77,7 @@
         android:id="@+id/TVProfileUserID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="255dp"
         android:fontFamily="sans-serif"
         android:shadowColor="#F44336"
         android:shadowDx="10"
@@ -95,16 +92,16 @@
 
     <Button
         android:id="@+id/BtnEditProfile"
-        android:layout_width="110dp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="275dp"
         android:backgroundTint="#DED7F9"
         android:fontFamily="sans-serif-medium"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:textSize="12sp"
         android:textStyle="bold"
-        android:textSize="12dp"
         app:cornerRadius="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,14 +112,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="330dp"
         android:fontFamily="@font/iceberg"
         android:shadowColor="#F44336"
         android:shadowDx="10"
         android:shadowDy="10"
-        android:text="Account Settings"
+        android:text="@string/account_settings"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -130,13 +127,13 @@
     <ListView
         android:id="@+id/AccountSettingsList"
         android:layout_width="330dp"
-        android:layout_height="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="365dp"
         android:divider="@null"
         android:scrollbars="none"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="420dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 

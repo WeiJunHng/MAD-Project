@@ -32,6 +32,11 @@
         android:name="com.example.madproject.ui.news.NewsFragment"
         android:label="NewsFragment"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/DestProfile"
+        android:name="com.example.madproject.ProfilePage"
+        android:label="fragment_profile_page"
+        tools:layout="@layout/fragment_profile_page" />
 
     <fragment
         android:id="@+id/DestPost"

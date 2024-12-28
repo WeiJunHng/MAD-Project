@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/light_background"
+    tools:context=".AllowNotification">
+
+    <TextView
+        android:id="@+id/TVNotificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/iceberg"
+        android:shadowColor="#F44336"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:text="@string/notification"
+        android:textColor="#314F3C"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/ShowNotification"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/show_notifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/TVDescriptionShowNotification"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/description_show_notification"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="12sp"
+        android:textColor="#4F4F4F"
+        app:layout_constraintStart_toStartOf="@id/ShowNotification"
+        app:layout_constraintTop_toTopOf="@id/ShowNotification" />
+
+    <Switch
+        android:id="@+id/Photo"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="210dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/floating_notifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/TVDescriptionFloatingNotification"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/description_floating_notification"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="12sp"
+        android:textColor="#4F4F4F"
+        app:layout_constraintStart_toStartOf="@id/Photo"
+        app:layout_constraintTop_toTopOf="@id/Photo" />
+
+    <Switch
+        android:id="@+id/Camera"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="300dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/lock_screen_notifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/TVDescriptionLockScreenNotification"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/description_lock_screen_notification"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="12sp"
+        android:textColor="#4F4F4F"
+        app:layout_constraintStart_toStartOf="@id/Camera"
+        app:layout_constraintTop_toTopOf="@id/Camera" />
+
+    <Switch
+        android:id="@+id/FileAndFolder"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="400dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/allow_vibration"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/TVDescriptionAllowVibration"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/description_allow_vibration"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="12sp"
+        android:textColor="#4F4F4F"
+        app:layout_constraintStart_toStartOf="@id/FileAndFolder"
+        app:layout_constraintTop_toTopOf="@id/FileAndFolder" />
+
+    <Switch
+        android:id="@+id/AllowSound"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="490dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/allow_sound"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/TVDescriptionAllowSound"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="@string/description_allow_sound"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="12sp"
+        android:textColor="#4F4F4F"
+        app:layout_constraintStart_toStartOf="@id/AllowSound"
+        app:layout_constraintTop_toTopOf="@id/AllowSound" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
