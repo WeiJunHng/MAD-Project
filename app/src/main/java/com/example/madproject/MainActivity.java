@@ -2,62 +2,66 @@ package com.example.madproject;
 
 import android.os.Bundle;
 
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.example.madproject.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Check if savedInstanceState is null to avoid reloading the fragment on orientation change
-        if (savedInstanceState == null) {
-            // Load the LocationFragment into the fragment_container
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new location()); // 'location' is the fragment class
-            transaction.commit();
-        }
-    }
-}
-
-/*
-import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-
-import java.io.File;
-
-public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String imagePath = "/storage/emulated/0/Download/516A4232.JPG";
+        // Use ViewBinding for accessing views
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Check if the file exists
-        File file = new File(imagePath);
-        if (file.exists()) {
-            Log.d("File Path", "File exists at: " + imagePath);
-        } else {
-            Log.e("File Path", "File does not exist at: " + imagePath);
-        }
+        NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.FCVMain);
+        NavController navController = host.getNavController();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-        // Proceed with Cloudinary upload if the file exists
-        new Thread(() -> {
-            try {
-                if (file.exists()) {
-                    String imageUrl = CloudinaryUploader.uploadImage(imagePath);
-                    Log.d("Cloudinary", "Uploaded image URL: " + imageUrl);
-                } else {
-                    Log.e("Cloudinary", "File does not exist. Cannot upload.");
-                }
-            } catch (Exception e) {
-                Log.e("Cloudinary", "Upload failed", e);
-            }
-        }).start();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.BottomNavView, navController);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        // Enable navigating up
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.FCVMain);
+        NavController navController = navHostFragment.getNavController();
+        return navController.navigateUp() || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle menu item selections for navigation
+        try {
+            Navigation.findNavController(this, R.id.FCVMain).navigate(item.getItemId());
+            return true;
+        } catch (Exception ex) {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.FCVMain, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }
-*/
