@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/light_background"
-    tools:context=".ProfilePage">
+    tools:context=".EditProfile">
 
     <TextView
-        android:id="@+id/TVProfileTitle"
+        android:id="@+id/TVEditProfileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -17,7 +16,7 @@
         android:shadowColor="#F44336"
         android:shadowDx="10"
         android:shadowDy="10"
-        android:text="@string/profile"
+        android:text="@string/edit_profile"
         android:textColor="#314F3C"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -57,84 +56,122 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVProfileUsername"
+        android:id="@+id/TVYourUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="225dp"
-        android:fontFamily="@font/iceberg"
-        android:shadowColor="#F44336"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:text="@string/username"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/TVProfileUserID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="255dp"
-        android:fontFamily="sans-serif"
-        android:shadowColor="#F44336"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:text="\@username"
-        android:textColor="#000000"
-        android:textSize="11sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/BtnEditProfile"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="275dp"
-        android:backgroundTint="#DED7F9"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="250dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/edit_profile"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:shadowColor="#F44336"
+        android:text="YOUR USERNAME"
+        android:textColor="#000000"
+        android:textSize="15sp"
         android:textStyle="bold"
-        app:cornerRadius="7dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETUsername"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="280dp"
+        android:ems="14"
+        android:imeOptions="actionDone"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="text"
+        android:text="ShunChuah"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/TVAccountSettings"
+        android:id="@+id/TVYourEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="330dp"
-        android:fontFamily="@font/iceberg"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="355dp"
+        android:fontFamily="sans-serif-medium"
         android:shadowColor="#F44336"
-        android:shadowDx="10"
-        android:shadowDy="10"
-        android:text="@string/account_settings"
+        android:text="YOUR EMAIL"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/AccountSettingsList"
-        android:layout_width="330dp"
+    <EditText
+        android:id="@+id/ETEmail"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="365dp"
-        android:divider="@null"
-        android:scrollbars="none"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="385dp"
+        android:ems="14"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="textEmailAddress"
+        android:text="teikshunchuah@gmail.com"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </ListView>
+    <TextView
+        android:id="@+id/TVYourBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="460dp"
+        android:fontFamily="sans-serif-medium"
+        android:shadowColor="#F44336"
+        android:text="YOUR BIRTHDAY"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETBirthday"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="490dp"
+        android:ems="14"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="date"
+        android:text="25/02/2004"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVYourContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="565dp"
+        android:fontFamily="sans-serif-medium"
+        android:shadowColor="#F44336"
+        android:text="YOUR CONTACT"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ETContact"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="595dp"
+        android:ems="14"
+        android:fontFamily="sans-serif-medium"
+        android:inputType="phone"
+        android:text="016-7894524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--android:clickable="false"
+    android:cursorVisible="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"-->

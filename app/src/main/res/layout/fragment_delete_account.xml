@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/light_background"
+    tools:context=".DeleteAccount">
+
+    <ImageButton
+        android:id="@+id/BtnCloseIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_close_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVDeleteAccountTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/iceberg"
+        android:text="@string/delete_account"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVDeleteAccountDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingMultiplier="1.2"
+        android:text="Are you sure you want to delete account linked to"
+        android:textColor="#646664"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVDeleteAccountDescriptionEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="sans-serif-medium"
+        android:lineSpacingMultiplier="1.2"
+        android:text="shunchuah@gmail.com?"
+        android:textColor="#646664"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TVConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="210dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:lineSpacingMultiplier="1.2"
+        android:text="@string/confirm_password"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView"
+        android:layout_width="310dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="240dp"
+        android:padding="5sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_shadowColorDark="#CAD3BB"
+        app:neumorph_shadowColorLight="#CAD3BB"
+        app:neumorph_shadowElevation="1sp"
+        app:neumorph_shapeType="flat">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ETPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:fontFamily="sans-serif"
+                android:hint="@string/password"
+                android:imeOptions="actionDone"
+                android:importantForAccessibility="yes"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:textColorHint="#736F6F"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/BtnConfirmDeleteAccount"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="330dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_backgroundColor="#ED747D"
+        app:neumorph_shadowColorDark="#C2CAB5"
+        app:neumorph_shadowColorLight="#EBE9E8E8"
+        app:neumorph_shadowElevation="3dp" />
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/BtnCancelDeleteAccount"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="330dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_backgroundColor="#DEDEE3"
+        app:neumorph_shadowColorDark="#C2CAB5"
+        app:neumorph_shadowColorLight="#EBE9E8E8"
+        app:neumorph_shadowElevation="3dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="450dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

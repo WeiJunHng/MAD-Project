@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 // Custom Adapter
-class CustomAdapter extends BaseAdapter {
+class SettingsAdapter extends BaseAdapter {
     private String[] items;
 
-    CustomAdapter(String[] items) {
+    SettingsAdapter(String[] items) {
         this.items = items;
     }
 
@@ -34,7 +34,7 @@ class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_item, parent, false);
+                    .inflate(R.layout.settings_list, parent, false);
         }
 
         // Bind data to views
