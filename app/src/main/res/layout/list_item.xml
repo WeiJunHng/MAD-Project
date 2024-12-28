@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dp"
+    android:layout_height="55dp"
+    android:padding="8dp">
+
+    <!-- Icon -->
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_lock" />
+
+    <!-- Text -->
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/item_icon"
+        android:text="Privacy &amp; Security"
+        android:textColor="#000000"
+        android:textSize="23sp" />
+
+    <!-- Arrow -->
+    <ImageView
+        android:id="@+id/item_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_arrow_right" />
+
+</RelativeLayout>
