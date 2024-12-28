@@ -10,13 +10,13 @@
     <!-- Title -->
     <ImageView
         android:id="@+id/ivPrecautionImage"
-        android:layout_width="395dp"
-        android:layout_height="248dp"
+        android:layout_width="384dp"
+        android:layout_height="280dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="11dp"
         android:contentDescription="Precaution Image"
         android:scaleType="centerCrop"

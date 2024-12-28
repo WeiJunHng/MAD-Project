@@ -33,22 +33,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RVChatList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="390dp"
+        android:layout_height="648dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@id/BNVNavigationBar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/IBBackToDiscussion" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BNVNavigationBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
