@@ -24,8 +24,38 @@ public class UserRepository {
         return userDAO.getByEmail(email); // Fetch from SQLite database
     }
 
+    public String getLastUserId() {
+        return userDAO.getLastUserId();
+    }
+
+    public int getUserCount() {
+        return userDAO.getUserCount();
+    }
+
+    public String createUserId() {
+        fetchUsers();
+        String lastId = getLastUserId();
+        if(lastId == null) {
+            return String.format("U%06d", 1);
+        }
+        int numId = getUserCount();
+        return String.format("U%06d", numId+1);
+    }
+
+    public boolean emailExist(String email) {
+        return userDAO.emailExist(email);
+    }
+
+    public boolean usernameExist(String username) {
+        return userDAO.usernameExist(username);
+    }
+
     public void fetchUsers(){
         firestoreManager.syncUserTable();
+    }
+
+    public void insertUserToFirestore(User user) {
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "user", user, context);
     }
 
     public void updateUserInFirestore(User user) {

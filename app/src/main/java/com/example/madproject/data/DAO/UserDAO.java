@@ -1,11 +1,7 @@
 package com.example.madproject.data.DAO;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.example.madproject.data.model.User;
 
@@ -38,11 +34,11 @@ public interface UserDAO extends BaseDAO<User>{
 
     // Check if username exists
     @Query("SELECT COUNT(*) > 0 FROM user WHERE username = :username")
-    boolean usernameExists(String username);
+    boolean usernameExist(String username);
 
     // Check if username exists
     @Query("SELECT COUNT(*) > 0 FROM user WHERE email = :email")
-    boolean emailExists(String email);
+    boolean emailExist(String email);
 
     @Query("DELETE FROM user")
     void deleteAll();

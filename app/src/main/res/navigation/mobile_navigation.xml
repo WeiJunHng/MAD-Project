@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/DestHome">
+
+    <fragment
+        android:id="@+id/DestHome"
+        android:name="com.example.madproject.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/DestPrecaution"
+        android:name="com.example.madproject.ui.precaution.PrecautionFragment"
+        android:label="PrecautionFragment"
+        tools:layout="@layout/fragment_precaution">
+        <action
+            android:id="@+id/action_Precaution_to_Detail"
+            app:destination="@id/DestPrecautionDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DestPrecautionDetail"
+        android:name="com.example.madproject.ui.precaution.PrecautionDetail"
+        android:label="PrecautionDetailFragment"
+        tools:layout="@layout/fragment_precaution_detail" />
+
+    <fragment
+        android:id="@+id/DestNews"
+        android:name="com.example.madproject.ui.news.NewsFragment"
+        android:label="NewsFragment"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/DestPost"
+        android:name="com.example.madproject.ui.discussion.DiscussionForum"
+        android:label="PostFragment"
+        tools:layout="@layout/fragment_discussion_forum" />
+</navigation>
