@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -6,6 +8,13 @@ plugins {
 android {
     namespace = "com.example.madproject"
     compileSdk = 34
+
+    packaging {
+        resources {
+            pickFirsts.add("META-INF/NOTICE.md")
+            pickFirsts.add("META-INF/LICENSE.md")
+        }
+    }
 
     defaultConfig {
         applicationId = "com.example.madproject"
@@ -26,6 +35,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -34,6 +44,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -57,9 +68,24 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-auth")
 
+    // Email
+//    implementation(libs.android.mail)
+//    implementation(libs.android.activation)
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
+
+    // Mailgun
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     // Room
     implementation(libs.room.runtime)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     annotationProcessor(libs.room.compiler)
+
+    implementation("com.squareup.picasso:picasso:2.8")
 
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
@@ -79,4 +105,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("androidx.cardview:cardview:1.0.0")
 }

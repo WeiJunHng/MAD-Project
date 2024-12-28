@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/discussionForum">
+
+    <fragment
+        android:id="@+id/discussionForum"
+        android:name="com.example.madproject.ui.discussion.DiscussionForum"
+        android:label="Discussion Forum"
+        tools:layout="@layout/fragment_discussion_forum">
+        <action
+            android:id="@+id/action_discussionForum_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.example.madproject.ui.message.ChatList"
+        android:label="Chat List"
+        tools:layout="@layout/fragment_chat_list">
+        <action
+            android:id="@+id/action_chatListFragment_to_privateMessagingFragment"
+            app:destination="@id/privateMessagingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/privateMessagingFragment"
+        android:name="com.example.madproject.ui.message.PrivateMessaging"
+        android:label="Private Messaging"
+        tools:layout="@layout/fragment_private_messaging" />
+
+    <fragment
+        android:id="@+id/precautionFragment"
+        android:name="com.example.madproject.ui.precaution.Precaution"
+        android:label="Precaution"
+        tools:layout="@layout/fragment_precaution">
+        <action
+            android:id="@+id/action_precautionFragment_to_precautionDetailFragment"
+            app:destination="@id/precautionDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/precautionDetailFragment"
+        android:name="com.example.madproject.ui.precaution.PrecautionDetail"
+        android:label="Precaution Detail"
+        tools:layout="@layout/fragment_precaution_detail" />
+</navigation>
