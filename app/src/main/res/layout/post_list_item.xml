@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soup.neumorphism.NeumorphCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:neumorph_shadowColorDark="#CAD3BB"
+    app:neumorph_shadowColorLight="#EFEFEF"
+    app:neumorph_shadowElevation="4sp"
+    app:neumorph_shapeType="flat"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    tools:context=".ui.discussion.DetailPostFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/light_background">
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowColorLight="#FFFFFF"
+            app:neumorph_shadowElevation="5sp"
+            app:neumorph_shapeType="pressed">
+
+            <ImageView
+                android:id="@+id/IVPostImage"
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_margin="5dp"
+                android:contentDescription="Post image"
+                app:srcCompat="@drawable/precaution_image1" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <TextView
+            android:id="@+id/TVPostText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post Description"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="start"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <!-- Like Button -->
+            <ImageButton
+                android:id="@+id/IBComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:contentDescription="Comment Button"
+                android:src="@drawable/comment_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/IBLike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:contentDescription="Like Button"
+                android:src="@drawable/dislike_button"
+                app:layout_constraintEnd_toStartOf="@+id/IBReport"
+                app:layout_constraintStart_toEndOf="@+id/IBComment"
+                app:layout_constraintTop_toBottomOf="@+id/TVPostText" />
+
+            <ImageButton
+                android:id="@+id/IBReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:contentDescription="Report Button"
+                android:src="@drawable/report_post_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TVPostText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</soup.neumorphism.NeumorphCardView>

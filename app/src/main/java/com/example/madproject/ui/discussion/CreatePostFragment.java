@@ -28,7 +28,7 @@ import com.example.madproject.R;
 
 import java.io.IOException;
 
-public class PostFragment extends Fragment {
+public class CreatePostFragment extends Fragment {
 
     private static final String TAG = "PostFragment";
     private ActivityResultLauncher<Intent> imagePickerLauncher; // Launcher for image selection
@@ -36,14 +36,14 @@ public class PostFragment extends Fragment {
     private EditText editTextPost; // EditText for post content
     private Uri selectedImageUri; // Selected image URI
 
-    public PostFragment() {
+    public CreatePostFragment() {
         // Required empty public constructor
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_post, container, false);
 
         // Find views
         Button postButton = view.findViewById(R.id.BtnPost);

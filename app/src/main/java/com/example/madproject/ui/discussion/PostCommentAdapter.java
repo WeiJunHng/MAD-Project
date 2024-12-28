@@ -1,4 +1,4 @@
-package com.example.sharingplatform;
+package com.example.madproject.ui.discussion;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,16 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madproject.R;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
-public class DetailPostAdapter extends RecyclerView.Adapter<DetailPostAdapter.PostViewHolder> {
+public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.PostViewHolder> {
 
     private List<Post> postList;
     private OnPostClickListener onPostClickListener;
 
-    public DetailPostAdapter(List<Post> postList, OnPostClickListener onPostClickListener) {
+    public PostCommentAdapter(List<Post> postList, OnPostClickListener onPostClickListener) {
         this.postList = postList;
         this.onPostClickListener = onPostClickListener;
     }
@@ -28,7 +30,7 @@ public class DetailPostAdapter extends RecyclerView.Adapter<DetailPostAdapter.Po
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_detail_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_create_post, parent, false);
         return new PostViewHolder(view);
     }
 
@@ -49,11 +51,11 @@ public class DetailPostAdapter extends RecyclerView.Adapter<DetailPostAdapter.Po
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 // You can set a placeholder or default image if needed
-                holder.imageView.setImageResource(R.drawable.placeholder_image);
+                holder.imageView.setImageResource(R.mipmap.empty_white_image);
             }
         } else {
             // Set a placeholder if no image is provided
-            holder.imageView.setImageResource(R.drawable.placeholder_image);
+            holder.imageView.setImageResource(R.mipmap.empty_white_image);
         }
 
         // Handle click events
@@ -75,7 +77,7 @@ public class DetailPostAdapter extends RecyclerView.Adapter<DetailPostAdapter.Po
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
-            content = itemView.findViewById(R.id.TVPosttext);
+            content = itemView.findViewById(R.id.TVPostText);
             imageView = itemView.findViewById(R.id.IVPostImage);
         }
     }
