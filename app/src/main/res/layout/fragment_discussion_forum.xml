@@ -1,0 +1,58 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CLmain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/light_background"
+    tools:context="com.example.madproject.ui.discussion.DiscussionForumFragment">
+
+    <TextView
+        android:id="@+id/TVForumPostTitle"
+        android:layout_width="181dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal"
+        android:text="Post"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IBForumPostButton" />
+
+    <ImageButton
+        android:id="@+id/IBForumPostButton"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:contentDescription="Post"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/forum_post_button"
+        tools:layout_editor_absoluteX="226dp" />
+
+    <ImageButton
+        android:id="@+id/IBForumChatButton"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
+        android:background="@null"
+        android:contentDescription="Chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/IBForumPostButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chat_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVPosts"
+        android:layout_width="416dp"
+        android:layout_height="570dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TVForumPostTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

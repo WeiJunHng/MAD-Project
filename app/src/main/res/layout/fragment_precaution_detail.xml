@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Top Image -->
+
+    <!-- Title -->
+    <ImageView
+        android:id="@+id/ivPrecautionImage"
+        android:layout_width="384dp"
+        android:layout_height="280dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="11dp"
+        android:contentDescription="Precaution Image"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/precaution_image1" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivPrecautionImage"
+        android:layout_marginTop="16dp"
+        android:text="Top 5 Safety Tips for Women"
+        android:textSize="24sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+        <!-- Description -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="8dp">
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Buddy up\nDo your best to not walk alone. The more the merrier in the terms of safety!\n\n2. Update your friends or family.\nLet your friends or family know where you’re going and that you’ll be alone. Giving them updates along the way will give the both of you peace of mind.\n\n3. Take a self-defense class\nTurn safety into fun and try a class in self-defense! We never want to think the worst could happen. However, in terms of learning to protect oneself in a potentially dangerous situation, being equipped physically and mentally to handle those scenarios is key.\n\n4. Ping Your Location\nSmartphones are not only a great tool for taking photos, sending messages, and sharing news, but also for ensuring safety. Share your live location with trusted friends or family."
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:lineSpacingExtra="4dp"
+        android:padding="8dp" />
+    </ScrollView>
+
+</RelativeLayout>

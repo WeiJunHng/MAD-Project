@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/light_background"
+    tools:context=".ui.discussion.DetailPostFragment">
+
+    <soup.neumorphism.NeumorphCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:neumorph_shadowColorDark="#CAD3BB"
+        app:neumorph_shadowColorLight="#FFFFFF"
+        app:neumorph_shadowElevation="5sp"
+        app:neumorph_shapeType="pressed">
+
+        <ImageView
+            android:id="@+id/IVPostImage"
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:layout_margin="5dp"
+            android:contentDescription="Post image"
+            app:srcCompat="@drawable/precaution_image1" />
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Like Button -->
+        <ImageButton
+            android:id="@+id/IBComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:contentDescription="Comment Button"
+            android:src="@drawable/comment_button" />
+
+        <ImageButton
+            android:id="@+id/IBLike"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:contentDescription="Like Button"
+            android:src="@drawable/dislike_button" />
+
+        <ImageButton
+            android:id="@+id/IBReport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:contentDescription="Report Button"
+            android:src="@drawable/report_post_button" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TVPostText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Post Description"
+                android:textSize="16sp"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/IVPostImage" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RVComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:overScrollMode="never"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/ConfirmReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Report"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/IBReport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+</LinearLayout>
