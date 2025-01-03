@@ -64,12 +64,17 @@ public class DiscussionForumFragment extends Fragment {
             }
         });
 
-        // Navigate to Chat List when the chat button is clicked
-//        view.findViewById(R.id.IBForumChatButton).setOnClickListener(v -> {
-//            Navigation.findNavController(v).navigate(R.id.action_discussionForum_to_chatListFragment);
-//        });
-
+        // Navigate to Create Post page when the post button is clicked
+        IBForumPostButton.setOnClickListener(v -> navigateToCreatePostFragment());
+        
         return root;
+    }
+
+    private void navigateToCreatePostFragment() {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.FCVMain, new CreatePostFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     private void switchPostDetailsFragment() {
