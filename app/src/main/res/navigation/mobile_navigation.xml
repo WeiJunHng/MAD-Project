@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/DestPrecautionDetail"
-        android:name="com.example.madproject.ui.precaution.PrecautionDetail"
+        android:name="com.example.madproject.ui.precaution.PrecautionDetailFragment"
         android:label="PrecautionDetailFragment"
         tools:layout="@layout/fragment_precaution_detail" />
 
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/DestPost"
-        android:name="com.example.madproject.ui.discussion.DiscussionForum"
+        android:name="com.example.madproject.ui.discussion.DiscussionForumFragment"
         android:label="PostFragment"
         tools:layout="@layout/fragment_discussion_forum" />
 </navigation>
