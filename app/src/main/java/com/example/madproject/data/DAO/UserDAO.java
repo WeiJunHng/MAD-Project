@@ -15,8 +15,8 @@ public interface UserDAO extends BaseDAO<User>{
     List<User> getAll();
 
     // Query a User by userId
-    @Query("SELECT * FROM user WHERE userId = :userId")
-    User getById(String userId);
+    @Query("SELECT * FROM user WHERE id = :id")
+    User getById(String id);
 
     // Query a User by email
     @Query("SELECT * FROM user WHERE email = :email")
@@ -26,7 +26,7 @@ public interface UserDAO extends BaseDAO<User>{
     @Query("SELECT * FROM user WHERE username = :username")
     User getByUsername(String username);
 
-    @Query("SELECT userId FROM user ORDER BY userId DESC LIMIT 1")
+    @Query("SELECT id FROM user ORDER BY id DESC LIMIT 1")
     String getLastUserId();
 
     @Query("SELECT COUNT(*) FROM user")

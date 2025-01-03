@@ -13,10 +13,10 @@ import androidx.room.PrimaryKey;
                 @Index(value = {"username"}, unique = true),
                 @Index(value = {"contactInfo"}, unique = true)
         })
-public class User implements Identifiable {
+public class User extends Identifiable {
     @PrimaryKey
     @NonNull
-    private String userId;
+    private String id;
 
     @NonNull
     private String firstName;
@@ -56,10 +56,10 @@ public class User implements Identifiable {
 
     }
 
-    public User(@NonNull String userId, @NonNull String firstName, @NonNull String lastName, @NonNull String username,
+    public User(@NonNull String id, @NonNull String firstName, @NonNull String lastName, @NonNull String username,
                 @NonNull String email, @NonNull String password, @Nullable String profilePicURL, @NonNull String gender,
                 int age, @NonNull String birthday, @Nullable String contactInfo, @Nullable Integer period) {
-        this.userId = userId;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -85,8 +85,8 @@ public class User implements Identifiable {
     }
 
     @NonNull
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
     @NonNull
@@ -142,8 +142,8 @@ public class User implements Identifiable {
         return period;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
 
     public void setFirstName(@NonNull String firstName) {
@@ -188,10 +188,5 @@ public class User implements Identifiable {
 
     public void setEmail(@NonNull String email) {
         this.email = email;
-    }
-
-    @Override
-    public String _getId() {
-        return getUserId();
     }
 }

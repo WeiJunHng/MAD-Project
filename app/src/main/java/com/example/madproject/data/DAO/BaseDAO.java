@@ -6,8 +6,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Update;
 
-import com.example.madproject.data.model.User;
-
 import java.util.List;
 
 @Dao

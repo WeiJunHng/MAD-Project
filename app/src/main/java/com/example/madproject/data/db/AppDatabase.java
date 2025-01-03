@@ -6,18 +6,38 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.madproject.data.DAO.ChatGroupDAO;
+import com.example.madproject.data.DAO.DiscussionCommentDAO;
+import com.example.madproject.data.DAO.DiscussionDAO;
+import com.example.madproject.data.DAO.DiscussionLikeDAO;
+import com.example.madproject.data.DAO.MessageDAO;
+import com.example.madproject.data.DAO.ReportDAO;
 import com.example.madproject.data.DAO.UserDAO;
+import com.example.madproject.data.model.ChatGroup;
+import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.model.DiscussionComment;
+import com.example.madproject.data.model.DiscussionLike;
+import com.example.madproject.data.model.Message;
+import com.example.madproject.data.model.Report;
 import com.example.madproject.data.model.User;
 
-@Database(entities = {User.class},version = 2)
+@Database(entities = {User.class, Discussion.class, DiscussionComment.class, DiscussionLike.class, Report.class, ChatGroup.class, Message.class},version = 2)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public static volatile AppDatabase INSTANCE;
 
     public abstract UserDAO userDAO();
+    public abstract DiscussionDAO discussionDAO();
+    public abstract DiscussionCommentDAO discussionCommentDAO();
+    public abstract DiscussionLikeDAO discussionLikeDAO();
+    public abstract ReportDAO reportDAO();
+    public abstract ChatGroupDAO groupDAO();
+    public abstract MessageDAO messageDAO();
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -48,7 +68,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
             database.execSQL(
                     "CREATE TABLE IF NOT EXISTS user_new (" +
-                            "userId TEXT DEFAULT NULL, " +
+                            "id TEXT NOT NULL, " +
                             "firstName TEXT NOT NULL, " +
                             "lastName TEXT NOT NULL, " +
                             "username TEXT NOT NULL, " +
@@ -60,7 +80,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             "birthday DATE NOT NULL, " +
                             "contactInfo TEXT NOT NULL, " +
                             "period INTEGER NOT NULL DEFAULT 28, " +
-                            "PRIMARY KEY (userId)" +
+                            "PRIMARY KEY (id)" +
                             ");"
             );
 
@@ -71,17 +91,87 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_user_username ON user_new(username);");
             database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS index_user_contactInfo ON user_new(contactInfo);");
 
+            database.execSQL("ALTER TABLE user_new RENAME TO user;");
+
+            // Discussion
+            database.execSQL("DROP TABLE IF EXISTS discussion;");
+
             database.execSQL(
-                    "CREATE TRIGGER create_user_id " +
-                            "BEFORE INSERT ON user " +
-                            "FOR EACH ROW " +
-                            "BEGIN " +
-                            "    UPDATE NEW " +
-                            "    SET userId = CONCAT('U', LPAD(COUNT(*)+1, 5, '0')); " +
-                            "END;"
+                    "CREATE TABLE IF NOT EXISTS discussion (" +
+                            "id TEXT NOT NULL, " +
+                            "authorId TEXT NOT NULL, " +
+                            "timestamp LONG NOT NULL, " +
+                            "title TEXT NOT NULL, " +
+                            "content TEXT NOT NULL, " +
+                            "PRIMARY KEY (id)" +
+                            ");"
             );
 
-            database.execSQL("ALTER TABLE user_new RENAME TO user;");
+            // Comment
+            database.execSQL("DROP TABLE IF EXISTS discussionComment;");
+
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS discussionComment (" +
+                            "id TEXT NOT NULL, " +
+                            "discussionId TEXT NOT NULL, " +
+                            "commenterId TEXT NOT NULL, " +
+                            "timestamp LONG NOT NULL, " +
+                            "content TEXT NOT NULL, " +
+                            "PRIMARY KEY (id)" +
+                            ");"
+            );
+
+            // Comment
+            database.execSQL("DROP TABLE IF EXISTS `discussionLike`;");
+
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `discussionLike` (" +
+                            "discussionId TEXT NOT NULL, " +
+                            "userId TEXT NOT NULL, " +
+                            "timestamp LONG NOT NULL, " +
+                            "PRIMARY KEY (discussionId, userId)" +
+                            ");"
+            );
+
+            // Report
+            database.execSQL("DROP TABLE IF EXISTS report;");
+
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS report (" +
+                            "id TEXT NOT NULL, " +
+                            "discussionId TEXT NOT NULL, " +
+                            "reporterId TEXT NOT NULL, " +
+                            "timestamp LONG NOT NULL, " +
+                            "content TEXT DEFAULT NULL, " +
+                            "PRIMARY KEY (id)" +
+                            ");"
+            );
+
+            // Chat Group
+            database.execSQL("DROP TABLE IF EXISTS `chatGroup`;");
+
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `chatGroup` (" +
+                            "id TEXT NOT NULL, " +
+                            "userId TEXT NOT NULL, " +
+                            "groupName TEXT NOT NULL, " +
+                            "PRIMARY KEY (id, userId)" +
+                            ");"
+            );
+
+            // Message
+            database.execSQL("DROP TABLE IF EXISTS message;");
+
+            database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS message (" +
+                            "id TEXT NOT NULL, " +
+                            "userId TEXT NOT NULL, " +
+                            "recipientId TEXT NOT NULL, " +
+                            "timestamp LONG NOT NULL, " +
+                            "content TEXT NOT NULL, " +
+                            "PRIMARY KEY (id)" +
+                            ");"
+            );
         }
     };
 }
