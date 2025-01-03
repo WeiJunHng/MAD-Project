@@ -1,11 +1,19 @@
 package com.example.madproject.data.model;
 
-public interface Identifiable {
+public abstract class Identifiable {
 
-    class IdFormat {
+    protected String id;
+
+    static class IdFormat {
         public static final String USER = "U%06d";
     }
 
-    String _getId();
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 }
