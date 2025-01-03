@@ -35,6 +35,58 @@
     <string name="guidelines_support">We are all part of the <b>Soluna</b> community. If you see content that may violate these guidelines, please report it using the app’s reporting feature. Our team will review the report and take action as necessary to maintain a safe and respectful environment.</string>
     <string name="guidelines_conclusion">We want <b>Soluna</b> to be a safe and empowering platform for everyone. These guidelines are here to help us protect and nurture our community. Together, we can foster an environment where everyone can engage, learn, and grow in the pursuit of gender equality and better health for all. Thank you for being part of the <b>Soluna</b> community.</string>
     <string name="guidelines_ending">By adhering to these guidelines, you are contributing to a supportive space where gender equality, women’s health, and safety are prioritized. We are grateful for your participation in creating a positive and empowering environment for all.</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="confirm">Confirm</string>
+
+    <!-- FAQ section -->
+    <string name="faq_1_question">How do I create an account on Soluna?</string>
+    <string name="faq_1_answer">To create an account, download the Soluna app. Click on “Sign Up” and follow the prompts to enter your email and set a password. If you encounter any issues, ensure your email address is valid or contact support at support@soluna.com.</string>
+
+    <string name="faq_2_question">What should I do if I forget my password?</string>
+    <string name="faq_2_answer">Use the “Forgot Password” option on the login page. Enter your registered email address, and you are able to reset your password now.</string>
+
+    <string name="faq_3_question">Can I access my Soluna account from multiple devices?</string>
+    <string name="faq_3_answer">Yes, you can access your Soluna account from multiple devices, including smartphones, tablets, and computers. Simply log in using the same credentials on any device.</string>
+
+    <string name="faq_4_question">How do I update my profile information?</string>
+    <string name="faq_4_answer">To update your profile, open the Soluna app, go to your profile section, and click on the “Edit Profile” button. From there, you can change your name, profile picture, and other personal details.</string>
+
+    <string name="faq_5_question">What type of content am I allowed to post?</string>
+    <string name="faq_5_answer">You can post educational, supportive, and authentic content related to gender equality, women’s health, and empowerment. Avoid posting anything that violates intellectual property rights or contains hate speech.</string>
+
+    <string name="faq_6_question">Are there any restrictions on posting links?</string>
+    <string name="faq_6_answer">You can post links to relevant educational or supportive content. However, links that lead to malicious sites, spam, or unrelated advertisements are not allowed and may result in your post being removed.</string>
+
+    <string name="faq_7_question">What is the Soluna Community Guidelines?</string>
+    <string name="faq_7_answer">The Soluna Community Guidelines outline the behaviors and content that are not allowed on the platform. This includes hate speech, discrimination, explicit content, and harmful behavior. You can view the full guidelines in the app.</string>
+
+    <string name="faq_8_question">Can I share my account with others?</string>
+    <string name="faq_8_answer">Each Soluna account is meant to be used by an individual only. Sharing your account is against our terms of service and may lead to suspension or termination of your account. Please keep your account details secure.</string>
+
+    <string name="faq_9_question">How do I ensure my privacy while using Soluna?</string>
+    <string name="faq_9_answer">Avoid sharing sensitive personal information such as your address or phone number publicly. Review our Privacy Policy for tips on managing your privacy settings.</string>
+
+    <string name="faq_10_question">How can I contact support?</string>
+    <string name="faq_10_answer">You can contact Soluna support by emailing us at support@soluna.com. Be sure to provide as much detail as possible about your issue to help us assist you quickly.</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="description_show_notification">Toggles whether notifications from the app are displayed at all. Turning this off will disable all notifications for the app.</string>
+    <string name="show_notifications">Show notifications</string>
+    <string name="description_floating_notification">Allows notifications to appear as floating pop-ups on the screen, even when you\'re using other apps.</string>
+    <string name="notification">Notification</string>
+    <string name="floating_notifications">Floating notifications</string>
+    <string name="lock_screen_notifications">Lock screen notifications</string>
+    <string name="description_lock_screen_notification">Controls whether notifications are shown on the lock screen. You can keep it on to view notifications without unlocking your phone.</string>
+    <string name="allow_vibration">Allow vibration</string>
+    <string name="description_allow_vibration">Activates vibration for notifications. Useful for receiving haptic feedback when a notification arrives.</string>
+    <string name="description_allow_sound">Enables sound to play when a notification is received. Turn it off for silent notifications.</string>
+    <string name="allow_sound">Allow sound</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="save">Save</string>
+
 
     <string name="terms_welcome">Welcome to <b>Soluna</b>! These Terms of Service ("Terms") govern your access to and use of the <b>Soluna</b> platform, including our website, mobile application, and other online services (collectively referred to as the "Service"). By accessing or using the Service, you agree to comply with these Terms and our Community Guidelines. If you do not agree, you may not use the Service.</string>
     <string name="terms_acceptance">By creating an account or using the Service, you confirm that you are at least 13 years old and legally capable of entering into these Terms. If you are under 18, you must have the consent of a parent or guardian.</string>
