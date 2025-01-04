@@ -34,11 +34,10 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <!-- Like Button -->
         <ImageButton
             android:id="@+id/IBComment"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
             android:contentDescription="Comment Button"
@@ -56,11 +55,74 @@
         <ImageButton
             android:id="@+id/IBReport"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
             android:contentDescription="Report Button"
             android:src="@drawable/report_post_button" />
+
+<!--        <soup.neumorphism.NeumorphCardView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
+<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
+<!--            app:neumorph_shadowElevation="6sp"-->
+<!--            app:neumorph_shapeType="flat"-->
+<!--            android:layout_margin="8dp">-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/IBComment"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:contentDescription="Comment Button"-->
+<!--                android:src="@drawable/comment_button"-->
+<!--                android:scaleType="centerInside" />-->
+
+<!--        </soup.neumorphism.NeumorphCardView>-->
+
+<!--        <soup.neumorphism.NeumorphCardView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
+<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
+<!--            app:neumorph_shadowElevation="6sp"-->
+<!--            app:neumorph_shapeType="flat"-->
+<!--            android:layout_margin="8dp">-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/IBLike"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:contentDescription="Like Button"-->
+<!--                android:src="@drawable/dislike_button"-->
+<!--                android:scaleType="centerInside" />-->
+
+<!--        </soup.neumorphism.NeumorphCardView>-->
+
+<!--        <soup.neumorphism.NeumorphCardView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
+<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
+<!--            app:neumorph_shadowElevation="6sp"-->
+<!--            app:neumorph_shapeType="flat"-->
+<!--            android:layout_margin="8dp">-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/IBReport"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:contentDescription="Report Button"-->
+<!--                android:src="@drawable/report_post_button"-->
+<!--                android:scaleType="centerInside" />-->
+
+<!--        </soup.neumorphism.NeumorphCardView>-->
 
     </LinearLayout>
 
@@ -91,6 +153,51 @@
                 android:layout_marginTop="16dp"
                 android:overScrollMode="never"
                 android:scrollbars="vertical" />
+
+            <!-- Comment Input Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp">
+
+                <soup.neumorphism.NeumorphCardView
+                    android:id="@+id/ETCommentFrame"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    app:neumorph_shadowColorDark="#CAD3BB"
+                    app:neumorph_shadowColorLight="#EFEFEF"
+                    app:neumorph_shadowElevation="6sp"
+                    app:neumorph_shapeType="flat">
+
+                    <EditText
+                        android:id="@+id/ETComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:hint="Write a comment..."
+                        android:padding="16dp"
+                        android:textSize="14sp" />
+
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphImageButton
+                    android:id="@+id/BtnSendComment"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Send Comment Button"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_send"
+                    app:neumorph_shadowColorDark="#CAD3BB"
+                    app:neumorph_shadowColorLight="#EFEFEF"
+                    app:neumorph_shadowElevation="4sp"
+                    app:neumorph_shapeType="flat" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

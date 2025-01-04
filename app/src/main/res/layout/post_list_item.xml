@@ -19,7 +19,21 @@
         android:gravity="center_horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
+
         android:background="@drawable/light_background">
+
+        <TextView
+            android:id="@+id/TVAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="Author Name"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="start"
+            android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
             android:layout_width="wrap_content"
@@ -55,11 +69,10 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-            <!-- Like Button -->
             <ImageButton
                 android:id="@+id/IBComment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:contentDescription="Comment Button"
@@ -81,7 +94,7 @@
             <ImageButton
                 android:id="@+id/IBReport"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:contentDescription="Report Button"
