@@ -15,12 +15,12 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 app:cardElevation="8dp"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="@color/cardview_light_background"
+                android:background="@drawable/light_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/ETTitle"
+                        android:id="@+id/TVTitle"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="26sp"
@@ -47,7 +47,7 @@
                         android:layout_height="250dp"/>
 
                     <TextView
-                        android:id="@+id/ETAuthor"
+                        android:id="@+id/TVAuthor"
                         android:layout_marginTop="6dp"
                         android:textColor="@color/text"
                         android:textSize="16sp"
@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:id="@+id/ETTime"
+                        android:id="@+id/TVTime"
                         android:layout_marginTop="6dp"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -67,7 +67,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/ETDetail"
+                android:id="@+id/TVDetail"
                 android:textSize="22sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="8dp"
@@ -75,12 +75,17 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/ETContent"
+                android:id="@+id/TVContent"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
