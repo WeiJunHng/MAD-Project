@@ -27,7 +27,7 @@ public interface UserDAO extends BaseDAO<User>{
     User getByUsername(String username);
 
     @Query("SELECT id FROM user ORDER BY id DESC LIMIT 1")
-    String getLastUserId();
+    String getLastId();
 
     @Query("SELECT COUNT(*) FROM user")
     int getUserCount();

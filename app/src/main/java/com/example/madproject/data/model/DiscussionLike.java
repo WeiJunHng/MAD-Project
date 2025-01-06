@@ -14,6 +14,10 @@ public class DiscussionLike {
     @NonNull
     private Date timestamp;
 
+    public DiscussionLike() {
+
+    }
+
     public DiscussionLike(@NonNull String discussionId, @NonNull String userId, @NonNull Date timestamp) {
         this.discussionId = discussionId;
         this.userId = userId;
