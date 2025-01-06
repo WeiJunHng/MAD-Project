@@ -4,8 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 
 @Entity(tableName = "user",
         indices = {
@@ -43,7 +48,8 @@ public class User extends Identifiable {
     private int age;
 
     @NonNull
-    private String birthday;
+    @ServerTimestamp
+    private Date birthday;
 
     @Nullable
     private String contactInfo;
@@ -56,9 +62,20 @@ public class User extends Identifiable {
 
     }
 
+    @Ignore
+    public User(@NonNull String id, @NonNull String firstName, @NonNull String lastName, @NonNull String username,
+                @NonNull String email, @NonNull String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(@NonNull String id, @NonNull String firstName, @NonNull String lastName, @NonNull String username,
                 @NonNull String email, @NonNull String password, @Nullable String profilePicURL, @NonNull String gender,
-                int age, @NonNull String birthday, @Nullable String contactInfo, @Nullable Integer period) {
+                int age, @NonNull Date birthday, @Nullable String contactInfo, @Nullable Integer period) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -129,7 +146,7 @@ public class User extends Identifiable {
     }
 
     @NonNull
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -138,6 +155,7 @@ public class User extends Identifiable {
         return contactInfo;
     }
 
+    @Nullable
     public Integer getPeriod() {
         return period;
     }
@@ -174,7 +192,7 @@ public class User extends Identifiable {
         this.age = age;
     }
 
-    public void setBirthday(@NonNull String birthday) {
+    public void setBirthday(@NonNull Date birthday) {
         this.birthday = birthday;
     }
 

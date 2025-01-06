@@ -2,6 +2,7 @@ package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "chatGroup", primaryKeys = {"id", "userId"})
 public class ChatGroup extends Identifiable {
@@ -9,6 +10,10 @@ public class ChatGroup extends Identifiable {
     private String userId;
     @NonNull
     private String groupName;
+
+    public ChatGroup() {
+
+    }
 
     public ChatGroup(@NonNull String id, @NonNull String userId, @NonNull String groupName) {
         this.id = id;

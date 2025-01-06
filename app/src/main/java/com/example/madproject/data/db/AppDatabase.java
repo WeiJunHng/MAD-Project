@@ -25,7 +25,15 @@ import com.example.madproject.data.model.Message;
 import com.example.madproject.data.model.Report;
 import com.example.madproject.data.model.User;
 
-@Database(entities = {User.class, Discussion.class, DiscussionComment.class, DiscussionLike.class, Report.class, ChatGroup.class, Message.class},version = 2)
+@Database(entities = {
+        User.class,
+        Discussion.class,
+        DiscussionComment.class,
+        DiscussionLike.class,
+        Report.class,
+        ChatGroup.class,
+        Message.class
+},version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -36,7 +44,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DiscussionCommentDAO discussionCommentDAO();
     public abstract DiscussionLikeDAO discussionLikeDAO();
     public abstract ReportDAO reportDAO();
-    public abstract ChatGroupDAO groupDAO();
+    public abstract ChatGroupDAO chatGroupDAO();
     public abstract MessageDAO messageDAO();
 
     public static AppDatabase getDatabase(final Context context) {
@@ -44,7 +52,8 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"app_database")
-                            .addMigrations(AppDatabase.MIGRATION_1_2)
+//                            .addMigrations(AppDatabase.MIGRATION_1_2)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -77,7 +86,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             "profilePicURL TEXT NOT NULL, " +
                             "gender TEXT NOT NULL, " +
                             "age INTEGER NOT NULL, " +
-                            "birthday DATE NOT NULL, " +
+                            "birthday LONG NOT NULL, " +
                             "contactInfo TEXT NOT NULL, " +
                             "period INTEGER NOT NULL DEFAULT 28, " +
                             "PRIMARY KEY (id)" +
@@ -101,7 +110,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             "id TEXT NOT NULL, " +
                             "authorId TEXT NOT NULL, " +
                             "timestamp LONG NOT NULL, " +
-                            "title TEXT NOT NULL, " +
+                            "pictureUrl TEXT NOT NULL, " +
                             "content TEXT NOT NULL, " +
                             "PRIMARY KEY (id)" +
                             ");"

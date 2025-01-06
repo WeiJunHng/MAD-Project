@@ -11,7 +11,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.madproject.data.DAO.BaseDAO;
+import com.example.madproject.data.model.ChatGroup;
+import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.model.DiscussionComment;
+import com.example.madproject.data.model.DiscussionLike;
 import com.example.madproject.data.model.Identifiable;
+import com.example.madproject.data.model.Message;
+import com.example.madproject.data.model.Report;
 import com.example.madproject.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Tasks;
@@ -45,6 +51,12 @@ public class FirestoreManager {
     static {
         // Map tableName to domain class
         MODEL_CLASS_MAP.put("user", User.class);
+        MODEL_CLASS_MAP.put("discussion", Discussion.class);
+        MODEL_CLASS_MAP.put("discussionComment", DiscussionComment.class);
+        MODEL_CLASS_MAP.put("discussionLike", DiscussionLike.class);
+        MODEL_CLASS_MAP.put("chatGroup", ChatGroup.class);
+        MODEL_CLASS_MAP.put("message", Message.class);
+        MODEL_CLASS_MAP.put("report", Report.class);
 
         // Map tablename to SQL execution code
         SQL_EXEC_CODE_MAP.put("user", new String[] {
@@ -100,6 +112,12 @@ public class FirestoreManager {
 
         // Map tableName to DAO
         DAO_MAP.put("user", database.userDAO());
+        DAO_MAP.put("discussion", database.discussionDAO());
+        DAO_MAP.put("discussionComment", database.discussionCommentDAO());
+        DAO_MAP.put("discussionLike", database.discussionLikeDAO());
+        DAO_MAP.put("chatGroup", database.chatGroupDAO());
+        DAO_MAP.put("message", database.messageDAO());
+        DAO_MAP.put("report", database.reportDAO());
     }
 
     public void clearTables() {
@@ -186,6 +204,9 @@ public class FirestoreManager {
 
                 // Update local database for offline access
                 insertDataToLocalDatabase(tableName, dataList);
+                Log.d("FirestoreSync", dataList.toString(), e);
+            }else{
+                Log.d("FirestoreSync", "Syncing failed.", e);
             }
         });
         return liveData;
@@ -452,6 +473,12 @@ public class FirestoreManager {
 
     public void syncUserTable() {
         LiveData<List<User>> allUserLiveData = fetchDataByTable("user");
+    }
+
+    public void syncDiscussionTable() {
+        LiveData<List<User>> allDiscussionLiveData = fetchDataByTable("discussion");
+        LiveData<List<User>> allDiscussionCommentLiveData = fetchDataByTable("discussionComment");
+        LiveData<List<User>> allDiscussionLikeLiveData = fetchDataByTable("discussionLike");
     }
 
 }
