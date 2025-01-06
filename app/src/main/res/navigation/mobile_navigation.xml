@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/DestProfile"
-        android:name="com.example.madproject.ProfilePage"
+        android:name="com.example.madproject.ui.profile.ProfilePageFragment"
         android:label="fragment_profile_page"
         tools:layout="@layout/fragment_profile_page" />
 

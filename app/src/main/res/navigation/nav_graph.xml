@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/discussionForum"
-        android:name="com.example.madproject.ui.discussion.DiscussionForum"
+        android:name="com.example.madproject.ui.discussion.DiscussionForumFragment"
         android:label="Discussion Forum"
         tools:layout="@layout/fragment_discussion_forum">
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/precautionDetailFragment"
-        android:name="com.example.madproject.ui.precaution.PrecautionDetail"
+        android:name="com.example.madproject.ui.precaution.PrecautionDetailFragment"
         android:label="Precaution Detail"
         tools:layout="@layout/fragment_precaution_detail" />
 </navigation>
