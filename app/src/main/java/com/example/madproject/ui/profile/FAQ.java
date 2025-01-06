@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 public class FAQ {
     private String question;

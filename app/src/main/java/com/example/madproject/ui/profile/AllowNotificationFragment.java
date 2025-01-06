@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.app.Notification;
 import android.os.Bundle;
@@ -13,12 +13,14 @@ import android.content.Context;
 import android.os.Build;
 import android.widget.Switch;
 
+import com.example.madproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AllowNotification#newInstance} factory method to
+ * Use the {@link AllowNotificationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllowNotification extends Fragment {
+public class AllowNotificationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +33,7 @@ public class AllowNotification extends Fragment {
 
     private NotificationManager notificationManager;
 
-    public AllowNotification() {
+    public AllowNotificationFragment() {
         // Required empty public constructor
     }
 
@@ -44,8 +46,8 @@ public class AllowNotification extends Fragment {
      * @return A new instance of fragment AllowNotification.
      */
     // TODO: Rename and change types and number of parameters
-    public static AllowNotification newInstance(String param1, String param2) {
-        AllowNotification fragment = new AllowNotification();
+    public static AllowNotificationFragment newInstance(String param1, String param2) {
+        AllowNotificationFragment fragment = new AllowNotificationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

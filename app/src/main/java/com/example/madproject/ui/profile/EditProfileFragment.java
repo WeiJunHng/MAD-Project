@@ -1,20 +1,21 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.madproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ChangePassword#newInstance} factory method to
+ * Use the {@link EditProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChangePassword extends DialogFragment {
+public class EditProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,7 @@ public class ChangePassword extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
-    public ChangePassword() {
+    public EditProfileFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +36,11 @@ public class ChangePassword extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ChangePassword.
+     * @return A new instance of fragment EditProfile.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChangePassword newInstance(String param1, String param2) {
-        ChangePassword fragment = new ChangePassword();
+    public static EditProfileFragment newInstance(String param1, String param2) {
+        EditProfileFragment fragment = new EditProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,6 +61,6 @@ public class ChangePassword extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_password, container, false);
+        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
     }
 }
