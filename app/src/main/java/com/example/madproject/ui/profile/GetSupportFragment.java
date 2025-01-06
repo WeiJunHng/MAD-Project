@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.os.Bundle;
 
@@ -10,15 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.madproject.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GetSupport#newInstance} factory method to
+ * Use the {@link GetSupportFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GetSupport extends Fragment {
+public class GetSupportFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +31,7 @@ public class GetSupport extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public GetSupport() {
+    public GetSupportFragment() {
         // Required empty public constructor
     }
 
@@ -42,8 +44,8 @@ public class GetSupport extends Fragment {
      * @return A new instance of fragment GetSupport.
      */
     // TODO: Rename and change types and number of parameters
-    public static GetSupport newInstance(String param1, String param2) {
-        GetSupport fragment = new GetSupport();
+    public static GetSupportFragment newInstance(String param1, String param2) {
+        GetSupportFragment fragment = new GetSupportFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
