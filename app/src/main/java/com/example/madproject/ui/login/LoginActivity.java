@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.madproject.MainActivity;
 import com.example.madproject.R;
-import com.example.madproject.data.DAO.UserDAO;
 import com.example.madproject.data.db.AppDatabase;
 import com.example.madproject.data.db.FirestoreManager;
 import com.example.madproject.data.model.User;
@@ -103,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserSession(User user) {
         SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userId", user.getUserId());
+        editor.putString("userId", user.getId());
         editor.apply();
     }
 
