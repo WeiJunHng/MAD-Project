@@ -11,7 +11,9 @@ import com.example.madproject.data.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class SignUpViewModel extends ViewModel {
 
@@ -99,7 +101,7 @@ public class SignUpViewModel extends ViewModel {
             }
             
             String userId = userRepository.createUserId();
-            User user = new User(userId, firstName, lastName, username, email, password, null, "Male", 20, "01/01/2000", null, null);
+            User user = new User(userId, firstName, lastName, username, email, password);
             userLiveData.postValue(user);
         }).start();
     }
@@ -121,11 +123,13 @@ public class SignUpViewModel extends ViewModel {
 
             // Calculate age based on birthday
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate birthDate = LocalDate.parse(birthday, formatter);
+            LocalDate birthLocalDate = LocalDate.parse(birthday, formatter);
             LocalDate currentDate = LocalDate.now();
-            int age = Period.between(birthDate, currentDate).getYears();
 
-            User userNew = new User(userId, firstName, lastName, username, email, password, null, gender, age, birthday, contact, null);
+            Date birthDate = Date.from(birthLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            int age = Period.between(birthLocalDate, currentDate).getYears();
+
+            User userNew = new User(userId, firstName, lastName, username, email, password, null, gender, age, birthDate, contact, null);
 
             userRepository.insertUserToFirestore(userNew);
             userLiveData.postValue(userNew);
