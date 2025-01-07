@@ -2,12 +2,16 @@ package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
 @Entity(tableName = "report")
 public class Report extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String discussionId;
     @NonNull
@@ -16,6 +20,7 @@ public class Report extends Identifiable {
     private Date timestamp;
     private String content;
 
+    @Ignore
     public Report(@NonNull String id, @NonNull String discussionId, @NonNull String reporterId, @NonNull Date timestamp) {
         this.id = id;
         this.discussionId = discussionId;
@@ -32,7 +37,6 @@ public class Report extends Identifiable {
         this.content = content;
     }
 
-    @PrimaryKey
     @NonNull
     public String getId() {
         return super.getId();

@@ -8,6 +8,9 @@ import java.util.Date;
 
 @Entity(tableName = "discussion")
 public class Discussion extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String authorId;
     @NonNull
@@ -26,10 +29,9 @@ public class Discussion extends Identifiable {
         this.content = content;
     }
 
-    @PrimaryKey
     @NonNull
     public String getId() {
-        return super.getId();
+        return id;
     }
 
     public void setId(@NonNull String id) {

@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     private void saveUserSession(User user) {
         SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userId", user.getUserId());
+        editor.putString("userId", user.getId());
         editor.apply();
     }
 

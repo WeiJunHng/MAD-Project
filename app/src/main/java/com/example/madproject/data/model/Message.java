@@ -8,6 +8,9 @@ import java.util.Date;
 
 @Entity(tableName = "message")
 public class Message extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String userId;
     @NonNull
@@ -19,14 +22,13 @@ public class Message extends Identifiable {
 
     public Message(@NonNull String id, @NonNull String userId, @NonNull String recipientId,
                    @NonNull Date timestamp, String content) {
-        setId(id);  // Set the ID from Identifiable class
+        this.id = id;  // Set the ID from Identifiable class
         this.userId = userId;
         this.recipientId = recipientId;
         this.timestamp = timestamp;
         this.content = content;
     }
 
-    @PrimaryKey
     @NonNull
     public String getId() {
         return super.getId();

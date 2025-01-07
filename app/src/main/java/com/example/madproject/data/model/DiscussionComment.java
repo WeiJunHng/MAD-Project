@@ -8,6 +8,9 @@ import java.util.Date;
 
 @Entity(tableName = "discussionComment")
 public class DiscussionComment extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String discussionId;
     @NonNull
@@ -26,7 +29,6 @@ public class DiscussionComment extends Identifiable {
         this.content = content;
     }
 
-    @PrimaryKey
     @NonNull
     public String getId() {
         return super.getId();
