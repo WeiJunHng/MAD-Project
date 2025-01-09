@@ -43,19 +43,18 @@ tools:context="com.example.madproject.ui.discussion.CreatePostFragment">
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <EditText
-    android:id="@+id/ETText"
-    android:layout_width="385dp"
-    android:layout_height="405dp"
-    android:layout_marginTop="24dp"
-    android:ems="10"
-    android:gravity="top"
-    android:hint="Text..."
-    android:inputType="text"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/BtnPost" />
+        android:id="@+id/ETText"
+        android:layout_width="365dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Text..."
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BtnPost" />
 
     <ImageButton
         android:id="@+id/IBLink"
@@ -92,4 +91,17 @@ tools:context="com.example.madproject.ui.discussion.CreatePostFragment">
         app:layout_constraintStart_toEndOf="@+id/IBTagUser"
         app:layout_constraintTop_toBottomOf="@+id/ETText"
         app:srcCompat="@drawable/gallery_button" />
+
+    <ImageView
+        android:id="@+id/IVSelectedImage"
+        android:layout_width="360dp"
+        android:layout_height="232dp"
+        android:contentDescription="Selected Image"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IBLink"
+        app:srcCompat="@drawable/ic_placeholder" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
