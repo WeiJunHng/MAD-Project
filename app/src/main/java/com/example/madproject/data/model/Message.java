@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 @Entity(tableName = "message")
@@ -16,13 +18,18 @@ public class Message extends Identifiable {
     @NonNull
     private String recipientId;
     @NonNull
+    @ServerTimestamp
     private Date timestamp;
     @NonNull
     private String content;
 
+    public Message() {
+
+    }
+
     public Message(@NonNull String id, @NonNull String userId, @NonNull String recipientId,
-                   @NonNull Date timestamp, String content) {
-        this.id = id;  // Set the ID from Identifiable class
+                   @NonNull Date timestamp, @NonNull String content) {
+        setId(id);  // Set the ID from Identifiable class
         this.userId = userId;
         this.recipientId = recipientId;
         this.timestamp = timestamp;

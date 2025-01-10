@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.os.Bundle;
 
@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.madproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DeleteAccount#newInstance} factory method to
+ * Use the {@link DeleteAccountDialog#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DeleteAccount extends DialogFragment {
+public class DeleteAccountDialog extends DialogFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +30,7 @@ public class DeleteAccount extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
-    public DeleteAccount() {
+    public DeleteAccountDialog() {
         // Required empty public constructor
     }
 
@@ -41,8 +43,8 @@ public class DeleteAccount extends DialogFragment {
      * @return A new instance of fragment DeleteAccount.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeleteAccount newInstance(String param1, String param2) {
-        DeleteAccount fragment = new DeleteAccount();
+    public static DeleteAccountDialog newInstance(String param1, String param2) {
+        DeleteAccountDialog fragment = new DeleteAccountDialog();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

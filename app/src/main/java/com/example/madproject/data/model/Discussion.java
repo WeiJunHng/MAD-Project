@@ -1,31 +1,40 @@
 package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
+import java.util.Objects;
 
 @Entity(tableName = "discussion")
 public class Discussion extends Identifiable {
-    @PrimaryKey
-    @NonNull
-    private String id;
+
+    private static final String DEFAULT_PICTURE_URL = "defaultPicUrl";
+
     @NonNull
     private String authorId;
     @NonNull
+    @ServerTimestamp
     private Date timestamp;
-    @NonNull
-    private String title;
+    @Nullable
+    private String pictureUrl;
     @NonNull
     private String content;
 
-    public Discussion(@NonNull String id, @NonNull String authorId, @NonNull Date timestamp,
-                      @NonNull String title, @NonNull String content) {
+    public Discussion() {
+
+    }
+
+    public Discussion(@NonNull String id, @NonNull String authorId, @NonNull Date timestamp, @Nullable String pictureUrl, @NonNull String content) {
         this.id = id;
         this.authorId = authorId;
         this.timestamp = timestamp;
-        this.title = title;
+        this.pictureUrl = pictureUrl;
         this.content = content;
     }
 
@@ -57,13 +66,13 @@ public class Discussion extends Identifiable {
         this.timestamp = timestamp;
     }
 
-    @NonNull
-    public String getTitle() {
-        return title;
+    @Nullable
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setTitle(@NonNull String title) {
-        this.title = title;
+    public void setPictureUrl(@Nullable String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     @NonNull

@@ -128,7 +128,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_weight="0.9">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -140,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Post Description"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -154,54 +155,54 @@
                 android:overScrollMode="never"
                 android:scrollbars="vertical" />
 
-            <!-- Comment Input Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="15dp">
-
-                <soup.neumorphism.NeumorphCardView
-                    android:id="@+id/ETCommentFrame"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    app:neumorph_shadowColorDark="#CAD3BB"
-                    app:neumorph_shadowColorLight="#EFEFEF"
-                    app:neumorph_shadowElevation="6sp"
-                    app:neumorph_shapeType="flat">
-
-                    <EditText
-                        android:id="@+id/ETComment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:hint="Write a comment..."
-                        android:padding="16dp"
-                        android:textSize="14sp" />
-
-                </soup.neumorphism.NeumorphCardView>
-
-                <soup.neumorphism.NeumorphImageButton
-                    android:id="@+id/BtnSendComment"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="Send Comment Button"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_send"
-                    app:neumorph_shadowColorDark="#CAD3BB"
-                    app:neumorph_shadowColorLight="#EFEFEF"
-                    app:neumorph_shadowElevation="4sp"
-                    app:neumorph_shapeType="flat" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
     </ScrollView>
+
+    <!-- Comment Input Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/ETCommentFrame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowElevation="6sp"
+            app:neumorph_shapeType="flat">
+
+            <EditText
+                android:id="@+id/ETComment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Write a comment..."
+                android:padding="16dp"
+                android:textSize="14sp" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/BtnSendComment"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Send Comment Button"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_send"
+            android:paddingStart="5dp"
+            app:neumorph_shadowColorDark="#CAD3BB"
+            app:neumorph_shadowColorLight="#EFEFEF"
+            app:neumorph_shadowElevation="4sp"
+            app:neumorph_shapeType="flat" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/ConfirmReportButton"

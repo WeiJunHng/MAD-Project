@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 @Entity(tableName = "discussionComment")
@@ -16,9 +18,14 @@ public class DiscussionComment extends Identifiable {
     @NonNull
     private String commenterId;
     @NonNull
+    @ServerTimestamp
     private Date timestamp;
     @NonNull
     private String content;
+
+    public DiscussionComment() {
+
+    }
 
     public DiscussionComment(@NonNull String id, @NonNull String discussionId, @NonNull String commenterId,
                              @NonNull Date timestamp, @NonNull String content) {

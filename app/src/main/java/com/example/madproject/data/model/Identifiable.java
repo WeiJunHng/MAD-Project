@@ -1,9 +1,11 @@
 package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.PrimaryKey;
 
 public abstract class Identifiable {
 
+    @PrimaryKey
     @NonNull
     protected String id;
 

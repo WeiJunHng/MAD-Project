@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.os.Bundle;
 
@@ -6,19 +6,20 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.madproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignOut#newInstance} factory method to
+ * Use the {@link SignOutDialog#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignOut extends DialogFragment {
+public class SignOutDialog extends DialogFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +30,7 @@ public class SignOut extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
-    public SignOut() {
+    public SignOutDialog() {
         // Required empty public constructor
     }
 
@@ -42,8 +43,8 @@ public class SignOut extends DialogFragment {
      * @return A new instance of fragment SignOut.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignOut newInstance(String param1, String param2) {
-        SignOut fragment = new SignOut();
+    public static SignOutDialog newInstance(String param1, String param2) {
+        SignOutDialog fragment = new SignOutDialog();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

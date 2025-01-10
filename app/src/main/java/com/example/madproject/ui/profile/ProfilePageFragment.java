@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.profile;
 
 import android.os.Bundle;
 
@@ -9,16 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.madproject.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfilePage#newInstance} factory method to
+ * Use the {@link ProfilePageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfilePage extends Fragment {
+public class ProfilePageFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,8 +38,8 @@ public class ProfilePage extends Fragment {
      * @return A new instance of fragment ProfilePage.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfilePage newInstance(String param1, String param2) {
-        ProfilePage fragment = new ProfilePage();
+    public static ProfilePageFragment newInstance(String param1, String param2) {
+        ProfilePageFragment fragment = new ProfilePageFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +47,7 @@ public class ProfilePage extends Fragment {
         return fragment;
     }
 
-    public ProfilePage() {
+    public ProfilePageFragment() {
         // Required empty public constructor
     }
 
@@ -93,7 +93,7 @@ public class ProfilePage extends Fragment {
                 v.setScaleX(1f);
                 v.setScaleY(1f);
                 FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.FCVMain, new EditProfile());
+                transaction.replace(R.id.FCVMain, new EditProfileFragment());
                 transaction.addToBackStack(null); // Add the transaction to the back stack for navigation
                 transaction.commit();
             }, 100);
@@ -103,38 +103,38 @@ public class ProfilePage extends Fragment {
             switch (settingsItems[position]) {
 
                 case "Change Password":
-                    ChangePassword changePasswordDialog = new ChangePassword();
+                    ChangePasswordDialog changePasswordDialog = new ChangePasswordDialog();
                     changePasswordDialog.show(getParentFragmentManager(), "changePasswordDialog");
                     break;
 
                 case "Allow Notification":
                     FragmentTransaction transaction1 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction1.replace(R.id.FCVMain, new AllowNotification());
+                    transaction1.replace(R.id.FCVMain, new AllowNotificationFragment());
                     transaction1.addToBackStack(null); // Add the transaction to the back stack for navigation
                     transaction1.commit();
                     break;
 
                 case "Get Support":
                     FragmentTransaction transaction2 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction2.replace(R.id.FCVMain, new GetSupport());
+                    transaction2.replace(R.id.FCVMain, new GetSupportFragment());
                     transaction2.addToBackStack(null);
                     transaction2.commit();
                     break;
 
                 case "Accessibility":
                     FragmentTransaction transaction3 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction3.replace(R.id.FCVMain, new Accessibility());
+                    transaction3.replace(R.id.FCVMain, new AccessibilityFragment());
                     transaction3.addToBackStack(null); // Add the transaction to the back stack for navigation
                     transaction3.commit();
                     break;
 
                 case "Sign Out":
-                    SignOut signOutDialog = new SignOut();
+                    SignOutDialog signOutDialog = new SignOutDialog();
                     signOutDialog.show(getParentFragmentManager(), "SignOutDialog");
                     break;
 
                 case "Delete Account":
-                    DeleteAccount deleteAccountdialog = new DeleteAccount();
+                    DeleteAccountDialog deleteAccountdialog = new DeleteAccountDialog();
                     deleteAccountdialog.show(getParentFragmentManager(), "DeleteAccountDialog");
                     break;
             }

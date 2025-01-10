@@ -1,5 +1,7 @@
 package com.example.madproject.data.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 public class UserNew extends Identifiable {
@@ -31,6 +33,7 @@ public class UserNew extends Identifiable {
 //        }
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
@@ -79,7 +82,7 @@ public class UserNew extends Identifiable {
         return period;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 

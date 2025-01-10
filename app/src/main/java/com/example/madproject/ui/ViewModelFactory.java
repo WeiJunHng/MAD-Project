@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.madproject.data.repository.DiscussionRepository;
 import com.example.madproject.data.repository.UserRepository;
 import com.example.madproject.ui.discussion.DiscussionViewModel;
 import com.example.madproject.ui.login.LoginViewModel;
@@ -16,9 +17,11 @@ import com.example.madproject.ui.signup.SignUpViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     private final UserRepository userRepository;
+    private final DiscussionRepository discussionRepository;
 
     public ViewModelFactory(Context context) {
         userRepository = new UserRepository(context);
+        discussionRepository = new DiscussionRepository(context);
     }
 
     @NonNull
@@ -40,7 +43,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new PrecautionViewModel(userRepository);
         }
         if (modelClass.isAssignableFrom(DiscussionViewModel.class)) {
-            return (T) new DiscussionViewModel(userRepository);
+            return (T) new DiscussionViewModel(userRepository, discussionRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

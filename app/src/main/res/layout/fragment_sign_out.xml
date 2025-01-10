@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/light_background"
     android:outlineSpotShadowColor="#231919"
-    tools:context=".SignOut">
+    tools:context=".ui.profile.SignOutDialog">
 
     <ImageButton
         android:id="@+id/BtnCloseIcon"

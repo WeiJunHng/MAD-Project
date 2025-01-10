@@ -20,6 +20,10 @@ public class Report extends Identifiable {
     private Date timestamp;
     private String content;
 
+    public Report() {
+
+    }
+
     @Ignore
     public Report(@NonNull String id, @NonNull String discussionId, @NonNull String reporterId, @NonNull Date timestamp) {
         this.id = id;
