@@ -95,4 +95,8 @@ public class UserRepository {
     public void updateUserInFirestore(User user) {
         firestoreManager.executeAction(FirestoreManager.Action.UPDATE, "user", user, context);
     }
+
+    public void deleteUserInFirestore(User user) {
+        firestoreManager.executeAction(FirestoreManager.Action.DELETE, "user", user, context);
+    }
 }
