@@ -6,6 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +18,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.madproject.R;
+import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.repository.DiscussionRepository;
 import com.example.madproject.databinding.FragmentDiscussionForumBinding;
 import com.example.madproject.ui.ViewModelFactory;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiscussionForumFragment extends Fragment {
@@ -26,8 +31,9 @@ public class DiscussionForumFragment extends Fragment {
     private ImageButton IBForumChatButton, IBForumPostButton;
     private RecyclerView recyclerView;
     private PostListAdapter postListAdapter;
-    private final List<Post> postList = new ArrayList<>();
+    private List<Discussion> postList;
     private FragmentDiscussionForumBinding binding;
+    private DiscussionRepository discussionRepository;;
     private DiscussionViewModel discussionViewModel;
 
     @Override
@@ -42,6 +48,8 @@ public class DiscussionForumFragment extends Fragment {
 
         View root = binding.getRoot();
 
+        discussionRepository = new DiscussionRepository(requireContext());
+
         ViewModelFactory factory = new ViewModelFactory(getContext());
         discussionViewModel = new ViewModelProvider(requireActivity(),factory).get(DiscussionViewModel.class);
 
@@ -50,15 +58,16 @@ public class DiscussionForumFragment extends Fragment {
         IBForumPostButton = binding.IBForumPostButton;
 
         // Example data
-        postList.add(new Post("Content 1", "https://example.com/image1.jpg"));
-        postList.add(new Post( "Content 2", "https://example.com/image2.jpg"));
+        postList = discussionRepository.getAllDiscussion();
+//        postList.add(new Post("Content 1", "https://example.com/image1.jpg"));
+//        postList.add(new Post( "Content 2", "https://example.com/image2.jpg"));
 
         postListAdapter = new PostListAdapter(getActivity(), getContext(), postList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(postListAdapter);
 
-        discussionViewModel.getPostLiveData().observe(getViewLifecycleOwner(),post -> {
+        discussionViewModel.getDiscussionLiveData().observe(getViewLifecycleOwner(), post -> {
             if(post != null) {
                 switchPostDetailsFragment();
             }
@@ -70,17 +79,25 @@ public class DiscussionForumFragment extends Fragment {
         return root;
     }
 
+//    private void navigateToCreatePostFragment() {
+//        requireActivity().getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.FCVMain, new CreatePostFragment())
+//                .addToBackStack(null)
+//                .commit();
+//    }
+
     private void navigateToCreatePostFragment() {
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FCVMain, new CreatePostFragment())
-                .addToBackStack(null)
-                .commit();
+        Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.createPostFragment);
     }
 
     private void switchPostDetailsFragment() {
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FCVMain, new DetailPostFragment())
-                .addToBackStack(null)
-                .commit();
+        Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.detailPostFragment);
     }
+
+//    private void switchPostDetailsFragment() {
+//        requireActivity().getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.FCVMain, new DetailPostFragment())
+//                .addToBackStack(null)
+//                .commit();
+//    }
 }

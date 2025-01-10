@@ -36,20 +36,21 @@
             android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
+            android:id="@+id/CVImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:neumorph_shadowColorDark="#CAD3BB"
             app:neumorph_shadowColorLight="#FFFFFF"
             app:neumorph_shadowElevation="5sp"
-            app:neumorph_shapeType="pressed">
+            app:neumorph_shapeType="pressed"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/IVPostImage"
                 android:layout_width="200sp"
                 android:layout_height="200sp"
                 android:layout_margin="5dp"
-                android:contentDescription="Post image"
-                app:srcCompat="@drawable/precaution_image1" />
+                android:contentDescription="Post image" />
 
         </soup.neumorphism.NeumorphCardView>
 

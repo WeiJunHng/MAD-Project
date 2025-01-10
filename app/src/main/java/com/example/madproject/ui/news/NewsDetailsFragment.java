@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,11 +23,14 @@ import com.squareup.picasso.Picasso;
 public class NewsDetailsFragment extends Fragment {
 
     private NewsHeadlines headline;
-    private TextView ETTitle, ETAuthor, ETTime, ETDetail, ETContent;
+    private TextView TVTitle, TVAuthor, TVTime, TVDetail, TVContent;
     private ImageView IVNews;
     
     private FragmentNewsDetailsBinding binding;
     private NewsViewModel newsViewModel;
+
+    private String articleUrl;
+    private WebView webView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,26 +46,34 @@ public class NewsDetailsFragment extends Fragment {
 
         View root = binding.getRoot();
         
-        ETTitle = binding.ETTitle;
-        ETAuthor = binding.ETAuthor;
-        ETTime = binding.ETTime;
-        ETDetail = binding.ETDetail;
-        ETContent = binding.ETContent;
+        TVTitle = binding.TVTitle;
+        TVAuthor = binding.TVAuthor;
+        TVTime = binding.TVTime;
+        TVDetail = binding.TVDetail;
+        TVContent = binding.TVContent;
         
         IVNews = binding.IVNews;
-        
+
+        webView = binding.webView;
+
+
         headline = newsViewModel.getHeadline().getValue();
 
         if(headline != null) {
-            ETTitle.setText(headline.getTitle());
-            ETAuthor.setText(headline.getAuthor());
-            ETTime.setText(headline.getPublishedAt());
-            ETDetail.setText(headline.getDescription());
-            ETContent.setText(headline.getContent());
+            TVTitle.setText(headline.getTitle());
+            TVAuthor.setText(headline.getAuthor());
+            TVTime.setText(headline.getPublishedAt());
+            TVDetail.setText(headline.getDescription());
+            TVContent.setText(headline.getContent());
             Picasso.get().load(headline.getUrlToImage()).into(IVNews);
         }
 
         newsViewModel.setHeadline(null);
+
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(headline.getUrl());
 
         return root;
     }

@@ -2,6 +2,7 @@ package com.example.madproject;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -9,8 +10,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -36,6 +39,25 @@ public class MainActivity extends AppCompatActivity {
 
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.BottomNavView, navController);
+        binding.BottomNavView.setOnItemSelectedListener(item -> {
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, true)  // Clear back stack when navigating
+                    .build();
+            navController.navigate(item.getItemId(), null, navOptions);
+
+//            switch (item.getItemId()) {
+//                case R.id.navigation_home:
+//                    navController.navigate(R.id.homeFragment, null, navOptions);
+//                    break;
+//                case R.id.navigation_profile:
+//                    navController.navigate(R.id.profileFragment, null, navOptions);
+//                    break;
+//                case R.id.navigation_settings:
+//                    navController.navigate(R.id.settingsFragment, null, navOptions);
+//                    break;
+//            }
+            return true;
+        });
     }
 
     @Override

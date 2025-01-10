@@ -1,11 +1,14 @@
 package com.example.madproject.ui.discussion;
 
-import android.net.Uri;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +20,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.madproject.ImageHandler;
 import com.example.madproject.R;
+import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.model.DiscussionComment;
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.DiscussionRepository;
+import com.example.madproject.data.repository.UserRepository;
 import com.example.madproject.databinding.FragmentDetailPostBinding;
 import com.example.madproject.ui.ViewModelFactory;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DetailPostFragment extends Fragment {
@@ -36,14 +45,15 @@ public class DetailPostFragment extends Fragment {
 
     private ImageView IVPostImage;
     private TextView TVPostText;
-    private ImageView IBComment, IBLike, IBReport;
+    private ImageButton IBComment, IBLike, BtnSendComment, IBReport;
     private RecyclerView commentsRecyclerView;
+    private EditText ETComment;
     private Button BtnConfirmReport;
     
     private FragmentDetailPostBinding binding;
     private DiscussionViewModel discussionViewModel;
     private CommentAdapter commentAdapter;
-    private List<String> commentsList;
+    private List<DiscussionComment> commentsList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,9 @@ public class DetailPostFragment extends Fragment {
 
         View root = binding.getRoot();
 
+        DiscussionRepository discussionRepository = new DiscussionRepository(requireContext());
+        UserRepository userRepository = new UserRepository(requireContext());
+
         ViewModelFactory factory = new ViewModelFactory(getContext());
         discussionViewModel = new ViewModelProvider(requireActivity(),factory).get(DiscussionViewModel.class);
         
@@ -65,20 +78,25 @@ public class DetailPostFragment extends Fragment {
         IBLike = binding.IBLike;
         IBReport = binding.IBReport;
         commentsRecyclerView = binding.RVComments;
+        ETComment = binding.ETComment;
+        BtnSendComment = binding.BtnSendComment;
         BtnConfirmReport = binding.ConfirmReportButton;
         
-        Post post = discussionViewModel.getPostLiveData().getValue();
+        Discussion post = discussionViewModel.getDiscussionLiveData().getValue();
         
         if(post != null) {
-            String imageUrl = post.getImageUrl();
+            String imageUrl = post.getPictureUrl();
             String content = post.getContent();
 
             // Load image using URI or set as drawable resource
-            if (imageUrl != null) {
-                Uri imageUri = Uri.parse(imageUrl);
-                IVPostImage.setImageURI(imageUri);
-            }
-
+//            if (imageUrl == null) {
+//                IVPostImage.setVisibility(View.GONE);
+//            } else {
+//                CloudinaryUploader.loadImage(userRepository.getCurrentUser().getProfilePicURL(), IVPostImage);
+//                Uri imageUri = Uri.parse(imageUrl);
+//                IVPostImage.setImageURI(imageUri);
+//            }
+            ImageHandler.loadImage(post.getPictureUrl(), IVPostImage);
             // Set content text
             if (content != null) {
                 TVPostText.setText(content);
@@ -86,27 +104,26 @@ public class DetailPostFragment extends Fragment {
         }
 
         // Initialize comments list and adapter
-        commentsList = new ArrayList<>();
-        populateDummyComments(); // Add some dummy comments
+        commentsList = discussionRepository.getAllCommentByDiscussion(post.getId());
+//        populateDummyComments(); // Add some dummy comments
         commentAdapter = new CommentAdapter(commentsList);
         commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         commentsRecyclerView.setAdapter(commentAdapter);
 
+        IBComment.setOnClickListener(v -> ETComment.requestFocus());
+
         // Like button toggle logic
-        IBLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isLiked) {
-                    // Change to unfilled like button
-                    IBLike.setImageResource(R.drawable.dislike_button);
-                    // user.like(post);
-                } else {
-                    // Change to filled like button
-                    IBLike.setImageResource(R.drawable.liked_button);
-                    // user.dislike(post);
-                }
-                isLiked = !isLiked; // Toggle like state
+        IBLike.setOnClickListener(v -> {
+            if (isLiked) {
+                // Change to unfilled like button
+                IBLike.setImageResource(R.drawable.dislike_button);
+                // user.like(post);
+            } else {
+                // Change to filled like button
+                IBLike.setImageResource(R.drawable.liked_button);
+                // user.dislike(post);
             }
+            isLiked = !isLiked; // Toggle like state
         });
 
         // Report button logic
@@ -124,17 +141,53 @@ public class DetailPostFragment extends Fragment {
             Toast.makeText(getContext(), "Report Successful", Toast.LENGTH_SHORT).show();
         });
 
-        discussionViewModel.setPostLiveData(null);
+        BtnSendComment.setOnClickListener(v -> {
+            String commentContent = ETComment.getText().toString();
+
+            if(commentContent.isBlank()){
+                Toast.makeText(getContext(), "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String commentId = discussionRepository.createDiscussionCommentId();
+            User commenter = userRepository.getCurrentUser();
+            DiscussionComment comment = new DiscussionComment(commentId, post.getId(), commenter.getId(), new Date(), commentContent);
+
+            discussionRepository.insertDiscussionCommentInFirestore(comment);
+
+            commentsList.add(comment);
+            commentAdapter.notifyDataSetChanged();
+
+            // Hide keyboard
+            InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            View view = getView();
+            if (view != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+
+            ETComment.setText(null);
+            ETComment.clearFocus();
+        });
+
+        discussionViewModel.setDiscussionLiveData(null);
 
         return root;
     }
 
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        NavController navController = Navigation.findNavController(requireActivity(), R.id.FCVMain);
+//        navController.popBackStack();
+//        Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.DestPost);
+//    }
+
     // Add dummy comments to the list
-    private void populateDummyComments() {
-        commentsList.add("This is a great post!");
-        commentsList.add("Thanks for sharing.");
-        commentsList.add("Amazing content, keep it up!");
-        commentsList.add("Really insightful post.");
-        commentsList.add("Great work!");
-    }
+//    private void populateDummyComments() {
+//        commentsList.add("This is a great post!");
+//        commentsList.add("Thanks for sharing.");
+//        commentsList.add("Amazing content, keep it up!");
+//        commentsList.add("Really insightful post.");
+//        commentsList.add("Great work!");
+//    }
 }

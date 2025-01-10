@@ -6,6 +6,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.madproject.ui.news.Models.NewsApiResponse;
+import com.example.madproject.ui.news.Models.NewsHeadlines;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +50,13 @@ public class NewsRequestManager {
                         return;
                     }
 
-                    newsViewModel.setHeadlinesList(response.body().getArticles());
+                    List<NewsHeadlines> filteredArticles = response.body().getArticles().stream()
+                            .filter(article -> article.getTitle() != null && !article.getTitle().equals("[Removed]"))
+                            .filter(article -> article.getDescription() != null && !article.getDescription().equals("[Removed]"))
+                            .filter(article -> article.getSource().getName() != null && !article.getSource().getName().equals("[Removed]"))
+                            .collect(Collectors.toList());
+
+                    newsViewModel.setHeadlinesList(filteredArticles);
                 }
 
                 @Override
