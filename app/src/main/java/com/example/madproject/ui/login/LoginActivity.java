@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private AppDatabase database;
     private FirestoreManager firestoreManager;
     private LoginViewModel loginViewModel;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         database = AppDatabase.getDatabase(getApplicationContext());
         firestoreManager = new FirestoreManager(database);
 
-        firestoreManager.clearTables();
+        firestoreManager.clearUserTables();
         firestoreManager.syncUserTable();
 
         ETEmail = findViewById(R.id.ETEmail);
@@ -51,6 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         TVForgotPassword = findViewById(R.id.TVForgotPassword);
         TVSignUp = findViewById(R.id.TVSignUp);
         BtnLogin = findViewById(R.id.BtnLogin);
+
+        sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
+
+        if(sharedPreferences.getString("userId",null) != null) {
+            navigateToHome();
+        }
 
         ViewModelFactory factory = new ViewModelFactory(getApplicationContext());
         loginViewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
@@ -83,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        firestoreManager.clearTables();
+        firestoreManager.clearUserTables();
         firestoreManager.syncUserTable();
     }
 
@@ -100,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveUserSession(User user) {
-        SharedPreferences sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userId", user.getId());
         editor.apply();

@@ -3,64 +3,72 @@ package com.example.madproject.ui.login;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.madproject.R;
+import com.example.madproject.databinding.FragmentForgotPasswordVerifyBinding;
+import com.example.madproject.ui.ViewModelFactory;
+import com.google.android.material.textfield.TextInputEditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ForgotPasswordVerifyFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import soup.neumorphism.NeumorphButton;
+
 public class ForgotPasswordVerifyFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ForgotPasswordVerifyFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ForgotPasswordVerifyFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ForgotPasswordVerifyFragment newInstance(String param1, String param2) {
-        ForgotPasswordVerifyFragment fragment = new ForgotPasswordVerifyFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextInputEditText ETCode;
+    private NeumorphButton BtnVerify, BtnCancel;
+    private FragmentForgotPasswordVerifyBinding binding;
+    private LoginViewModel loginViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password_verify, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentForgotPasswordVerifyBinding.inflate(inflater, container, false);
+
+        ViewModelFactory factory = new ViewModelFactory(requireActivity());
+        loginViewModel = new ViewModelProvider(requireActivity(), factory).get(LoginViewModel.class);
+
+        View root = binding.getRoot();
+
+        ETCode = binding.ETCode;
+        BtnVerify = binding.BtnVerify;
+        BtnCancel = binding.BtnCancel;
+
+        BtnVerify.setOnClickListener(v -> verifyCode());
+        BtnCancel.setOnClickListener(view -> requireActivity().finish());
+
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    private void verifyCode() {
+        String code = loginViewModel.getVerificationCode().getValue();
+        String codeInput = ETCode.getText().toString().trim();
+
+        if(codeInput.equals(code)) {
+            switchResetPasswordFragment();
+        } else {
+            Toast.makeText(requireContext(), "Invalid verification code", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void switchResetPasswordFragment() {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.ForgotPasswordFCV, new ForgotPasswordResetFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }
