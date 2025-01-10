@@ -17,7 +17,6 @@ import com.example.madproject.R;
 import com.example.madproject.databinding.HeadListItemBinding;
 import com.example.madproject.ui.ViewModelFactory;
 import com.example.madproject.ui.news.Models.NewsHeadlines;
-import com.example.madproject.ui.signup.SignUpViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

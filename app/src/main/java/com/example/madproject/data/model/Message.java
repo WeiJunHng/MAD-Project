@@ -10,6 +10,9 @@ import java.util.Date;
 
 @Entity(tableName = "message")
 public class Message extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String userId;
     @NonNull
