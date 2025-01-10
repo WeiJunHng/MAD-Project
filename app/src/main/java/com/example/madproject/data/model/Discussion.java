@@ -40,7 +40,7 @@ public class Discussion extends Identifiable {
 
     @NonNull
     public String getId() {
-        return super.getId();
+        return id;
     }
 
     public void setId(@NonNull String id) {

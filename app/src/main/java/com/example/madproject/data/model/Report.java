@@ -9,6 +9,9 @@ import java.util.Date;
 
 @Entity(tableName = "report")
 public class Report extends Identifiable {
+    @PrimaryKey
+    @NonNull
+    private String id;
     @NonNull
     private String discussionId;
     @NonNull
