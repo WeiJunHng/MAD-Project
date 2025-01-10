@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp"
     android:background="@drawable/light_background"
     tools:context=".ui.discussion.DetailPostFragment">
 
+    <!-- Post Image -->
     <soup.neumorphism.NeumorphCardView
+        android:id="@+id/IVPostImageCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         app:neumorph_shadowColorDark="#CAD3BB"
         app:neumorph_shadowColorLight="#FFFFFF"
         app:neumorph_shadowElevation="5sp"
@@ -25,19 +29,22 @@
             android:layout_margin="5dp"
             android:contentDescription="Post image"
             app:srcCompat="@drawable/precaution_image1" />
-
     </soup.neumorphism.NeumorphCardView>
 
+    <!-- Action Buttons -->
     <LinearLayout
+        android:id="@+id/actionButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/IVPostImageCard"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <ImageButton
             android:id="@+id/IBComment"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:contentDescription="Comment Button"
@@ -55,144 +62,70 @@
         <ImageButton
             android:id="@+id/IBReport"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:contentDescription="Report Button"
             android:src="@drawable/report_post_button" />
-
-<!--        <soup.neumorphism.NeumorphCardView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
-<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
-<!--            app:neumorph_shadowElevation="6sp"-->
-<!--            app:neumorph_shapeType="flat"-->
-<!--            android:layout_margin="8dp">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/IBComment"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:contentDescription="Comment Button"-->
-<!--                android:src="@drawable/comment_button"-->
-<!--                android:scaleType="centerInside" />-->
-
-<!--        </soup.neumorphism.NeumorphCardView>-->
-
-<!--        <soup.neumorphism.NeumorphCardView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
-<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
-<!--            app:neumorph_shadowElevation="6sp"-->
-<!--            app:neumorph_shapeType="flat"-->
-<!--            android:layout_margin="8dp">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/IBLike"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:contentDescription="Like Button"-->
-<!--                android:src="@drawable/dislike_button"-->
-<!--                android:scaleType="centerInside" />-->
-
-<!--        </soup.neumorphism.NeumorphCardView>-->
-
-<!--        <soup.neumorphism.NeumorphCardView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
-<!--            app:neumorph_shadowColorLight="#EFEFEF"-->
-<!--            app:neumorph_shadowElevation="6sp"-->
-<!--            app:neumorph_shapeType="flat"-->
-<!--            android:layout_margin="8dp">-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/IBReport"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                android:contentDescription="Report Button"-->
-<!--                android:src="@drawable/report_post_button"-->
-<!--                android:scaleType="centerInside" />-->
-
-<!--        </soup.neumorphism.NeumorphCardView>-->
-
     </LinearLayout>
 
-    <ScrollView
+    <!-- Post Description -->
+    <TextView
+        android:id="@+id/TVPostText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.9">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionButtons"
+        android:layout_marginTop="8dp"
+        android:text="Post Description"
+        android:textSize="20sp"
+        android:padding="8dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/TVPostText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Post Description"
-                android:textSize="20sp"
-                android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/IVPostImage" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RVComments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:overScrollMode="never"
-                android:scrollbars="vertical" />
-
-        </LinearLayout>
-
-    </ScrollView>
+    <!-- Comments RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RVComments"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/TVPostText"
+        android:layout_above="@id/commentSection"
+        android:layout_marginTop="16dp"
+        android:overScrollMode="never"
+        android:scrollbars="vertical" />
 
     <!-- Comment Input Section -->
     <LinearLayout
+        android:id="@+id/commentSection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_weight="1">
+        android:background="@drawable/light_background">
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/ETCommentFrame"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:neumorph_shadowColorDark="#CAD3BB"
             app:neumorph_shadowColorLight="#EFEFEF"
-            app:neumorph_shadowElevation="6sp"
+            app:neumorph_shadowElevation="4sp"
             app:neumorph_shapeType="flat">
 
             <EditText
                 android:id="@+id/ETComment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/light_background"
                 android:hint="Write a comment..."
                 android:padding="16dp"
-                android:textSize="14sp" />
-
+                android:textSize="16sp" />
         </soup.neumorphism.NeumorphCardView>
 
         <soup.neumorphism.NeumorphImageButton
             android:id="@+id/BtnSendComment"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/light_background"
             android:contentDescription="Send Comment Button"
             android:scaleType="centerInside"
             android:src="@drawable/ic_send"
@@ -201,7 +134,6 @@
             app:neumorph_shadowColorLight="#EFEFEF"
             app:neumorph_shadowElevation="4sp"
             app:neumorph_shapeType="flat" />
-
     </LinearLayout>
 
     <Button
@@ -215,4 +147,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5" />
 
-</LinearLayout>
+</RelativeLayout>
