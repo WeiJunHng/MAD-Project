@@ -14,14 +14,20 @@ import com.example.madproject.data.DAO.ChatGroupDAO;
 import com.example.madproject.data.DAO.DiscussionCommentDAO;
 import com.example.madproject.data.DAO.DiscussionDAO;
 import com.example.madproject.data.DAO.DiscussionLikeDAO;
+import com.example.madproject.data.DAO.EmergencyContactDAO;
 import com.example.madproject.data.DAO.MessageDAO;
+import com.example.madproject.data.DAO.PeriodCycleDAO;
+import com.example.madproject.data.DAO.PeriodRecordDAO;
 import com.example.madproject.data.DAO.ReportDAO;
 import com.example.madproject.data.DAO.UserDAO;
 import com.example.madproject.data.model.ChatGroup;
 import com.example.madproject.data.model.Discussion;
 import com.example.madproject.data.model.DiscussionComment;
 import com.example.madproject.data.model.DiscussionLike;
+import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.Message;
+import com.example.madproject.data.model.PeriodCycle;
+import com.example.madproject.data.model.PeriodRecord;
 import com.example.madproject.data.model.Report;
 import com.example.madproject.data.model.User;
 
@@ -32,7 +38,10 @@ import com.example.madproject.data.model.User;
         DiscussionLike.class,
         Report.class,
         ChatGroup.class,
-        Message.class
+        Message.class,
+        EmergencyContact.class,
+        PeriodCycle.class,
+        PeriodRecord.class
 },version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -46,6 +55,10 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ReportDAO reportDAO();
     public abstract ChatGroupDAO chatGroupDAO();
     public abstract MessageDAO messageDAO();
+    public abstract EmergencyContactDAO emergencyContactDAO();
+    public abstract PeriodCycleDAO periodCycleDAO();
+    public abstract PeriodRecordDAO periodRecordDAO();
+
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

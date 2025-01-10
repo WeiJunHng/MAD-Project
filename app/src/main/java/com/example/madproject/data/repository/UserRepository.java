@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.madproject.data.DAO.EmergencyContactDAO;
 import com.example.madproject.data.DAO.UserDAO;
 import com.example.madproject.data.db.AppDatabase;
 import com.example.madproject.data.db.FirestoreManager;
+import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.User;
 
 import java.util.concurrent.ExecutionException;
@@ -20,12 +22,14 @@ public class UserRepository {
 
     private final Context context;
     private final UserDAO userDAO; // Local database access
+    private final EmergencyContactDAO emergencyContactDAO;
     private final FirestoreManager firestoreManager; // Firestore operations
 
     public UserRepository(Context context) {
         AppDatabase database = AppDatabase.getDatabase(context);
         this.context = context;
         userDAO = database.userDAO();
+        emergencyContactDAO = database.emergencyContactDAO();
         firestoreManager = new FirestoreManager(database);
     }
 
@@ -98,5 +102,16 @@ public class UserRepository {
 
     public void deleteUserInFirestore(User user) {
         firestoreManager.executeAction(FirestoreManager.Action.DELETE, "user", user, context);
+    }
+
+    public EmergencyContact getEmergencyContactByUserId(String userId) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<EmergencyContact> future = executorService.submit(() -> emergencyContactDAO.getByUserId(userId));
+
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
