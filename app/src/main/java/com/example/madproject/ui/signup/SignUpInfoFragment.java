@@ -1,17 +1,13 @@
 package com.example.madproject.ui.signup;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.madproject.ImageHandler;
-import com.example.madproject.ImagePickerLauncher;
 import com.example.madproject.ImageViewModel;
-import com.example.madproject.R;
 import com.example.madproject.data.model.User;
 import com.example.madproject.databinding.FragmentSignUpInfoBinding;
 import com.example.madproject.ui.ViewModelFactory;
@@ -42,8 +36,8 @@ public class SignUpInfoFragment extends Fragment {
 
     private FragmentSignUpInfoBinding binding;
     private SignUpViewModel signUpViewModel;
-    private ImageViewModel imageViewModel;
-    private ImagePickerLauncher imagePickerLauncher;
+//    private ImageViewModel imageViewModel;
+    private ImageHandler imageHandler;
     private User user;
 
     private final String[] genderList = {"Male", "Female", "Other"};
@@ -59,7 +53,7 @@ public class SignUpInfoFragment extends Fragment {
 
         ViewModelFactory factory = new ViewModelFactory(requireActivity());
         signUpViewModel = new ViewModelProvider(requireActivity(),factory).get(SignUpViewModel.class);
-        imageViewModel = new ViewModelProvider(this).get(ImageViewModel.class);
+//        imageViewModel = new ViewModelProvider(this).get(ImageViewModel.class);
 
         View root = binding.getRoot();
 
@@ -81,13 +75,13 @@ public class SignUpInfoFragment extends Fragment {
                 requireActivity().finish();
             }
         });
-        imageViewModel.getImageUriLiveData().observe(getViewLifecycleOwner(), uri -> {
-            if (uri != null) {
-                IVProfilePic.setImageURI(uri);
-            }
-        });
+//        imageViewModel.getImageUriLiveData().observe(getViewLifecycleOwner(), uri -> {
+//            if (uri != null) {
+//                IVProfilePic.setImageURI(uri);
+//            }
+//        });
 
-        imagePickerLauncher = new ImagePickerLauncher(this,IVProfilePic);
+        imageHandler = new ImageHandler(this,IVProfilePic);
 
         ACTVGender.setInputType(InputType.TYPE_NULL);
         ACTVGender.setAdapter(new ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, genderList));
@@ -109,11 +103,11 @@ public class SignUpInfoFragment extends Fragment {
             datePickerDialog.show();
         });
 
-        IVProfilePic.post(() -> {
-            int width = IVProfilePic.getWidth();
-            int height = IVProfilePic.getHeight();
-            Log.d("ImageViewDimensions", "Width: " + width + ", Height: " + height);
-        });
+//        IVProfilePic.post(() -> {
+//            int width = IVProfilePic.getWidth();
+//            int height = IVProfilePic.getHeight();
+//            Log.d("ImageViewDimensions", "Width: " + width + ", Height: " + height);
+//        });
 
         BtnChangePic.setOnClickListener(view -> choosePic());
 
@@ -151,7 +145,7 @@ public class SignUpInfoFragment extends Fragment {
 //        } else {
 //            Log.w("ImageHandler", "Fragment is not attached yet.");
 //        }
-        imagePickerLauncher.launch();
+        imageHandler.launchImagePicker();
     }
 
     private void signUp() {
@@ -164,6 +158,14 @@ public class SignUpInfoFragment extends Fragment {
             return;
         }
 
-        signUpViewModel.signUpUser_2(user, gender, birthday, contact);
+//        Bitmap imageBitmap = null;
+//        Drawable drawable = IVProfilePic.getDrawable();
+//        if(drawable != null && !drawable.equals(ImageHandlerNew.getNotAvailableDrawable(requireContext()))) {
+//            imageBitmap = ((BitmapDrawable) drawable).getBitmap();
+//        }
+
+        String encodedImage = ImageHandler.encodeImage(IVProfilePic);
+
+        signUpViewModel.signUpUser_2(requireContext(), user, gender, birthday, contact, encodedImage);
     }
 }

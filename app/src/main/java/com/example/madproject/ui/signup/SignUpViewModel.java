@@ -1,5 +1,6 @@
 package com.example.madproject.ui.signup;
 
+import android.content.Context;
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
@@ -106,7 +107,7 @@ public class SignUpViewModel extends ViewModel {
         }).start();
     }
 
-    public void signUpUser_2(User user, String gender, String birthday, String contact) {
+    public void signUpUser_2(Context context, User user, String gender, String birthday, String contact, String encodedImage) {
         new Thread(() -> {
 
             if(gender.isBlank()||birthday.isBlank()||contact.isBlank()) {
@@ -129,7 +130,9 @@ public class SignUpViewModel extends ViewModel {
             Date birthDate = Date.from(birthLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             int age = Period.between(birthLocalDate, currentDate).getYears();
 
-            User userNew = new User(userId, firstName, lastName, username, email, password, null, gender, age, birthDate, contact, null);
+//            String imageUrl = encodedImage == null ? null : ImageHandlerNew.uploadImageToCloudinary(context, encodedImage);
+
+            User userNew = new User(userId, firstName, lastName, username, email, password, encodedImage, gender, age, birthDate, contact, null);
 
             userRepository.insertUserToFirestore(userNew);
             userLiveData.postValue(userNew);
