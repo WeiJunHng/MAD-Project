@@ -1,6 +1,10 @@
 package com.example.madproject.data.repository;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.madproject.data.DAO.UserDAO;
 import com.example.madproject.data.db.AppDatabase;
@@ -30,7 +34,19 @@ public class UserRepository {
     }
 
     public User getUserById(String id) {
-        return userDAO.getById(id);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<User> future = executorService.submit(() -> userDAO.getById(id));
+
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User getCurrentUser() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("userPreferences", MODE_PRIVATE);
+        return getUserById(sharedPreferences.getString("userId",null));
     }
 
     public String getLastUserId() {

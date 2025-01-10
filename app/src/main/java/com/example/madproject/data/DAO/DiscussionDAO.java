@@ -20,4 +20,7 @@ public interface DiscussionDAO extends BaseDAO<Discussion> {
     @Query("SELECT id FROM discussion ORDER BY id DESC LIMIT 1")
     String getLastId();
 
+    @Query("DELETE FROM user")
+    void deleteAll();
+
 }
