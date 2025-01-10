@@ -1,6 +1,7 @@
 package com.example.madproject.data.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.madproject.data.DAO.DiscussionCommentDAO;
 import com.example.madproject.data.DAO.DiscussionDAO;
@@ -13,7 +14,6 @@ import com.example.madproject.data.model.DiscussionLike;
 import com.example.madproject.data.model.User;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,7 +34,7 @@ public class DiscussionRepository {
         discussionDAO = database.discussionDAO();
         discussionCommentDAO = database.discussionCommentDAO();
         discussionLikeDAO = database.discussionLikeDAO();
-        fetchDiscussions();
+//        fetchDiscussions();
     }
 
     public String createDiscussionId() {
@@ -78,8 +78,14 @@ public class DiscussionRepository {
     public List<Discussion> getAllDiscussion() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<List<Discussion>> future = executorService.submit(() -> {
+            firestoreManager.clearDiscussionTables();
             fetchDiscussions();
-            return discussionDAO.getAll();
+
+            Log.d("Discussion", "Fetched discussion");
+            // Sort from latest to oldest
+            List<Discussion> discussions = discussionDAO.getAll();
+            discussions.sort((discussion1, discussion2) -> discussion2.getTimestamp().compareTo(discussion1.getTimestamp()));
+            return discussions;
         });
 
         try {
@@ -92,6 +98,7 @@ public class DiscussionRepository {
     public List<DiscussionComment> getAllCommentByDiscussion(String discussionId) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<List<DiscussionComment>> future = executorService.submit(() -> {
+            firestoreManager.clearDiscussionTables();
             fetchDiscussions();
             return discussionCommentDAO.getAllByDiscussionId(discussionId);
         });

@@ -120,9 +120,17 @@ public class FirestoreManager {
         DAO_MAP.put("report", database.reportDAO());
     }
 
-    public void clearTables() {
+    public void clearUserTables() {
         Executor.executeTask(() -> {
             database.userDAO().deleteAll();
+        });
+    }
+
+    public void clearDiscussionTables() {
+        Executor.executeTask(() -> {
+            database.discussionDAO().deleteAll();
+            database.discussionCommentDAO().deleteAll();
+            database.discussionLikeDAO().deleteAll();
         });
     }
 

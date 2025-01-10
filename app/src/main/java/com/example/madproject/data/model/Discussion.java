@@ -21,7 +21,7 @@ public class Discussion extends Identifiable {
     @NonNull
     @ServerTimestamp
     private Date timestamp;
-    @NonNull
+    @Nullable
     private String pictureUrl;
     @NonNull
     private String content;
@@ -34,7 +34,7 @@ public class Discussion extends Identifiable {
         this.id = id;
         this.authorId = authorId;
         this.timestamp = timestamp;
-        this.pictureUrl = Objects.requireNonNullElse(pictureUrl, DEFAULT_PICTURE_URL);
+        this.pictureUrl = pictureUrl;
         this.content = content;
     }
 
@@ -66,12 +66,12 @@ public class Discussion extends Identifiable {
         this.timestamp = timestamp;
     }
 
-    @NonNull
+    @Nullable
     public String getPictureUrl() {
         return pictureUrl;
     }
 
-    public void setPictureUrl(@NonNull String pictureUrl) {
+    public void setPictureUrl(@Nullable String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
 

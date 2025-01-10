@@ -14,4 +14,6 @@ public interface DiscussionLikeDAO extends BaseDAO<DiscussionLike> {
     @Query("SELECT COUNT(*) > 0 FROM discussionLike WHERE discussionId = :discussionId AND userId = :userId")
     boolean isLiked(String discussionId, String userId);
 
+    @Query("DELETE FROM user")
+    void deleteAll();
 }

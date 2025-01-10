@@ -121,6 +121,10 @@ public class User extends Identifiable {
         return username;
     }
 
+    public String getFormattedUsername() {
+        return "@" + getUsername();
+    }
+
     @NonNull
     public String getEmail() {
         return email;
