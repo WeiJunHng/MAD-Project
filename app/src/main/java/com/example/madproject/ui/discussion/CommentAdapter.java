@@ -9,14 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.madproject.R;
+import com.example.madproject.data.model.DiscussionComment;
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.UserRepository;
+import com.example.madproject.databinding.ItemCommentBinding;
 
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
-    private List<String> commentsList;
+    private List<DiscussionComment> commentsList;
 
-    public CommentAdapter(List<String> commentsList) {
+    public CommentAdapter(List<DiscussionComment> commentsList) {
         this.commentsList = commentsList;
     }
 
@@ -29,8 +33,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        String comment = commentsList.get(position);
-        holder.commentTextView.setText(comment);
+        DiscussionComment comment = commentsList.get(position);
+        UserRepository userRepository = new UserRepository(holder.itemView.getContext());
+        holder.TVCommenterUsername.setText(userRepository.getUserById(comment.getCommenterId()).getFormattedUsername());
+        holder.TVCommentText.setText(comment.getContent());
     }
 
     @Override
@@ -39,11 +45,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     static class CommentViewHolder extends RecyclerView.ViewHolder {
-        TextView commentTextView;
+        TextView TVCommenterUsername, TVCommentText;
+        private ItemCommentBinding binding;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
-            commentTextView = itemView.findViewById(R.id.TVCommentText);
+            binding = ItemCommentBinding.bind(itemView);
+            TVCommentText = binding.TVCommentText;
+            TVCommenterUsername = binding.TVCommenterUsername;
         }
     }
 }

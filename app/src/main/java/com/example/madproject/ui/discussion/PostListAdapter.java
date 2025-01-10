@@ -13,24 +13,23 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import android.net.Uri;
-
+import com.example.madproject.ImageHandler;
 import com.example.madproject.R;
+import com.example.madproject.data.model.Discussion;
 import com.example.madproject.databinding.PostListItemBinding;
 import com.example.madproject.ui.ViewModelFactory;
-import com.example.madproject.ui.precaution.PrecautionViewModel;
 
 import soup.neumorphism.NeumorphCardView;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostViewHolder> {
 
-    private List<Post> postList;
+    private List<Discussion> postList;
 
     private final FragmentActivity activity;
     private final Context context;
     private DiscussionViewModel discussionViewModel;
 
-    public PostListAdapter(FragmentActivity activity, Context context, List<Post> postItems) {
+    public PostListAdapter(FragmentActivity activity, Context context, List<Discussion> postItems) {
         this.activity = activity;
         this.context = context;
         this.postList = postItems;
@@ -48,27 +47,38 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         ViewModelFactory factory = new ViewModelFactory(context);
         discussionViewModel = new ViewModelProvider(activity,factory).get(DiscussionViewModel.class);
 
-        Post post = postList.get(position);
+        holder.CVImage.setVisibility(View.GONE);
+        holder.IVPostImage.setImageURI(null);
 
-        holder.TVPostText.setText(post.getContent());
-        if (post.getImageUrl() != null) {
-            // If it's a URI
-            try {
-                Uri imageUri = Uri.parse(post.getImageUrl());
-                holder.IVPostImage.setImageURI(imageUri);
-            } catch (Exception e) {
-                // Log the error and set a placeholder image
-                holder.IVPostImage.setImageResource(R.drawable.post_image);
-            }
-        } else {
-            // If no image is provided, set a placeholder
-            holder.IVPostImage.setImageResource(R.drawable.post_image);
+        Discussion discussion = postList.get(position);
+
+        holder.TVAuthorName.setText(discussionViewModel.getAuthorUsername(discussion));
+        holder.TVPostText.setText(discussion.getContent());
+
+        String encodedImage = discussion.getPictureUrl();
+        if(encodedImage != null && !encodedImage.equals("defaultPicUrl")) {
+            holder.CVImage.setVisibility(View.VISIBLE);
+            ImageHandler.loadImage(discussion.getPictureUrl(),holder.IVPostImage);
         }
+
+//        if (discussion.getPictureUrl() != null) {
+//            // If it's a URI
+//            try {
+//                Uri imageUri = Uri.parse(discussion.getPictureUrl());
+//                holder.IVPostImage.setImageURI(imageUri);
+//            } catch (Exception e) {
+//                // Log the error and set a placeholder image
+//                holder.IVPostImage.setImageResource(R.drawable.post_image);
+//            }
+//        } else {
+//            // If no image is provided, set a placeholder
+//            holder.IVPostImage.setImageResource(R.drawable.post_image);
+//        }
 
         holder.root.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
             if(adapterPosition != RecyclerView.NO_POSITION) {
-                discussionViewModel.setPostLiveData(post);
+                discussionViewModel.setDiscussionLiveData(discussion);
             }
         });
     }
@@ -81,7 +91,8 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
         private NeumorphCardView root;
-        private TextView TVPostText;
+        private TextView TVAuthorName, TVPostText;
+        private NeumorphCardView CVImage;
         private ImageView IVPostImage;
         private ImageButton IBComment, IBLike, IBReport;
         private final PostListItemBinding binding;
@@ -92,7 +103,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
             binding = PostListItemBinding.bind(itemView);
             root = binding.getRoot();
 
+            TVAuthorName = binding.TVAuthorName;
             TVPostText = binding.TVPostText;
+            CVImage = binding.CVImage;
             IVPostImage = binding.IVPostImage;
             IBComment = binding.IBComment;
             IBLike = binding.IBLike;
