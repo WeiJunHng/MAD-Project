@@ -112,10 +112,7 @@ public class PrecautionFragment extends Fragment {
     }
 
     private void switchDetailsFragment() {
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.FCVMain, new PrecautionDetailFragment())
-                .addToBackStack(null)
-                .commit();
+        Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.DestPrecautionDetail);
     }
 
     private void openPrecautionDetail(View view, int position) {
