@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_background">
+    android:orientation="vertical"
+    tools:context=".ReviewReport" >
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -26,18 +27,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Manage User Account"
+            android:text="Review Report"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#000" />
     </LinearLayout>
 
-    <!-- User List -->
+    <LinearLayout
+        android:id="@+id/FlaggedAccountTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/TVFlaggedAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:padding="10dp"
+            android:text="Flagged Account"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUserList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/FlaggedAccountTitle"
         android:padding="8dp" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/light_background"
+    tools:context=".ManageContentDetails">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:weightSum="4">
+
+        <ImageButton
+            android:id="@+id/BtnBack"
+            android:layout_width="81dp"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:src="@drawable/arrow_left_icon" />
+
+        <TextView
+            android:id="@+id/textUserName"
+            android:layout_width="32dp"
+            android:layout_height="62dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="\@Username"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/BtnPlay"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Play"
+            android:src="@drawable/tick_circle" />
+
+        <ImageButton
+            android:id="@+id/BtnStop"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Stop"
+            android:src="@drawable/close_circle" />
+    </LinearLayout>
+
+    <soup.neumorphism.NeumorphCardView
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        app:neumorph_shadowColorDark="#CAD3BB"
+        app:neumorph_shadowColorLight="#FFFFFF"
+        app:neumorph_shadowElevation="5sp"
+        app:neumorph_shapeType="pressed">
+
+        <ImageView
+            android:id="@+id/IVPostImage"
+            android:layout_width="334dp"
+            android:layout_height="200sp"
+            android:layout_margin="5dp"
+            android:contentDescription="Post image"
+            app:srcCompat="@drawable/post_image" />
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <TextView
+        android:id="@+id/TVPostText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Caption..."
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="start"/>
+
+
+    <!-- Buttons Section -->
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="364dp"
+        android:layout_height="166dp"
+        android:layout_weight="1"
+        android:text="Status: Publish\nDate created: 17 Nov 2024\nLikes: 20\nComments: 3\nFlagged content:\nI just don’t like it\nFalse information"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/BtnSuspendAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neumorph_backgroundColor="#C1A0E7"
+        app:neumorph_shadowElevation="3dp"
+        android:padding="10dp"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Remove Content"
+                android:src="@drawable/ic_trash" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove Content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/BtnReactivateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neumorph_backgroundColor="#C1A0E7"
+        app:neumorph_shadowElevation="3dp"
+        android:padding="10dp"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Edit Content"
+                android:src="@drawable/ic_edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/BtnBanAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:neumorph_backgroundColor="#C1A0E7"
+        app:neumorph_shadowElevation="3dp"
+        android:padding="10dp"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Restore Content"
+                android:src="@drawable/ic_rotate_right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restore Content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+</LinearLayout>
+
+
