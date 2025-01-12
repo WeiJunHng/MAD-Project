@@ -3,158 +3,198 @@ package com.example.madproject.ui.profile;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.provider.Settings;
 import android.widget.Switch;
 import android.widget.Toast;
-
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.madproject.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AccessibilityFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AccessibilityFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private static final int REQUEST_CAMERA_PERMISSION = 2;
-    private static final int REQUEST_STORAGE_PERMISSION = 3;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AccessibilityFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Accessibility.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AccessibilityFragment newInstance(String param1, String param2) {
-        AccessibilityFragment fragment = new AccessibilityFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private Switch locationSwitch, photoSwitch, cameraSwitch, fileAndFolderSwitch;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final int PHOTO_PERMISSION_REQUEST_CODE = 2;
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 3;
+    private ActivityResultLauncher<Intent> appSettingsLauncher;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_accessibility, container, false);
 
-        // Initialize Switches and TextViews
-        Switch locationSwitch = view.findViewById(R.id.Location);
+        // Initialize Switches
+        photoSwitch = view.findViewById(R.id.Photo);
+        locationSwitch = view.findViewById(R.id.Location);
+        cameraSwitch = view.findViewById(R.id.Camera);
 
-        Switch photoSwitch = view.findViewById(R.id.Photo);
-
-        Switch cameraSwitch = view.findViewById(R.id.Camera);
-
-        Switch fileAndFolderSwitch = view.findViewById(R.id.FileAndFolder);
-// Location switch functionality
-        locationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
+        // Initialize ActivityResultLauncher for app settings
+        appSettingsLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    // Update switch states when returning from app settings
+                    photoSwitch.setChecked(checkPhotoPermission());
+                    locationSwitch.setChecked(checkLocationPermission());
+                    cameraSwitch.setChecked(checkCameraPermission());
                 }
-            }
-        });
+        );
 
-        // Photo switch functionality
+        // Set initial states
+        photoSwitch.setChecked(checkPhotoPermission());
+        locationSwitch.setChecked(checkLocationPermission());
+        cameraSwitch.setChecked(checkCameraPermission());
+
+        // Photo Switch Listener
         photoSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+                if (!checkPhotoPermission()) {
+                    requestPhotoPermission();
+                } else {
+                    Toast.makeText(getContext(), "Photo access already enabled", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                if (checkPhotoPermission()) {
+                    openAppSettings();
+                    photoSwitch.setChecked(checkPhotoPermission());
                 }
             }
         });
 
-        // Camera switch functionality
+        // Location Switch Listener
+        locationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                if (!checkLocationPermission()) {
+                    requestLocationPermission();
+                } else {
+                    Toast.makeText(getContext(), "Location access already enabled", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                if (checkLocationPermission()) {
+                    openAppSettings();
+                    locationSwitch.setChecked(checkLocationPermission());
+                }
+            }
+        });
+
+        // Camera Switch Listener
         cameraSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                if (!checkCameraPermission()) {
+                    requestCameraPermission();
                 } else {
-                    openCamera();
+                    Toast.makeText(getContext(), "Camera access already enabled", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        // File and folder switch functionality
-        fileAndFolderSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(requireActivity(),
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+            } else {
+                if (checkCameraPermission()) {
+                    openAppSettings();
+                    cameraSwitch.setChecked(checkCameraPermission());
                 }
             }
         });
 
         return view;
+
     }
 
-    private void openCamera() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            startActivity(cameraIntent);
+    private boolean checkPhotoPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return ContextCompat.checkSelfPermission(requireContext(),
+                    Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return ContextCompat.checkSelfPermission(requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
+    }
+
+    private boolean checkLocationPermission() {
+        return ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private boolean checkCameraPermission() {
+        return ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPhotoPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.READ_MEDIA_IMAGES},
+                    PHOTO_PERMISSION_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PHOTO_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    private void requestLocationPermission() {
+        ActivityCompat.requestPermissions(requireActivity(),
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                LOCATION_PERMISSION_REQUEST_CODE);
+    }
+
+    private void requestCameraPermission() {
+        ActivityCompat.requestPermissions(requireActivity(),
+                new String[]{Manifest.permission.CAMERA},
+                CAMERA_PERMISSION_REQUEST_CODE);
+    }
+
+    private void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == REQUEST_LOCATION_PERMISSION && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(requireContext(), "Location permission granted", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(requireContext(), "Camera permission granted", Toast.LENGTH_SHORT).show();
-            openCamera();
-        } else if (requestCode == REQUEST_STORAGE_PERMISSION && grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(requireContext(), "Storage permission granted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+        if (requestCode == PHOTO_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "Photo permission granted", Toast.LENGTH_SHORT).show();
+                photoSwitch.setChecked(true);
+            } else {
+                Toast.makeText(getContext(), "Photo permission denied", Toast.LENGTH_SHORT).show();
+                photoSwitch.setChecked(false);
+            }
+        } else if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "Location permission granted", Toast.LENGTH_SHORT).show();
+                locationSwitch.setChecked(true);
+            } else {
+                Toast.makeText(getContext(), "Location permission denied", Toast.LENGTH_SHORT).show();
+                locationSwitch.setChecked(false);
+            }
+        } else if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "Camera permission granted", Toast.LENGTH_SHORT).show();
+                cameraSwitch.setChecked(true);
+            } else {
+                Toast.makeText(getContext(), "Camera permission denied", Toast.LENGTH_SHORT).show();
+                cameraSwitch.setChecked(false);
+            }
         }
     }
+
 }

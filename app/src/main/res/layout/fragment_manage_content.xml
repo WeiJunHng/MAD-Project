@@ -15,23 +15,23 @@
 
         <ImageButton
             android:id="@+id/IBHamburgerMenu"
-            android:layout_width="62dp"
-            android:layout_height="38dp"
+            android:layout_width="74dp"
+            android:layout_height="48dp"
             android:background="@android:color/transparent"
+            android:contentDescription="Admin menu"
             android:src="@drawable/hamburger_menu" />
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="269dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Manage Content"
+            android:textColor="#000"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#000" />
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- User List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUserList"
         android:layout_width="match_parent"

@@ -71,6 +71,37 @@ public class PrecautionFragment extends Fragment {
                 "HIV (human immunodeficiency virus) is spread by contact with certain bodily fluids of a person with HIV, including blood, semen, pre-seminal fluid, vaginal fluids, and breast milk. HIV is most commonly spread through unprotected sex, sharing injection drug equipment, or getting stuck with a needle that has the blood of someone with HIV on it. HIV can also be spread from a mother to her child during pregnancy, childbirth, or breastfeeding.",
                 R.drawable.precaution_image3
         ));
+        precautionItems.add(new PrecautionItem(
+                "Women's Safety Rights You Need To Be Aware Of",
+                "1. Right Against Being Stalked\nLegal action can be taken against an offender who stalks a woman under the Anti-Stalking Act 2023 in Malaysia. This includes acts such as following her, repeatedly attempting to contact her despite her disinterest, or monitoring her use of the internet, emails, or other forms of communication. A person found guilty may face imprisonment for up to three years, a fine, or both.\n\n"
+                        + "2. Right Against Workplace Harassment\nA woman has the right to report any form of sexual harassment at her workplace under the Employment Act 1955 (Amendment 2022). Employers are now legally required to investigate sexual harassment complaints. If unresolved, a woman may lodge her complaint with the Labour Department (JTKSM) or refer it to the Industrial Court for further action.\n\n"
+                        + "3. Right Against Domestic Violence\nUnder the Domestic Violence Act 1994 (Amendment 2017), women in Malaysia are protected against domestic violence, which includes physical, emotional, verbal, psychological, and sexual abuse. A protection order can be issued to ensure the safety of victims, and perpetrators may face fines, imprisonment, or both, depending on the severity of the offense.\n\n",
+                R.mipmap.precaution_image4
+        ));
+        precautionItems.add(new PrecautionItem(
+                "Safety Tips for Women Living Alone",
+                "1. Avoid oversharing on social media.\nPosting your location, travel plans and details about your home layout on social media can make it easy for people to know exactly how and when to break into your home.\n\n"
+                        + "2. Tell someone you got home safe.\nTell a friend or family member to expect a text message from you when you get home and what to do if they don’t hear from you.\n\n"
+                        + "3. Mind your garbage.\nDon’t leave boxes from expensive TVs or speakers immediately outside your home. This can make your home a target for thieves.\n\n"
+                        + "4. Get to know your neighbors.\nKnowing who is around you will help you know when unusual behavior is happening and build a community.\n\n"
+                        +"5. Use technology.\nSmart doorbells, security cameras and motion detectors can help secure your home and deter potential thieves.",
+                R.mipmap.precaution_image5
+        ));
+        precautionItems.add(new PrecautionItem(
+                "Heart Disease in Women",
+                "1. Various heart conditions that can affect women differently from men\n"
+                        + "2. Common types include coronary artery disease, arrhythmia, diseases of the heart valves, among others\n"
+                        + "3. Treatment includes lifestyle changes, medications, surgical procedures, cardiac rehabilitation\n"
+                        + "4. Involves cardiovascular medicine\n\n"
+                        + "What are the most common types of cardiovascular disease in women?\n\n"
+                        + "- Coronary artery disease:\n"
+                        + "  The most common type of heart disease in the United States, and a leading cause of heart attacks, it occurs when arteries become clogged with plaque and the heart can’t get enough blood.\n\n"
+                        + "- Arrhythmia:\n"
+                        + "  These conditions, such as atrial fibrillation or atrial flutter, are characterized by an irregular heartbeat.\n\n"
+                        + "- Diseases of the heart valves:\n"
+                        + "  Common valve diseases include mitral valve prolapse, mitral regurgitation, and aortic stenosis.\n",
+                R.mipmap.precaution_image6_foreground
+        ));
 
         PrecautionAdapter adapter = new PrecautionAdapter(getActivity(), getContext(), precautionItems);
 
