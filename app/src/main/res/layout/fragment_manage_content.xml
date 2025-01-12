@@ -17,7 +17,7 @@
             android:id="@+id/IBHamburgerMenu"
             android:layout_width="62dp"
             android:layout_height="38dp"
-            android:background="null"
+            android:background="@android:color/transparent"
             android:src="@drawable/hamburger_menu" />
 
         <TextView

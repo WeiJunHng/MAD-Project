@@ -26,7 +26,9 @@
 
     <Switch
         android:id="@+id/Location"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_height="60dp"
         android:layout_marginTop="120dp"
         android:fontFamily="sans-serif"
@@ -40,18 +42,25 @@
 
     <TextView
         android:id="@+id/TVDescriptionLocation"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="45dp"
-        android:text="Allow the app to access your device's location for location-based services"        android:fontFamily="sans-serif-medium"
-        android:textSize="12sp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Allow the app to access your device's location for location-based services"
         android:textColor="#4F4F4F"
+        android:textSize="12sp"
+        android:justificationMode="inter_word"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/Location"
         app:layout_constraintTop_toTopOf="@id/Location" />
 
     <Switch
         android:id="@+id/Photo"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_height="60dp"
         android:layout_marginTop="210dp"
         android:fontFamily="sans-serif"
@@ -65,19 +74,25 @@
 
     <TextView
         android:id="@+id/TVDescriptionPhoto"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="45dp"
-        android:text="Allow the app to access your photos for sharing or other purposes"
+        android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-medium"
-        android:textSize="12sp"
+        android:text="Allow the app to access your photos for sharing or other purposes"
         android:textColor="#4F4F4F"
+        android:justificationMode="inter_word"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/Photo"
         app:layout_constraintTop_toTopOf="@id/Photo" />
 
     <Switch
         android:id="@+id/Camera"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
         android:layout_height="60dp"
         android:layout_marginTop="300dp"
         android:fontFamily="sans-serif"
@@ -91,40 +106,18 @@
 
     <TextView
         android:id="@+id/TVDescriptionCamera"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="45dp"
-        android:text="Allow the app to access your camera for taking pictures or videos"
+        android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif-medium"
-        android:textSize="12sp"
+        android:text="Allow the app to access your camera for taking pictures or videos"
         android:textColor="#4F4F4F"
+        android:textSize="12sp"
+        android:justificationMode="inter_word"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/Camera"
         app:layout_constraintTop_toTopOf="@id/Camera" />
-
-    <Switch
-        android:id="@+id/FileAndFolder"
-        android:layout_width="330dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="400dp"
-        android:fontFamily="sans-serif"
-        android:text="File and Folder"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <TextView
-        android:id="@+id/TVDescriptionAllowVibration"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="Allow the app to access your files and folders for file management or storage purposes"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="12sp"
-        android:textColor="#4F4F4F"
-        app:layout_constraintStart_toStartOf="@id/FileAndFolder"
-        app:layout_constraintTop_toTopOf="@id/FileAndFolder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
