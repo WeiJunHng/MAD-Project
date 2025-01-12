@@ -1,73 +1,57 @@
 package com.example.madproject.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.madproject.R;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DeleteAccountDialog#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.madproject.R;
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.UserRepository;
+import com.example.madproject.ui.login.LoginActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class DeleteAccountDialog extends DialogFragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextInputEditText etPassword;
+    private UserRepository userRepository;
+    private User currentUser;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DeleteAccountDialog() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DeleteAccount.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DeleteAccountDialog newInstance(String param1, String param2) {
-        DeleteAccountDialog fragment = new DeleteAccountDialog();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_delete_account, container, false);
 
         Button btnConfirm = view.findViewById(R.id.BtnConfirmDeleteAccount);
         Button btnCancel = view.findViewById(R.id.BtnCancelDeleteAccount);
         ImageButton btnClose = view.findViewById(R.id.BtnCloseIcon);
+        etPassword = view.findViewById(R.id.ETPassword);
+
+        userRepository = new UserRepository(requireContext());
+        currentUser = userRepository.getCurrentUser();
+
+        TextView ETEmail = view.findViewById(R.id.TVDeleteAccountDescriptionEmail);
+        ETEmail.setText(currentUser.getEmail() + "?");
 
         btnConfirm.setOnClickListener(v -> {
             v.setScaleX(0.9f);
@@ -75,8 +59,7 @@ public class DeleteAccountDialog extends DialogFragment {
             v.postDelayed(() -> {
                 v.setScaleX(1f);
                 v.setScaleY(1f);
-                Toast.makeText(getContext(), "Delete Account", Toast.LENGTH_SHORT).show();
-                dismiss();
+                handleAccountDeletion();
             }, 100);
         });
 
@@ -100,17 +83,41 @@ public class DeleteAccountDialog extends DialogFragment {
             }, 100);
         });
 
-
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Set the dialog width and height
-        if (getDialog() != null) {
-            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    private void handleAccountDeletion() {
+        String password = etPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getContext(), "Please enter your password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Get the current user from the repository
+        User currentUser = userRepository.getCurrentUser();
+        if (currentUser != null) {
+            String storedPassword = currentUser.getPassword(); // Retrieve password from the database
+
+            // Check if the entered password matches the stored password
+            if (password.equals(storedPassword)) {
+                // Delete the user account
+                userRepository.deleteUserInFirestore(currentUser);
+
+                Toast.makeText(getContext(), "Account deleted successfully", Toast.LENGTH_SHORT).show();
+
+                // Navigate to the login page
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                dismiss();
+            } else {
+                // Show error if passwords do not match
+                Toast.makeText(getContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getContext(), "No user is signed in", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

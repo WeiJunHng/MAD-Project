@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
 
-        if(sharedPreferences.getString("userId",null) != null) {
+        String currentUserId = sharedPreferences.getString("userId", null);
+        if(currentUserId != null && !currentUserId.isBlank()) {
             navigateToHome();
         }
 

@@ -20,11 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="35dp"
         android:layout_toEndOf="@id/item_icon"
         android:text="Privacy &amp; Security"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="19sp" />
 
     <!-- Arrow -->
     <ImageView
