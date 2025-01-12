@@ -15,14 +15,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="207dp"
+        android:layout_height="28dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/jacques_francois"
         android:text="Live Location"
         android:textAlignment="center"
         android:textColor="#314F3C"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_container"
         app:layout_constraintEnd_toEndOf="parent"
