@@ -48,7 +48,7 @@ public class UserRepository {
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<User> future = executorService.submit(() -> {
-            fetchUsers();
+//            fetchUsers();
             User user = userDAO.getById(id);
             userMap.put(id, user);
             return user;

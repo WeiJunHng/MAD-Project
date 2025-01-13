@@ -82,7 +82,7 @@ public class DiscussionRepository {
     public List<Discussion> getAllDiscussion() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<List<Discussion>> future = executorService.submit(() -> {
-            firestoreManager.clearDiscussionTables();
+//            firestoreManager.clearDiscussionTables();
             fetchDiscussions();
 
             Log.d("Discussion", "Fetched discussion");

@@ -2,72 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="top"
-    android:padding="10dp">
+    android:orientation="vertical"
+    android:divider="@android:color/black"
+    android:showDividers="middle">
 
-    <CheckBox
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:scaleX="1.4"
-        android:scaleY="1.4"/>
-
-    <ImageView
-        android:id="@+id/IVPostImage"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:visibility="gone"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:orientation="horizontal"
+        android:gravity="top"
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/TVAuthorName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="\@praiseade"
-            android:textSize="20sp"/>
+        <CheckBox
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"/>
 
-        <TextView
-            android:id="@+id/TVContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="\@praiseade"
-            android:textSize="20sp"/>
+        <ImageView
+            android:id="@+id/IVPostImage"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/TVStatus"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="\@praiseade"
-            android:textSize="20sp"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+
+            <TextView
+                android:id="@+id/TVAuthorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\@praiseade"
+                android:maxLines="1"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/TVContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\@praiseade"
+                android:maxLines="1"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/TVStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\@praiseade"
+                android:maxLines="1"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/BtnRestore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_rotate_right"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+        <ImageButton
+            android:id="@+id/BtnRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:scaleX="1.3"
+            android:scaleY="1.3"
+            android:src="@drawable/ic_trash"
+            android:background="?selectableItemBackgroundBorderless"/>
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/BtnRestore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:scaleX="1.5"
-        android:scaleY="1.5"
-        android:src="@drawable/ic_rotate_right"
-        android:background="?selectableItemBackgroundBorderless"/>
-
-    <ImageButton
-        android:id="@+id/BtnRemove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:scaleX="1.3"
-        android:scaleY="1.3"
-        android:src="@drawable/ic_trash"
-        android:background="?selectableItemBackgroundBorderless"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
 </LinearLayout>

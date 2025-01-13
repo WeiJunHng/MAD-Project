@@ -5,78 +5,82 @@
     android:id="@+id/drawer_layoutAdminMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@drawable/light_background"
-    tools:context=".AdminProfileMenu">
+    android:gravity="top"
+    android:padding="8dp"
+    tools:context=".ui.admin.AdminProfileMenu">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="457dp"
-        android:orientation="vertical"
-        android:padding="8dp">
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:layout_gravity="start"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="Menu Button"
+        android:padding="8dp"
+        android:src="@drawable/hamburger_menu" />
 
-        <ImageButton
-            android:id="@+id/menu_button"
-            android:layout_width="66dp"
-            android:layout_height="53dp"
-            android:layout_gravity="start"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="Menu Button"
-            android:padding="8dp"
-            android:src="@drawable/hamburger_menu" />
+    <ImageView
+        android:id="@+id/IVProfileAdmin"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/profile_pic_manage_user" />
 
-        <ImageView
-            android:id="@+id/IVProfileAdmin"
-            android:layout_width="383dp"
-            android:layout_height="131dp"
-            android:layout_weight="1"
-            android:src="@drawable/profile_pic_manage_user" />
+    <TextView
+        android:id="@+id/TVAdminName"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:text="Praise Ade"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/TVAdminName"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_gravity="center"
-            android:text="Praise Ade"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/TVUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="\@praiseade"
+        android:textSize="15dp" />
 
-        <TextView
-            android:id="@+id/TVUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="\@praiseade"
-            android:textSize="15dp" />
+    <Button
+        android:id="@+id/BtnManageUserAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:textSize="20dp"
+        android:text="Manage User Account"
+        android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/BtnManageUserAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:textSize="20dp"
-            android:text="Manage User Account"
-            android:textColor="@color/black" />
+    <Button
+        android:id="@+id/BtnManageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background=" @android:color/transparent"
+        android:text="Manage Content"
+        android:textSize="20dp"
+        android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/BtnManageContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="Manage Content"
-            android:textSize="20dp"
-            android:textColor="@color/black" />
+    <Button
+        android:id="@+id/BtnReviewReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background=" @android:color/transparent"
+        android:textSize="20dp"
+        android:text="Review Report"
+        android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/BtnReviewReport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:textSize="20dp"
-            android:text="Review Report"
-            android:textColor="@color/black" />
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="8dp">-->
 
-    </LinearLayout>
+<!--        -->
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>
