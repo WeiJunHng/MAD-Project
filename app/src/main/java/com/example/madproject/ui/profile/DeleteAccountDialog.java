@@ -1,6 +1,8 @@
 package com.example.madproject.ui.profile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -67,7 +69,7 @@ public class DeleteAccountDialog extends DialogFragment {
             v.setScaleX(0.9f);
             v.setScaleY(0.9f);
             v.postDelayed(() -> {
-                v.setScaleX(1f);
+                v.setScaleX(1f);    
                 v.setScaleY(1f);
                 dismiss();
             }, 100);
@@ -101,17 +103,22 @@ public class DeleteAccountDialog extends DialogFragment {
 
             // Check if the entered password matches the stored password
             if (password.equals(storedPassword)) {
-                // Delete the user account
+
                 userRepository.deleteUserInFirestore(currentUser);
 
+//                currentUser = null;
+                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userId", null);
+                editor.apply();
+
+                userRepository.logoutUser();
                 Toast.makeText(getContext(), "Account deleted successfully", Toast.LENGTH_SHORT).show();
 
                 // Navigate to the login page
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(requireContext(), LoginActivity.class);
+                requireActivity().finish();
                 startActivity(intent);
-
-                dismiss();
             } else {
                 // Show error if passwords do not match
                 Toast.makeText(getContext(), "Incorrect password", Toast.LENGTH_SHORT).show();

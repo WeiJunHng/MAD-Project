@@ -75,13 +75,14 @@ public class LoginActivity extends AppCompatActivity {
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "periodRecord", periodRecord, getApplicationContext());
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "emergencyContact", emergencyContact, getApplicationContext());*/
 
+        ViewModelFactory factory = new ViewModelFactory(getApplicationContext());
+        loginViewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
 
         if(sharedPreferences.getString("userId",null) != null) {
             navigateToHome();
+        } else {
+            loginViewModel.resetUserLiveData();
         }
-
-        ViewModelFactory factory = new ViewModelFactory(getApplicationContext());
-        loginViewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
 
         loginViewModel.getUserLiveData().observe(this, user -> {
             if (user != null) {

@@ -88,6 +88,8 @@ public class SignOutDialog extends DialogFragment {
 //        editor.remove("userId");
         editor.apply();
 
+        userRepository.logoutUser();
+
         String userId = sharedPreferences.getString("userId", null);
 
         if (userId == null) {

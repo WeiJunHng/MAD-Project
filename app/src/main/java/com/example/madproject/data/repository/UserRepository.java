@@ -69,6 +69,10 @@ public class UserRepository {
         return currentUser;
     }
 
+    public void logoutUser() {
+        currentUser = null;
+    }
+
     public String getLastUserId() {
         return userDAO.getLastId();
     }
