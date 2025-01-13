@@ -55,6 +55,11 @@ public class User extends Identifiable {
     private String contactInfo;
 
     @Nullable
+    private String emergencyContact;
+
+    private int currentDay;
+
+    @Nullable
     @ColumnInfo(defaultValue = "28")
     private Integer period;
 
@@ -75,7 +80,8 @@ public class User extends Identifiable {
 
     public User(@NonNull String id, @NonNull String firstName, @NonNull String lastName, @NonNull String username,
                 @NonNull String email, @NonNull String password, @Nullable String profilePicURL, @NonNull String gender,
-                int age, @NonNull Date birthday, @Nullable String contactInfo, @Nullable Integer period) {
+                int age, @NonNull Date birthday, @Nullable String contactInfo, @Nullable Integer period,
+                @Nullable String emergencyContact, int currentDay) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -99,6 +105,9 @@ public class User extends Identifiable {
         } else {
             this.period = period;
         }
+
+        this.emergencyContact = emergencyContact;
+        this.currentDay = currentDay;
     }
 
     @NonNull
