@@ -58,12 +58,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
+    <Button
         android:id="@+id/textView4"
-        android:layout_width="110dp"
-        android:layout_height="30dp"
+        android:layout_width="137dp"
+        android:layout_height="36dp"
         android:text="Reminder"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,11 +87,11 @@
         app:layout_constraintVertical_bias="0.786" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/cycleDayImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
-        android:src="@drawable/number_day"
+        android:src="@drawable/day1"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
@@ -105,7 +105,7 @@
         android:background="@drawable/sec_circle"
         android:text=" "
         android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
+        app:backgroundTint="#F40808"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +118,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/jacques_francois"
         android:text="PRESS"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button3"
@@ -133,6 +134,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/jacques_francois"
         android:text="Emergency"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button3"
@@ -145,7 +147,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/circle_background"
+        android:src="@drawable/circle_background_red"
         tools:layout_editor_absoluteX="103dp"
         tools:layout_editor_absoluteY="58dp" />
 
@@ -180,35 +182,18 @@
         android:id="@+id/countdown_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="104dp"
         android:text="Next Period in\n X days"
         android:textAlignment="center"
         android:textColor="#314F3C"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         tools:ignore="MissingConstraints" />
 
     <!-- Button to Connect to Gemini -->
-
-    <Button
-        android:id="@+id/gemini_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#B39DDB"
-        android:elevation="5dp"
-        android:padding="10dp"
-        android:text="Connect to Gemini"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.992"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

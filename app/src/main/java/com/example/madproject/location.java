@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class location extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -37,6 +43,9 @@ public class location extends Fragment implements OnMapReadyCallback {
     private LocationCallback locationCallback;
     private static final int LOCATION_PERMISSION_CODE = 102;
     private static final int LOCATION_SETTINGS_REQUEST_CODE = 103;
+
+    private ArrayList<LatLng> unsafeLocations; // List of unsafe locations
+    private Location userCurrentLocation; // User's current location for distance calculation
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +60,32 @@ public class location extends Fragment implements OnMapReadyCallback {
         // Initialize Location Provider Client
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
+        // Initialize buttons
+        ImageButton button1 = view.findViewById(R.id.profile_button1);
+        ImageButton button2 = view.findViewById(R.id.profile_button2);
+        ImageButton button3 = view.findViewById(R.id.profile_button3);
+        ImageButton button4 = view.findViewById(R.id.profile_button4);
+        ImageButton button5 = view.findViewById(R.id.profile_button5);
+        Button reportButton = view.findViewById(R.id.reportUnsafeLocation);
+
+        // Predefined unsafe locations (replace these with data from the database later)
+        unsafeLocations = new ArrayList<>();
+        unsafeLocations.add(new LatLng(3.1390, 101.6869)); // Example: KL city center
+        unsafeLocations.add(new LatLng(3.1569, 101.7123)); // Example: Bukit Bintang
+        unsafeLocations.add(new LatLng(3.1575, 101.7111)); // Example: Jalan Alor
+        unsafeLocations.add(new LatLng(3.1400, 101.6900)); // Example: Petronas Twin Towers
+        unsafeLocations.add(new LatLng(3.1500, 101.7000)); // Example: KLCC Park
+
+        // Set button click listeners
+        button1.setOnClickListener(v -> showUnsafeLocationWithDistance(0));
+        button2.setOnClickListener(v -> showUnsafeLocationWithDistance(1));
+        button3.setOnClickListener(v -> showUnsafeLocationWithDistance(2));
+        button4.setOnClickListener(v -> showUnsafeLocationWithDistance(3));
+        button5.setOnClickListener(v -> showUnsafeLocationWithDistance(4));
+
+        // Set report location button listener
+        reportButton.setOnClickListener(v -> enableReportUnsafeLocation());
+
         return view;
     }
 
@@ -58,7 +93,6 @@ public class location extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Check location permission and settings
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
         } else {
@@ -95,18 +129,16 @@ public class location extends Fragment implements OnMapReadyCallback {
         if (mMap != null && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
-            // Fetch the last known location immediately
             fusedLocationProviderClient.getLastLocation()
                     .addOnSuccessListener(location -> {
                         if (location != null) {
-                            updateMapLocation(location);
+                            userCurrentLocation = location; // Save user's current location
+                            sortUnsafeLocationsByDistance();
                         } else {
-                            // Force location updates if last location is unavailable
                             startLocationUpdates();
                         }
                     });
 
-            // Start continuous location updates
             startLocationUpdates();
         }
     }
@@ -123,7 +155,8 @@ public class location extends Fragment implements OnMapReadyCallback {
                 if (locationResult == null) return;
 
                 for (Location location : locationResult.getLocations()) {
-                    updateMapLocation(location);
+                    userCurrentLocation = location; // Save user's current location
+                    sortUnsafeLocationsByDistance();
                 }
             }
         };
@@ -133,31 +166,65 @@ public class location extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void updateMapLocation(Location location) {
-        LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.clear(); // Clear existing markers
-        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Your Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
+    private void sortUnsafeLocationsByDistance() {
+        if (userCurrentLocation == null) return;
+
+        // Sort unsafe locations based on distance to user's current location
+        Collections.sort(unsafeLocations, Comparator.comparingDouble(location -> {
+            float[] results = new float[1];
+            Location.distanceBetween(userCurrentLocation.getLatitude(), userCurrentLocation.getLongitude(),
+                    location.latitude, location.longitude, results);
+            return results[0];
+        }));
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == LOCATION_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                checkLocationSettingsAndInitialize();
-            } else {
-                Toast.makeText(requireContext(), "Location permission is required", Toast.LENGTH_SHORT).show();
-            }
+    private void showUnsafeLocationWithDistance(int index) {
+        if (index >= unsafeLocations.size()) {
+            Toast.makeText(requireContext(), "No location available.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LatLng location = unsafeLocations.get(index);
+        if (userCurrentLocation != null) {
+            float[] results = new float[1];
+            Location.distanceBetween(userCurrentLocation.getLatitude(), userCurrentLocation.getLongitude(),
+                    location.latitude, location.longitude, results);
+            double distance = results[0] / 1000.0; // Convert to kilometers
+
+            mMap.clear(); // Clear existing markers
+            mMap.addMarker(new MarkerOptions().position(location).title("Unsafe Location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+
+            Toast.makeText(requireContext(), "Distance: " + String.format("%.2f", distance) + " km", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(requireContext(), "Unable to calculate distance.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable android.content.Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void enableReportUnsafeLocation() {
+        // Notify the user that they can now long-press to report a location
+        Toast.makeText(requireContext(), "You can now report a location by long-pressing on the map.", Toast.LENGTH_LONG).show();
 
-        if (requestCode == LOCATION_SETTINGS_REQUEST_CODE) {
-            checkLocationSettingsAndInitialize(); // Re-check settings after user interaction
-        }
+        mMap.setOnMapLongClickListener(latLng -> {
+            // Show confirmation dialog
+            new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                    .setTitle("Report Unsafe Location")
+                    .setMessage("Are you sure you want to report this location as unsafe?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Add marker and save location
+                        mMap.addMarker(new MarkerOptions().position(latLng).title("Reported Unsafe Location"));
+                        unsafeLocations.add(latLng);
+                        Toast.makeText(requireContext(), "Unsafe location reported!", Toast.LENGTH_SHORT).show();
+
+                        // Save location to database (example, uncomment when integrated with Firebase)
+                        // saveLocationToDatabase(latLng);
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Do nothing if the user cancels
+                        Toast.makeText(requireContext(), "Action canceled", Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
+        });
     }
 
     @Override
