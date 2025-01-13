@@ -47,16 +47,19 @@ public class UserRepository {
         }
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<User> future = executorService.submit(() -> userDAO.getById(id));
-
-        User user = null;
-        try {
-            user = future.get();
+        Future<User> future = executorService.submit(() -> {
+            fetchUsers();
+            User user = userDAO.getById(id);
+            userMap.put(id, user);
             return user;
+        });
+
+//        User user = null;
+        try {
+//            user = future.get();
+            return future.get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
-        } finally {
-            userMap.put(id, user);
         }
     }
 
