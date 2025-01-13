@@ -77,7 +77,7 @@ public class HomepageFragment extends Fragment {
 
         // Initialize the Gemini button
         geminiButton = view.findViewById(R.id.gemini_button);
-        geminiButton.setOnClickListener(v -> navigateToChatFragment());
+//        geminiButton.setOnClickListener(v -> navigateToChatFragment());
 
         // Initialize the Neumorph Call button
         callButton = view.findViewById(R.id.button);
@@ -98,13 +98,13 @@ public class HomepageFragment extends Fragment {
         emergencyButton.setOnClickListener(v -> handleEmergencyButtonClick());
     }
 
-    private void navigateToChatFragment() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.FCVMain, new fragment_chat())
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void navigateToChatFragment() {
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.FCVMain, new fragment_chat())
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     private void navigateToLocationFragment() {
         requireActivity().getSupportFragmentManager()

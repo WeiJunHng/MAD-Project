@@ -16,7 +16,17 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/ETSource"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"
+            android:maxLines="1"
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>            android:orientation="vertical"
             android:layout_margin="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,17 +42,7 @@
                 android:layout_height="wrap_content">
 
             </TextView>
-            <TextView
-                android:id="@+id/ETSource"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:maxLines="1"
-                android:layout_margin="6dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-            </TextView>
         </LinearLayout>
         <ImageView
             android:id="@+id/IVHeadline"

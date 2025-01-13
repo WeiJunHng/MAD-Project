@@ -14,7 +14,7 @@ public interface EmergencyContactDAO extends BaseDAO<EmergencyContact> {
     List<EmergencyContact> getAll();
 
     @Query("SELECT * FROM emergencyContact WHERE userId = :userId")
-    EmergencyContact getByUserId(String userId);
+    List<EmergencyContact> getByUserId(String userId);
 
     @Query("DELETE FROM emergencyContact")
     void deleteAll();

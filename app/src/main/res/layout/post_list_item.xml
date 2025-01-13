@@ -54,23 +54,23 @@
             android:layout_gravity="start"
             android:textStyle="bold" />
 
-        <soup.neumorphism.NeumorphCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:neumorph_shadowColorDark="#CAD3BB"
-            app:neumorph_shadowColorLight="#FFFFFF"
-            app:neumorph_shadowElevation="5sp"
-            app:neumorph_shapeType="pressed">
+<!--        <soup.neumorphism.NeumorphCardView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
+<!--            app:neumorph_shadowColorLight="#FFFFFF"-->
+<!--            app:neumorph_shadowElevation="5sp"-->
+<!--            app:neumorph_shapeType="pressed">-->
 
-            <ImageView
-                android:id="@+id/IVPostImage"
-                android:layout_width="200sp"
-                android:layout_height="200sp"
-                android:layout_margin="5dp"
-                android:contentDescription="Post image"
-                app:srcCompat="@drawable/precaution_image1" />
+<!--            <ImageView-->
+<!--                android:id="@+id/IVPostImage"-->
+<!--                android:layout_width="200sp"-->
+<!--                android:layout_height="200sp"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:contentDescription="Post image"-->
+<!--                app:srcCompat="@drawable/precaution_image1" />-->
 
-        </soup.neumorphism.NeumorphCardView>
+<!--        </soup.neumorphism.NeumorphCardView>-->
 
         <TextView
             android:id="@+id/TVPostText"

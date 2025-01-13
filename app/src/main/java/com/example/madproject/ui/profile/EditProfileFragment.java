@@ -3,9 +3,7 @@ package com.example.madproject.ui.profile;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import com.example.madproject.ImageHandler;
 import com.example.madproject.R;
+import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.User;
 import com.example.madproject.data.repository.UserRepository;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,11 +26,7 @@ public class EditProfileFragment extends Fragment {
     private UserRepository userRepository;
     private User currentUser;
     private ImageHandler imageHandler;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private EmergencyContact emergencyContact;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +36,7 @@ public class EditProfileFragment extends Fragment {
 
         userRepository = new UserRepository(requireContext());
         currentUser = userRepository.getCurrentUser();
+        emergencyContact = userRepository.getEmergencyContactByUserId(currentUser.getId());
 
         ImageButton EditProfilePic = rootView.findViewById(R.id.BtnEditProfileIcon);
         ImageView ProfilePic = rootView.findViewById(R.id.IVProfilePic);
@@ -62,6 +57,14 @@ public class EditProfileFragment extends Fragment {
         EditText ETUsername = rootView.findViewById(R.id.ETUsername);
         ETUsername.setText(currentUser.getUsername());
 
+        ETUsername.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboardAndClearFocus(ETUsername);
+                return true;
+            }
+            return false;
+        });
+
         EditText ETEmail = rootView.findViewById(R.id.ETEmail);
         ETEmail.setText(currentUser.getEmail());
 
@@ -70,14 +73,12 @@ public class EditProfileFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(birthday);
 
-        // Format the date+
         String formattedDate = String.format("%02d-%02d-%d",
                 calendar.get(Calendar.DAY_OF_MONTH),
                 calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.YEAR));
         ETBirthday.setText(formattedDate);
 
-        // Disable keyboard input for the EditText
         ETBirthday.setFocusable(false);
         ETBirthday.setCursorVisible(false);
         ETBirthday.setInputType(EditorInfo.TYPE_NULL);
@@ -86,7 +87,6 @@ public class EditProfileFragment extends Fragment {
             Calendar birthdayCalendar = Calendar.getInstance();
             birthdayCalendar.setTime(currentUser.getBirthday());
 
-            // Get the year, month, and day of the user's birthday
             int year = birthdayCalendar.get(Calendar.YEAR);
             int month = birthdayCalendar.get(Calendar.MONTH); // Month is 0-indexed
             int day = birthdayCalendar.get(Calendar.DAY_OF_MONTH);
@@ -94,19 +94,8 @@ public class EditProfileFragment extends Fragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     requireContext(),
                     (view, year1, monthOfYear, dayOfMonth) -> {
-
-                        // Update the EditText with the selected date
                         String formattedDateChanged = String.format("%02d-%02d-%d", dayOfMonth, monthOfYear + 1, year1);
                         ETBirthday.setText(formattedDateChanged);
-
-                        // Convert the selected date to a Date object
-                        Calendar selectedDate = Calendar.getInstance();
-                        selectedDate.set(year1, monthOfYear, dayOfMonth);
-                        Date updatedBirthday = selectedDate.getTime();
-
-                        // Update the user's birthday and save it
-                        currentUser.setBirthday(updatedBirthday);
-                        userRepository.updateUserInFirestore(currentUser);
                     },
                     year, month, day);
             datePickerDialog.show();
@@ -118,44 +107,29 @@ public class EditProfileFragment extends Fragment {
 
         ETContact.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-
-                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(ETContact.getWindowToken(), 0);
-                ETContact.clearFocus();
+                hideKeyboardAndClearFocus(ETContact);
                 return true;
             }
             return false;
         });
 
+        EditText ETEmergencyContact = rootView.findViewById(R.id.ETEmergencyContact);
+        ETEmergencyContact.setText(emergencyContact.getContactInfo());
 
-//        EditText ETEmergencyContact = rootView.findViewById(R.id.ETEmergencyContact);
-//        ETEmergencyContact.setText(currentUser.getContactInfo());
-//
-//        ETEmergencyContact.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (!hasFocus) {
-//                saveEmergencyContactInfo(ETEmergencyContact);
-//            }
-//        });
-//
-//        ETEmergencyContact.setOnEditorActionListener((v, actionId, event) -> {
-//            if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                saveEmergencyContactInfo(ETEmergencyContact);
-//
-//                // Hide the keyboard
-//                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(ETEmergencyContact.getWindowToken(), 0);
-//                ETEmergencyContact.clearFocus();
-//                return true;
-//            }
-//            return false;
-//        });
+        ETEmergencyContact.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboardAndClearFocus(ETEmergencyContact);
+                return true;
+            }
+            return false;
+        });
 
         Button BtnSave = rootView.findViewById(R.id.BtnSave);
         BtnSave.setOnClickListener(v -> {
-            // Save changes
             saveUsernameInfo(ETUsername);
             saveContactInfo(ETContact);
-//            saveBirthdayInfo(ETBirthday);
+            saveBirthdayInfo(ETBirthday);
+            saveEmergencyContactInfo(ETEmergencyContact);
 
             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -181,15 +155,35 @@ public class EditProfileFragment extends Fragment {
         }
     }
 
+    private void saveBirthdayInfo(EditText etBirthday) {
+        String[] dateParts = etBirthday.getText().toString().split("-");
+        int day = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]) - 1; // Month is 0-indexed
+        int year = Integer.parseInt(dateParts[2]);
 
-//    private void saveEmergencyContactInfo(EditText editText) {
-//        String newContactInfo = editText.getText().toString().trim();
-//        if (!newContactInfo.equals(currentUser.getContactInfo())) {
-//            currentUser.setContactInfo(newContactInfo);
-//            userRepository.updateUserInFirestore(currentUser);
-//        }
-//    }
+        Calendar selectedDate = Calendar.getInstance();
+        selectedDate.set(year, month, day);
+        Date updatedBirthday = selectedDate.getTime();
 
+        if (!updatedBirthday.equals(currentUser.getBirthday())) {
+            currentUser.setBirthday(updatedBirthday);
+            userRepository.updateUserInFirestore(currentUser);
+        }
+    }
+
+    private void saveEmergencyContactInfo(EditText editText) {
+        String newContactInfo = editText.getText().toString().trim();
+        if (!newContactInfo.equals(emergencyContact.getContactInfo())) {
+            emergencyContact.setContactInfo(newContactInfo);
+            userRepository.updateEmergencyContactInFirestore(emergencyContact);
+        }
+    }
+
+    private void hideKeyboardAndClearFocus(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        editText.clearFocus();
+    }
 
 }
 
@@ -229,3 +223,33 @@ public class EditProfileFragment extends Fragment {
 //            }
 //            return false;
 //        });
+
+//ETContact.setOnEditorActionListener((v, actionId, event) -> {
+//        if (actionId == EditorInfo.IME_ACTION_DONE) {
+//
+//InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(ETContact.getWindowToken(), 0);
+//        ETContact.clearFocus();
+//                return true;
+//                        }
+//                        return false;
+//                        });
+
+// ETEmergencyContact.setOnFocusChangeListener((v, hasFocus) -> {
+//        if (!hasFocus) {
+//saveEmergencyContactInfo(ETEmergencyContact);
+//            }
+//                    });
+//
+//                    ETEmergencyContact.setOnEditorActionListener((v, actionId, event) -> {
+//        if (actionId == EditorInfo.IME_ACTION_DONE) {
+//saveEmergencyContactInfo(ETEmergencyContact);
+//
+//// Hide the keyboard
+//InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(ETEmergencyContact.getWindowToken(), 0);
+//        ETEmergencyContact.clearFocus();
+//                return true;
+//                        }
+//                        return false;
+//                        });
