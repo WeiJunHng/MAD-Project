@@ -2,6 +2,7 @@ package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 import java.util.Date;
 

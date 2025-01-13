@@ -129,8 +129,14 @@ public class FirestoreManager {
     public void clearDiscussionTables() {
         Executor.executeTask(() -> {
             database.discussionDAO().deleteAll();
-            database.discussionCommentDAO().deleteAll();
-            database.discussionLikeDAO().deleteAll();
+//            database.discussionCommentDAO().deleteAll();
+//            database.discussionLikeDAO().deleteAll();
+        });
+    }
+
+    public void clearReportTables() {
+        Executor.executeTask(() -> {
+            database.reportDAO().deleteAll();
         });
     }
 
@@ -481,12 +487,17 @@ public class FirestoreManager {
 
     public void syncUserTable() {
         LiveData<List<User>> allUserLiveData = fetchDataByTable("user");
+        Log.d("Sync", "Synced");
     }
 
     public void syncDiscussionTable() {
         LiveData<List<User>> allDiscussionLiveData = fetchDataByTable("discussion");
         LiveData<List<User>> allDiscussionCommentLiveData = fetchDataByTable("discussionComment");
         LiveData<List<User>> allDiscussionLikeLiveData = fetchDataByTable("discussionLike");
+    }
+
+    public void syncReportTable() {
+        LiveData<List<User>> allReportLiveData = fetchDataByTable("report");
     }
 
 }

@@ -11,6 +11,7 @@ import com.example.madproject.data.db.AppDatabase;
 import com.example.madproject.data.db.FirestoreManager;
 import com.example.madproject.data.model.User;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,6 +19,8 @@ import java.util.concurrent.Future;
 
 public class UserRepository {
 
+    private static final HashMap<String, User> userMap = new HashMap<>();
+    private static User currentUser;
     private final Context context;
     private final UserDAO userDAO; // Local database access
     private final FirestoreManager firestoreManager; // Firestore operations
@@ -34,19 +37,31 @@ public class UserRepository {
     }
 
     public User getUserById(String id) {
+        if (userMap.containsKey(id)) {
+            return userMap.get(id);
+        }
+
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<User> future = executorService.submit(() -> userDAO.getById(id));
 
+        User user = null;
         try {
-            return future.get();
+            user = future.get();
+            return user;
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
+        } finally {
+            userMap.put(id, user);
         }
     }
 
     public User getCurrentUser() {
+        if(currentUser != null) {
+            return currentUser;
+        }
         SharedPreferences sharedPreferences = context.getSharedPreferences("userPreferences", MODE_PRIVATE);
-        return getUserById(sharedPreferences.getString("userId",null));
+        currentUser = getUserById(sharedPreferences.getString("userId",null));
+        return currentUser;
     }
 
     public String getLastUserId() {
