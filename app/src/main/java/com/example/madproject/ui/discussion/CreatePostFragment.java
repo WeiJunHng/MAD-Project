@@ -5,11 +5,15 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -176,16 +180,97 @@ public class CreatePostFragment extends Fragment {
 //    }
 
     private void applyBoldText() {
-        int start = editTextPost.getSelectionStart();
-        int end = editTextPost.getSelectionEnd();
-        if (start < end) {
-            SpannableStringBuilder spannable = new SpannableStringBuilder(editTextPost.getText());
-            spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            editTextPost.setText(spannable);
-            editTextPost.setSelection(end); // Keep the cursor at the end
-        } else {
+//        int start = editTextPost.getSelectionStart();
+//        int end = editTextPost.getSelectionEnd();
+//        if (start < end) {
+//            SpannableStringBuilder spannable = new SpannableStringBuilder(editTextPost.getText());
+//            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            editTextPost.setText(spannable);
+//            editTextPost.setSelection(end); // Keep the cursor at the end
+//        } else {
+//            Toast.makeText(getContext(), "Select text to make it bold", Toast.LENGTH_SHORT).show();
+//        }
+
+        // Get the current text as Spannable
+//        Spannable spannable = editTextPost.getText();
+
+        // Get the selection start and end
+        int start = Math.min(editTextPost.getSelectionStart(), editTextPost.getSelectionEnd());
+        int end = Math.max(editTextPost.getSelectionStart(), editTextPost.getSelectionEnd());
+
+        if (start == end) {
+            // No text is selected
             Toast.makeText(getContext(), "Select text to make it bold", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        Editable editable = editTextPost.getText();
+        SpannableStringBuilder builder = new SpannableStringBuilder(editable);
+
+        StyleSpan[] spans = builder.getSpans(start, end, StyleSpan.class);
+
+        boolean hasNonBold = false;
+
+        // Check if any part of the selection is not bold
+        for (int i = start; i < end; i++) {
+            StyleSpan[] charSpans = builder.getSpans(i, i + 1, StyleSpan.class);
+            boolean isBold = false;
+
+            for (StyleSpan span : charSpans) {
+                if (span.getStyle() == Typeface.BOLD) {
+                    isBold = true;
+                    break;
+                }
+            }
+
+            if (!isBold) {
+                hasNonBold = true;
+                break;
+            }
+        }
+
+        if (hasNonBold) {
+            // Apply bold to the entire selection
+            for(int i = start; i < end; i++) {
+                builder.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+//            builder.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            // Remove all bold spans in the range
+            for (StyleSpan span : spans) {
+                builder.removeSpan(span);
+            }
+        }
+
+        editTextPost.setText(builder);
+        editTextPost.setSelection(start, end);
+
+
+//        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(editTextPost.getText());
+//        spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        editTextPost.setText(spannable);
+//
+//        // Check for existing bold spans in the selected range
+//        StyleSpan[] styleSpans = spannable.getSpans(start, end, StyleSpan.class);
+//
+//        boolean hasNormal = false;
+//        for (StyleSpan span : styleSpans) {
+//            if (span.getStyle() != Typeface.BOLD) {
+//                // Found a normal span
+//                hasNormal = true;
+//            }
+////            else {
+////                spannable.removeSpan(span); // Remove bold
+////                Log.d("Spannable", "Bold");
+////            }
+////            spannable.removeSpan(span);
+//        }
+//
+//        spannable.setSpan(new StyleSpan(Typeface.NORMAL), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        if (hasNormal) {
+//            // Apply bold if normal spans found
+//            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        }
     }
 
     private void handleLocationButtonClick() {

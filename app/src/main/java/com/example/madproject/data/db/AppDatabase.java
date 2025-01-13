@@ -64,11 +64,11 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    context.deleteDatabase("app_database");
+//                    context.deleteDatabase("app_database");
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),AppDatabase.class,"app_database")
 //                            .addMigrations(AppDatabase.MIGRATION_1_2)
-                            .fallbackToDestructiveMigration()
-                            .fallbackToDestructiveMigrationOnDowngrade()
+//                            .fallbackToDestructiveMigration()
+//                            .fallbackToDestructiveMigrationOnDowngrade()
                             .build();
                 }
             }

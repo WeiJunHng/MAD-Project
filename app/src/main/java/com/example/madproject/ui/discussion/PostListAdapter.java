@@ -16,6 +16,9 @@ import java.util.List;
 import com.example.madproject.ImageHandler;
 import com.example.madproject.R;
 import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.DiscussionRepository;
+import com.example.madproject.data.repository.UserRepository;
 import com.example.madproject.databinding.PostListItemBinding;
 import com.example.madproject.ui.ViewModelFactory;
 
@@ -23,16 +26,23 @@ import soup.neumorphism.NeumorphCardView;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostViewHolder> {
 
-    private List<Discussion> postList;
+    private List<Discussion> discussionList;
 
     private final FragmentActivity activity;
     private final Context context;
     private DiscussionViewModel discussionViewModel;
+    private DiscussionRepository discussionRepository;
+    private UserRepository userRepository;
+    private User currentUser;
 
-    public PostListAdapter(FragmentActivity activity, Context context, List<Discussion> postItems) {
+    public PostListAdapter(FragmentActivity activity, Context context, List<Discussion> discussionItems) {
         this.activity = activity;
         this.context = context;
-        this.postList = postItems;
+        this.discussionList = discussionItems;
+
+        discussionRepository = new DiscussionRepository(context);
+        userRepository = new UserRepository(context);
+        currentUser = userRepository.getCurrentUser();
     }
 
     @NonNull
@@ -50,7 +60,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         holder.CVImage.setVisibility(View.GONE);
         holder.IVPostImage.setImageURI(null);
 
-        Discussion discussion = postList.get(position);
+        Discussion discussion = discussionList.get(position);
 
         holder.TVAuthorName.setText(discussionViewModel.getAuthorUsername(discussion));
         holder.TVPostText.setText(discussion.getContent());
@@ -75,6 +85,41 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 //            holder.IVPostImage.setImageResource(R.drawable.post_image);
 //        }
 
+        // Initialize Like Button
+        new Thread(() -> {
+            if(discussion._getInitialLiked() == null) {
+                boolean isLiked = discussionRepository.isLiked(discussion, currentUser);
+                discussion._setInitialLiked(isLiked);
+                discussion._setLiked(isLiked);
+            }
+            activity.runOnUiThread(() -> {
+                if(discussion.isLiked()) {
+                    holder.IBLike.setImageResource(R.drawable.liked_button);
+                } else {
+                    holder.IBLike.setImageResource(R.drawable.dislike_button);
+                }
+            });
+        }).start();
+
+        // Like Button pressed, then like/dislike
+        holder.IBLike.setOnClickListener(v -> {
+            if (discussion.isLiked()) {
+                // Change to unfilled like button
+                discussion.disliked();
+                holder.IBLike.setImageResource(R.drawable.dislike_button);
+            } else {
+                // Change to filled like button
+                discussion.liked();
+                holder.IBLike.setImageResource(R.drawable.liked_button);
+            }
+        });
+
+        holder.IBReport.setOnClickListener(v -> {
+            discussionViewModel.setDiscussionReportSelectedLiveData(discussion);
+            DiscussionReportDialogFragment reportDialog = new DiscussionReportDialogFragment();
+            reportDialog.show(activity.getSupportFragmentManager(), "reportDialog");
+        });
+
         holder.root.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
             if(adapterPosition != RecyclerView.NO_POSITION) {
@@ -85,7 +130,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
     @Override
     public int getItemCount() {
-        return postList.size();
+        return discussionList.size();
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {

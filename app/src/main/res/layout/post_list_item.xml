@@ -19,8 +19,20 @@
         android:gravity="center_horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
-
         android:background="@drawable/light_background">
+
+        <TextView
+            android:id="@+id/TVAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="Author Name"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="start"
+            android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/CVImage"
@@ -41,36 +53,23 @@
 
         </soup.neumorphism.NeumorphCardView>
 
-        <TextView
-            android:id="@+id/TVAuthorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:text="Author Name"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="start"
-            android:textStyle="bold" />
+<!--        <soup.neumorphism.NeumorphCardView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:neumorph_shadowColorDark="#CAD3BB"-->
+<!--            app:neumorph_shadowColorLight="#FFFFFF"-->
+<!--            app:neumorph_shadowElevation="5sp"-->
+<!--            app:neumorph_shapeType="pressed">-->
 
-        <soup.neumorphism.NeumorphCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:neumorph_shadowColorDark="#CAD3BB"
-            app:neumorph_shadowColorLight="#FFFFFF"
-            app:neumorph_shadowElevation="5sp"
-            app:neumorph_shapeType="pressed">
+<!--            <ImageView-->
+<!--                android:id="@+id/IVPostImage"-->
+<!--                android:layout_width="200sp"-->
+<!--                android:layout_height="200sp"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:contentDescription="Post image"-->
+<!--                app:srcCompat="@drawable/precaution_image1" />-->
 
-            <ImageView
-                android:id="@+id/IVPostImage"
-                android:layout_width="200sp"
-                android:layout_height="200sp"
-                android:layout_margin="5dp"
-                android:contentDescription="Post image"
-                app:srcCompat="@drawable/precaution_image1" />
-
-        </soup.neumorphism.NeumorphCardView>
+<!--        </soup.neumorphism.NeumorphCardView>-->
 
         <TextView
             android:id="@+id/TVPostText"
