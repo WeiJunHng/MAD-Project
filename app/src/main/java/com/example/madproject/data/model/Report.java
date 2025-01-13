@@ -9,6 +9,11 @@ import java.util.Date;
 
 @Entity(tableName = "report")
 public class Report extends Identifiable {
+
+    public static class STATUS {
+        public static final String POSTED = "Posted";
+        public static final String REMOVED = "Removed";
+    }
     @PrimaryKey
     @NonNull
     private String id;
@@ -19,6 +24,7 @@ public class Report extends Identifiable {
     @NonNull
     private Date timestamp;
     private String content;
+    private String status;
 
     public Report() {
 
@@ -33,12 +39,13 @@ public class Report extends Identifiable {
         this.content = null;
     }
 
-    public Report(@NonNull String id, @NonNull String discussionId, @NonNull String reporterId, @NonNull Date timestamp, @NonNull String content) {
+    public Report(@NonNull String id, @NonNull String discussionId, @NonNull String reporterId, @NonNull Date timestamp, @NonNull String content, @NonNull String status) {
         this.id = id;
         this.discussionId = discussionId;
         this.reporterId = reporterId;
         this.timestamp = timestamp;
         this.content = content;
+        this.status = status;
     }
 
     @NonNull
@@ -84,6 +91,22 @@ public class Report extends Identifiable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isPosted() {
+        return status.equals(STATUS.POSTED);
+    }
+
+    public boolean isRemoved() {
+        return status.equals(STATUS.REMOVED);
     }
 }
 

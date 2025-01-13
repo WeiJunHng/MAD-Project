@@ -110,7 +110,7 @@ public class DiscussionViewModel extends ViewModel {
         new Thread(() -> {
             String reportId = reportRepository.createReportId();
             Date timestamp = new Date();
-            Report report = new Report(reportId, discussionId, reporterId, timestamp, reason);
+            Report report = new Report(reportId, discussionId, reporterId, timestamp, reason, Report.STATUS.POSTED);
             reportRepository.insertReportInFirestore(report);
             discussionReportSubmittedLiveData.postValue(true);
         }).start();
