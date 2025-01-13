@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.madproject.ui.admin.AdminActivity;
 import com.example.madproject.MainActivity;
 import com.example.madproject.R;
 import com.example.madproject.data.db.AppDatabase;
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        firestoreManager.clearUserTables();
+//        firestoreManager.clearUserTables();
         firestoreManager.syncUserTable();
     }
 
@@ -121,6 +122,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if(email.isBlank() || password.isBlank()){
             Toast.makeText(this,"All the fields must be filled in!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(email.equals("admin123@soluna.com") && password.equals("admin123")){
+            navigateToAdmin();
             return;
         }
 
@@ -135,6 +141,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToHome() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToAdmin() {
+        Intent intent = new Intent(this, AdminActivity.class);
         startActivity(intent);
         finish();
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/light_background"
-    tools:context=".ManageUserAccountDetails">
+    tools:context=".ui.admin.ManageUserAccountDetails">
 
     <!-- Top Header with Back Button, Username, and Play/Stop Buttons -->
     <LinearLayout

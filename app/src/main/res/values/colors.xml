@@ -7,4 +7,6 @@
     <color name="icon_active">#6B39A4</color>
     <color name="icon_inactive">#93BEA3</color>
     <color name="title">#314F3C</color>
+    <color name="red_button">#C5192D</color>
+    <color name="remember_the_password__color">#A1A1A1</color>
 </resources>
