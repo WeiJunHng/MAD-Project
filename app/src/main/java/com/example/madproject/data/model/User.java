@@ -173,6 +173,15 @@ public class User extends Identifiable {
         return period;
     }
 
+    @Nullable
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public int getCurrentDay() {
+        return currentDay;
+    }
+
     public void setId(@NonNull String id) {
         this.id = id;
     }
@@ -219,5 +228,13 @@ public class User extends Identifiable {
 
     public void setEmail(@NonNull String email) {
         this.email = email;
+    }
+
+    public void setEmergencyContact(@Nullable String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public void setCurrentDay(int currentDay) {
+        this.currentDay = currentDay;
     }
 }
