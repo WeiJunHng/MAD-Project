@@ -1,4 +1,4 @@
-package com.example.madproject;
+package com.example.madproject.ui.admin;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.madproject.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReviewReport#newInstance} factory method to
+ * Use the {@link ManageUserAccount#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReviewReport extends Fragment {
+public class ManageUserAccount extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class ReviewReport extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ReviewReport() {
+    public ManageUserAccount() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class ReviewReport extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ReviewReport.
+     * @return A new instance of fragment ManageUserAccount.
      */
     // TODO: Rename and change types and number of parameters
-    public static ReviewReport newInstance(String param1, String param2) {
-        ReviewReport fragment = new ReviewReport();
+    public static ManageUserAccount newInstance(String param1, String param2) {
+        ManageUserAccount fragment = new ManageUserAccount();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class ReviewReport extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_review_report, container, false);
+        return inflater.inflate(R.layout.fragment_manage_user_account, container, false);
     }
 }

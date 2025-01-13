@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ReviewReport" >
+    tools:context=".ui.admin.ReviewReport" >
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -54,7 +54,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewUserList"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/FlaggedAccountTitle"
