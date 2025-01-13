@@ -17,7 +17,7 @@ import com.example.madproject.data.model.DiscussionComment;
 import com.example.madproject.data.model.DiscussionLike;
 import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.Identifiable;
-import com.example.madproject.data.model.Location;
+import com.example.madproject.data.model.DbLocation;
 import com.example.madproject.data.model.Message;
 import com.example.madproject.data.model.PeriodCycle;
 import com.example.madproject.data.model.PeriodRecord;
@@ -64,7 +64,7 @@ public class FirestoreManager {
         MODEL_CLASS_MAP.put("emergencyContact", EmergencyContact.class);
         MODEL_CLASS_MAP.put("periodRecord", PeriodRecord.class);
         MODEL_CLASS_MAP.put("periodCycle", PeriodCycle.class);
-        MODEL_CLASS_MAP.put("location", Location.class);
+        MODEL_CLASS_MAP.put("location", DbLocation.class);
 
 
         // Map tablename to SQL execution code
@@ -130,7 +130,7 @@ public class FirestoreManager {
         DAO_MAP.put("emergencyContact", database.emergencyContactDAO());
         DAO_MAP.put("periodCycle", database.periodCycleDAO());
         DAO_MAP.put("periodRecord", database.periodRecordDAO());
-        DAO_MAP.put("location",database.LocationDAO());
+        DAO_MAP.put("location",database.locationDAO());
 
 
     }
@@ -513,6 +513,10 @@ public class FirestoreManager {
 
     public void syncReportTable() {
         LiveData<List<User>> allReportLiveData = fetchDataByTable("report");
+    }
+
+    public void syncLocationTable() {
+        LiveData<List<User>> allLocationLiveData = fetchDataByTable("location");
     }
 
 }

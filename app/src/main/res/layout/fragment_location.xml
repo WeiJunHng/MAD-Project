@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#FFFFFF"
-    tools:context=".location">
+    tools:context=".dbLocation">
 
     <!-- Title Text -->
 
@@ -51,7 +51,9 @@
             android:layout_height="50dp"
             android:background="@drawable/circle_background_red"
             android:contentDescription="Profile Picture 1"
-            app:iconTintMode="add" />
+            android:src="@drawable/alert"
+            app:iconTintMode="add"
+            tools:src="@drawable/alert" />
 
         <ImageButton
             android:id="@+id/profile_button2"
@@ -60,7 +62,9 @@
             android:layout_margin="8dp"
             android:background="@drawable/circle_background_red"
             android:backgroundTint="#F84710"
-            android:contentDescription="Profile Picture 2" />
+            android:contentDescription="Profile Picture 2"
+            android:src="@drawable/alert"
+            tools:src="@drawable/alert" />
 
         <ImageButton
             android:id="@+id/profile_button3"
@@ -69,7 +73,9 @@
             android:layout_margin="8dp"
             android:background="@drawable/circle_background_red"
             android:backgroundTint="#FF9500"
-            android:contentDescription="Profile Picture 3" />
+            android:contentDescription="Profile Picture 3"
+            android:src="@drawable/alert"
+            tools:src="@drawable/alert" />
 
         <ImageButton
             android:id="@+id/profile_button4"
@@ -78,7 +84,9 @@
             android:layout_margin="8dp"
             android:background="@drawable/circle_background_red"
             android:backgroundTint="#FFC107"
-            android:contentDescription="Profile Picture 4" />
+            android:contentDescription="Profile Picture 4"
+            android:src="@drawable/alert"
+            tools:src="@drawable/alert" />
 
         <ImageButton
             android:id="@+id/profile_button5"
@@ -87,7 +95,8 @@
             android:layout_margin="8dp"
             android:background="@drawable/circle_background_red"
             android:backgroundTint="#FFEB3B"
-            android:contentDescription="Profile Picture 5" />
+            android:contentDescription="Profile Picture 5"
+            android:src="@drawable/alert" />
 
     </LinearLayout>
 
