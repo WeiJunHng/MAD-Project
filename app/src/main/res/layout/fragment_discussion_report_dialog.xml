@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="50dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@drawable/light_background"
+    tools:context=".ui.discussion.DiscussionReportDialogFragment">
+
+    <ImageButton
+        android:id="@+id/BtnClose"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="end"
+        android:background="@drawable/close_icon"
+        android:contentDescription="Close" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/LayoutReasonMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Why are you reporting this post?"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your report is anonymous. If someone is in immediate danger, call the local emergency services - don't wait."
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="@android:color/black"
+            android:showDividers="middle">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <ListView
+                android:id="@+id/MainReasonListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/black"
+                android:showDividers="middle"
+                android:scrollbars="none"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutReasonDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/TVReasonTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Why are you reporting this post?"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:divider="@android:color/black"
+            android:showDividers="middle">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <ListView
+                android:id="@+id/DetailsReasonListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/black"
+                android:showDividers="middle"
+                android:scrollbars="none"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="I just don't like it"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Bullying or unwanted contact"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Suicide or self-injury"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Violence, hate or exploitation"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Promoting restricted items"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Nudity or sexual activity"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Scam, fraud or spam"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="False information"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+<!--        -->
+<!--    </LinearLayout>-->
+
+        <!--Above-->
+
+<!--    &lt;!&ndash;Bullying&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LayoutReasonBully"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="How is it bullying or unwanted contact?"-->
+<!--            android:textSize="21sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_margin="10dp"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="Threatening to share or sharing nude images"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Bullying or harassment"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Spam"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+<!--    -->
+<!--    &lt;!&ndash;Suicide&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LayoutReasonSuicide"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="What kind of self-harm?"-->
+<!--            android:textSize="21sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_margin="10dp"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Suicide or self-injury"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Eating disorder"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash;Violence&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LayoutReasonViolence"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="How is it violence, hate or exploitation?"-->
+<!--            android:textSize="21sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_margin="10dp"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Credible threat to safety"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="Seems like terrorism or organized crime"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Seems like exploitation"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Hate speech or symbols"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Calling for violence"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="Showing violence, death or severe injury"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Animal abuse"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash;Restricted&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LayoutReasonRestricted"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="How is it violence, hate or exploitation?"-->
+<!--            android:textSize="21sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_margin="10dp"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Drugs"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="Weapons"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Animals"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--    &lt;!&ndash;Restricted&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/LayoutReasonRestricted"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="How is it violence, hate or exploitation?"-->
+<!--            android:textSize="21sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_margin="10dp"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:divider="@android:color/black"-->
+<!--            android:showDividers="middle">-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Drugs"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:text="Weapons"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="8dp">-->
+
+<!--                &lt;!&ndash; Text &ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:text="Animals"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="18sp" />-->
+
+<!--                &lt;!&ndash; Arrow &ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:src="@drawable/ic_arrow_right" />-->
+
+<!--            </RelativeLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+</LinearLayout>

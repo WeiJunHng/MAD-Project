@@ -1,5 +1,7 @@
 package com.example.madproject.ui.discussion;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,18 +14,24 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.madproject.R;
+import com.example.madproject.data.db.AppDatabase;
+import com.example.madproject.data.db.FirestoreManager;
 import com.example.madproject.data.model.Discussion;
+import com.example.madproject.data.model.DiscussionLike;
+import com.example.madproject.data.model.User;
 import com.example.madproject.data.repository.DiscussionRepository;
 import com.example.madproject.databinding.FragmentDiscussionForumBinding;
 import com.example.madproject.ui.ViewModelFactory;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Date;
 import java.util.List;
 
 public class DiscussionForumFragment extends Fragment {
@@ -33,12 +41,17 @@ public class DiscussionForumFragment extends Fragment {
     private PostListAdapter postListAdapter;
     private List<Discussion> postList;
     private FragmentDiscussionForumBinding binding;
-    private DiscussionRepository discussionRepository;;
+    private DiscussionRepository discussionRepository;
     private DiscussionViewModel discussionViewModel;
+    private AppDatabase appDatabase;
+    private FirestoreManager firestoreManager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        discussionRepository = new DiscussionRepository(requireContext());
+        postList = discussionRepository.getAllDiscussion();
     }
 
     @Nullable
@@ -48,8 +61,6 @@ public class DiscussionForumFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        discussionRepository = new DiscussionRepository(requireContext());
-
         ViewModelFactory factory = new ViewModelFactory(getContext());
         discussionViewModel = new ViewModelProvider(requireActivity(),factory).get(DiscussionViewModel.class);
 
@@ -57,10 +68,14 @@ public class DiscussionForumFragment extends Fragment {
         IBForumChatButton = binding.IBForumChatButton;
         IBForumPostButton = binding.IBForumPostButton;
 
-        // Example data
-        postList = discussionRepository.getAllDiscussion();
-//        postList.add(new Post("Content 1", "https://example.com/image1.jpg"));
-//        postList.add(new Post( "Content 2", "https://example.com/image2.jpg"));
+        discussionViewModel.getBackFromDetailLiveData().observe(getViewLifecycleOwner(), back -> {
+            if(back == null) {
+                postList = discussionRepository.getAllDiscussion();
+            } else if(!back) {
+                postList = discussionRepository.getAllDiscussion();
+                discussionViewModel.setBackFromDetailLiveData(false);
+            }
+        });
 
         postListAdapter = new PostListAdapter(getActivity(), getContext(), postList);
 
@@ -79,12 +94,26 @@ public class DiscussionForumFragment extends Fragment {
         return root;
     }
 
-//    private void navigateToCreatePostFragment() {
-//        requireActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.FCVMain, new CreatePostFragment())
-//                .addToBackStack(null)
-//                .commit();
-//    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        new Thread(() -> {
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
+            String currentUserId = sharedPreferences.getString("userId", null);
+
+            for(Discussion post:postList) {
+                if(post.isLiked() != post._getInitialLiked()) {
+                    post._setInitialLiked(post.isLiked());
+                    if(post.isLiked()) {
+                        discussionRepository.insertDiscussionLikeInFirestore(new DiscussionLike(post.getId(), currentUserId, new Date()));
+                    } else {
+                        DiscussionLike discussionLike = discussionRepository.getDiscussionLike(post.getId(), currentUserId);
+                        discussionRepository.deleteDiscussionLikeInFirestore(discussionLike);
+                    }
+                }
+            }
+        }).start();
+    }
 
     private void navigateToCreatePostFragment() {
         Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.createPostFragment);
@@ -93,11 +122,4 @@ public class DiscussionForumFragment extends Fragment {
     private void switchPostDetailsFragment() {
         Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.detailPostFragment);
     }
-
-//    private void switchPostDetailsFragment() {
-//        requireActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.FCVMain, new DetailPostFragment())
-//                .addToBackStack(null)
-//                .commit();
-//    }
 }

@@ -43,11 +43,11 @@ public class Report extends Identifiable {
 
     @NonNull
     public String getId() {
-        return super.getId();
+        return id;
     }
 
     public void setId(@NonNull String id) {
-        super.setId(id);
+        this.id = id;
     }
 
     // Getters and Setters

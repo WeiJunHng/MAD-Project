@@ -11,17 +11,16 @@
         android:id="@+id/BtnCloseIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/ic_close_bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/TVDeleteAccountTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TVDeleteAccountTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:fontFamily="@font/iceberg"
         android:text="@string/delete_account"
@@ -29,7 +28,8 @@
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/neumorphCardView"
+        app:layout_constraintStart_toStartOf="@+id/neumorphCardView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -79,7 +79,7 @@
         android:id="@+id/neumorphCardView"
         android:layout_width="310dp"
         android:layout_height="65dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="240dp"
         android:padding="5sp"
         app:layout_constraintStart_toStartOf="parent"

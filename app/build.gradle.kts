@@ -113,4 +113,7 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.cardview:cardview:1.0.0")
 
+    implementation ("androidx.activity:activity:1.7.2")
+    implementation ("androidx.fragment:fragment:1.6.1")
+
 }

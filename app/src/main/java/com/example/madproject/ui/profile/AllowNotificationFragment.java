@@ -1,195 +1,209 @@
 package com.example.madproject.ui.profile;
 
 import android.app.Notification;
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Switch;
-
+import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import com.example.madproject.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AllowNotificationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AllowNotificationFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 1;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Switch showNotificationSwitch, floatingNotificationSwitch, lockScreenNotificationSwitch, allowVibrationSwitch, allowSoundSwitch;
 
-    private NotificationManager notificationManager;
-
-    public AllowNotificationFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllowNotification.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AllowNotificationFragment newInstance(String param1, String param2) {
-        AllowNotificationFragment fragment = new AllowNotificationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ActivityResultLauncher<Intent> appSettingsLauncher;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_allow_notification, container, false);
 
-        notificationManager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationUtils.createNotificationChannel(requireContext());
 
-        // Create Notification Channel (Android 8.0 and above)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    "default_channel",
-                    "Default Notifications",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            notificationManager.createNotificationChannel(channel);
-        }
+        // Initialize switches
+        showNotificationSwitch = view.findViewById(R.id.ShowNotification);
+        floatingNotificationSwitch = view.findViewById(R.id.FloatingNotification);
+        lockScreenNotificationSwitch = view.findViewById(R.id.LockScreenNotification);
+        allowVibrationSwitch = view.findViewById(R.id.AllowVibration);
+        allowSoundSwitch = view.findViewById(R.id.AllowSound);
 
-        // Get Switches from layout
-        Switch showNotificationSwitch = view.findViewById(R.id.ShowNotification);
-        Switch floatingNotificationSwitch = view.findViewById(R.id.Photo);
-        Switch lockScreenNotificationSwitch = view.findViewById(R.id.Camera);
-        Switch allowVibrationSwitch = view.findViewById(R.id.FileAndFolder);
-        Switch allowSoundSwitch = view.findViewById(R.id.AllowSound);
+        appSettingsLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> updateSwitchStates()
+        );
 
-        // Initially disable floating and lock screen switches
-        floatingNotificationSwitch.setEnabled(false);
-        lockScreenNotificationSwitch.setEnabled(false);
+        updateSwitchStates();
 
-        // Handle Show Notifications logic
+        // Main notification switch listener
         showNotificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
             if (isChecked) {
-                // Enable other switches
-                floatingNotificationSwitch.setEnabled(true);
-                lockScreenNotificationSwitch.setEnabled(true);
+                if (manager != null && !manager.areNotificationsEnabled()) {
+                    enableNotificationDependentSwitches(true);
+                    openAppSettings();
+                } else {
+                    Toast.makeText(getContext(), "Notifications enabled", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                // Disable and uncheck other switches
-                floatingNotificationSwitch.setEnabled(false);
-                floatingNotificationSwitch.setChecked(false);
-                lockScreenNotificationSwitch.setEnabled(false);
-                lockScreenNotificationSwitch.setChecked(false);
+                openAppSettings();
+                enableNotificationDependentSwitches(false);
             }
+            updateSwitchStates();
         });
 
-        // Handle Floating Notifications
+        // Floating notification switch listener
         floatingNotificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                int importance = isChecked ? NotificationManager.IMPORTANCE_HIGH : NotificationManager.IMPORTANCE_LOW;
-                updateNotificationChannelImportance("default_channel", importance);
+            NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (manager != null) {
+                NotificationChannel generalChannel = manager.getNotificationChannel("general_notification_channel");
+
+                if (generalChannel != null) {
+                    Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().getPackageName());
+                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, "general_notification_channel");
+                    appSettingsLauncher.launch(intent);
+
+                    int newImportance = isChecked ? NotificationManager.IMPORTANCE_HIGH : NotificationManager.IMPORTANCE_DEFAULT;
+
+                    if (generalChannel.getImportance() != newImportance) {
+                        generalChannel.setImportance(newImportance);  // Set the new importance value
+                        manager.createNotificationChannel(generalChannel);  // Apply the change
+                    }
+                }
             }
         });
 
-        // Handle Lock Screen Notifications
+
+        // Lock screen notification switch listener
         lockScreenNotificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                int visibility = isChecked ? Notification.VISIBILITY_PUBLIC : Notification.VISIBILITY_SECRET;
-                updateNotificationChannelLockScreenVisibility("default_channel", visibility);
+            NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (manager != null) {
+                NotificationChannel generalChannel = manager.getNotificationChannel("general_notification_channel");
+
+                if (generalChannel != null) {
+                    Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().getPackageName());
+                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, "general_notification_channel");
+                    appSettingsLauncher.launch(intent);
+
+                    int newLockscreenVisibility = isChecked ? Notification.VISIBILITY_PRIVATE : Notification.VISIBILITY_SECRET;
+
+                    if (generalChannel.getLockscreenVisibility() != newLockscreenVisibility) {
+                        generalChannel.setLockscreenVisibility(newLockscreenVisibility); // Set the new lockscreen visibility
+                        manager.createNotificationChannel(generalChannel); // Apply the change
+                    }
+                }
             }
         });
 
-        // Handle Vibration
+        // Set OnClickListener for Vibration Switch
         allowVibrationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                updateNotificationChannelVibration("default_channel", isChecked);
+            NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (manager != null) {
+                NotificationChannel generalChannel = manager.getNotificationChannel("general_notification_channel");
+
+                if (generalChannel != null) {
+                    Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().getPackageName());
+                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, "general_notification_channel");
+                    appSettingsLauncher.launch(intent);
+                }
             }
         });
 
-        // Handle Sound
         allowSoundSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                updateNotificationChannelSound("default_channel", isChecked);
+            NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if (manager != null) {
+                NotificationChannel generalChannel = manager.getNotificationChannel("general_notification_channel");
+
+                if (generalChannel != null) {
+                    Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().getPackageName());
+                    intent.putExtra(Settings.EXTRA_CHANNEL_ID, "general_notification_channel");
+                    appSettingsLauncher.launch(intent);
+                }
             }
         });
 
         return view;
     }
 
-    private void enableNotifications() {
-        // Logic to enable notifications
-    }
+    private void updateSwitchStates() {
+        NotificationManager manager = (NotificationManager) requireContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        boolean notificationsEnabled = manager != null && manager.areNotificationsEnabled();
 
-    private void disableNotifications() {
-        // Logic to disable notifications
-    }
+        showNotificationSwitch.setChecked(notificationsEnabled);
+        enableNotificationDependentSwitches(notificationsEnabled);
 
-    private void updateNotificationChannelImportance(String channelId, int importance) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
-            if (channel != null) {
-                channel.setImportance(importance);
-                notificationManager.createNotificationChannel(channel);
+        // Get the current status of the "General" notification channel
+        if (manager != null) {
+            NotificationChannel generalChannel = manager.getNotificationChannel("general_notification_channel");
+            if (generalChannel != null) {
+                // Set the floating notification switch state based on the banner status in the general notification channel
+                boolean isBannerEnabled = generalChannel.getImportance() >= NotificationManager.IMPORTANCE_HIGH;
+                floatingNotificationSwitch.setChecked(isBannerEnabled);
+
+                // Set the lock screen notification switch state based on the lock screen visibility
+                boolean isLockscreenNotVisible = generalChannel.getLockscreenVisibility() == Notification.VISIBILITY_SECRET;
+                lockScreenNotificationSwitch.setChecked(!isLockscreenNotVisible);
+
+                // Check if vibration is enabled by verifying the pattern length or if it's set to a default value
+                boolean isVibrationNotEnabled = generalChannel.shouldVibrate();
+                allowVibrationSwitch.setChecked(isVibrationNotEnabled);
+
+                // Check if sound is enabled (it can be silent, default, or custom)
+                boolean isSoundEnabled = generalChannel.getSound() != null;
+                allowSoundSwitch.setChecked(isSoundEnabled);
             }
         }
     }
 
-    private void updateNotificationChannelLockScreenVisibility(String channelId, int visibility) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
-            if (channel != null) {
-                channel.setLockscreenVisibility(visibility);
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
+    private void enableNotificationDependentSwitches(boolean enabled) {
+        floatingNotificationSwitch.setEnabled(enabled);
+        lockScreenNotificationSwitch.setEnabled(enabled);
+        allowVibrationSwitch.setEnabled(enabled);
+        allowSoundSwitch.setEnabled(enabled);
     }
 
-    private void updateNotificationChannelVibration(String channelId, boolean enabled) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
-            if (channel != null) {
-                channel.enableVibration(enabled);
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
+    private void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
+        intent.setData(uri);
+        appSettingsLauncher.launch(intent);
     }
 
-    private void updateNotificationChannelSound(String channelId, boolean enabled) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
-            if (channel != null) {
-                if (enabled) {
-                    channel.setSound(null, null); // Use default sound
-                } else {
-                    channel.setSound(null, null); // Disable sound
-                }
-                notificationManager.createNotificationChannel(channel);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "Notification permission granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Notification permission denied", Toast.LENGTH_SHORT).show();
             }
         }
+        updateSwitchStates();
     }
+
 }
+
