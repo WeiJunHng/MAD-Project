@@ -17,10 +17,16 @@ import com.example.madproject.MainActivity;
 import com.example.madproject.R;
 import com.example.madproject.data.db.AppDatabase;
 import com.example.madproject.data.db.FirestoreManager;
+import com.example.madproject.data.model.EmergencyContact;
+import com.example.madproject.data.model.PeriodCycle;
+import com.example.madproject.data.model.PeriodRecord;
 import com.example.madproject.data.model.User;
 import com.example.madproject.ui.signup.SignUpActivity;
 import com.example.madproject.ui.ViewModelFactory;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import soup.neumorphism.NeumorphButton;
 
@@ -54,6 +60,21 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin = findViewById(R.id.BtnLogin);
 
         sharedPreferences = getSharedPreferences("userPreferences", MODE_PRIVATE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2025,Calendar.JANUARY,20);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(2025,Calendar.JANUARY,28);
+/*
+        String userId = sharedPreferences.getString("userId",null);
+        PeriodCycle periodCycle = new PeriodCycle("001",userId,new Date(),calendar.getTime(),calendar2.getTime(),28);
+        PeriodRecord periodRecord = new PeriodRecord(userId, "001",new Date(),"Oh no!");
+        EmergencyContact emergencyContact = new EmergencyContact(userId,"Dad","01134839999");
+
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "periodCycle", periodCycle, getApplicationContext());
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "periodRecord", periodRecord, getApplicationContext());
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "emergencyContact", emergencyContact, getApplicationContext());*/
+
 
         if(sharedPreferences.getString("userId",null) != null) {
             navigateToHome();
