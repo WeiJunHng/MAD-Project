@@ -132,7 +132,7 @@ public class SignUpViewModel extends ViewModel {
 
 //            String imageUrl = encodedImage == null ? null : ImageHandlerNew.uploadImageToCloudinary(context, encodedImage);
 
-            User userNew = new User(userId, firstName, lastName, username, email, password, encodedImage, gender, age, birthDate, contact, null);
+            User userNew = new User(userId, firstName, lastName, username, email, password, encodedImage, gender, age, birthDate, contact, null, null, 1);
 
             userRepository.insertUserToFirestore(userNew);
             userLiveData.postValue(userNew);
