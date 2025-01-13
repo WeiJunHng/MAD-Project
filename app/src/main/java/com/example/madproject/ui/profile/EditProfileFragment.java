@@ -26,7 +26,6 @@ public class EditProfileFragment extends Fragment {
     private UserRepository userRepository;
     private User currentUser;
     private ImageHandler imageHandler;
-    private EmergencyContact emergencyContact;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +35,6 @@ public class EditProfileFragment extends Fragment {
 
         userRepository = new UserRepository(requireContext());
         currentUser = userRepository.getCurrentUser();
-        emergencyContact = userRepository.getEmergencyContactByUserId(currentUser.getId());
 
         ImageButton EditProfilePic = rootView.findViewById(R.id.BtnEditProfileIcon);
         ImageView ProfilePic = rootView.findViewById(R.id.IVProfilePic);
@@ -114,7 +112,7 @@ public class EditProfileFragment extends Fragment {
         });
 
         EditText ETEmergencyContact = rootView.findViewById(R.id.ETEmergencyContact);
-        ETEmergencyContact.setText(emergencyContact.getContactInfo());
+        ETEmergencyContact.setText(currentUser.getEmergencyContact());
 
         ETEmergencyContact.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -173,9 +171,9 @@ public class EditProfileFragment extends Fragment {
 
     private void saveEmergencyContactInfo(EditText editText) {
         String newContactInfo = editText.getText().toString().trim();
-        if (!newContactInfo.equals(emergencyContact.getContactInfo())) {
-            emergencyContact.setContactInfo(newContactInfo);
-            userRepository.updateEmergencyContactInFirestore(emergencyContact);
+        if (!newContactInfo.equals(currentUser.getEmergencyContact())) {
+           currentUser.setEmergencyContact(newContactInfo);
+            userRepository.updateUserInFirestore(currentUser);
         }
     }
 

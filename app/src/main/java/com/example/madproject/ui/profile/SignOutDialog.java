@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import android.widget.Toast;
 import com.example.madproject.R;
 import com.example.madproject.data.model.User;
 import com.example.madproject.data.repository.UserRepository;
+import com.example.madproject.ui.ViewModelFactory;
 import com.example.madproject.ui.login.LoginActivity;
+import com.example.madproject.ui.login.LoginViewModel;
 
 public class SignOutDialog extends DialogFragment {
 
@@ -49,7 +52,7 @@ public class SignOutDialog extends DialogFragment {
                 v.setScaleX(1f);
                 v.setScaleY(1f);
                 logOutUser();
-                navigateToLoginPage();
+//                navigateToLoginPage();
                 dismiss();
             }, 100);
         });
@@ -79,15 +82,16 @@ public class SignOutDialog extends DialogFragment {
     }
     private void logOutUser() {
         currentUser = null;
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("userPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userId", null);
+//        editor.remove("userId");
         editor.apply();
 
         String userId = sharedPreferences.getString("userId", null);
 
-        navigateToLoginPage();
         if (userId == null) {
+            navigateToLoginPage();
             Toast.makeText(getContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Failed to log out", Toast.LENGTH_SHORT).show();
