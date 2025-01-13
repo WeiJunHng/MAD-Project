@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,24 +109,27 @@ public class ProfilePageFragment extends Fragment {
                     break;
 
                 case "Allow Notification":
-                    FragmentTransaction transaction1 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction1.replace(R.id.FCVMain, new AllowNotificationFragment());
-                    transaction1.addToBackStack(null); // Add the transaction to the back stack for navigation
-                    transaction1.commit();
+//                    FragmentTransaction transaction1 = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction1.replace(R.id.FCVMain, new AllowNotificationFragment());
+//                    transaction1.addToBackStack(null); // Add the transaction to the back stack for navigation
+//                    transaction1.commit();
+                    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.allowNotificationFragment);
                     break;
 
                 case "Get Support":
-                    FragmentTransaction transaction2 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction2.replace(R.id.FCVMain, new GetSupportFragment());
-                    transaction2.addToBackStack(null);
-                    transaction2.commit();
+//                    FragmentTransaction transaction2 = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction2.replace(R.id.FCVMain, new GetSupportFragment());
+//                    transaction2.addToBackStack(null);
+//                    transaction2.commit();
+                    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.getSupportFragment);
                     break;
 
                 case "Accessibility":
-                    FragmentTransaction transaction3 = requireActivity().getSupportFragmentManager().beginTransaction();
-                    transaction3.replace(R.id.FCVMain, new AccessibilityFragment());
-                    transaction3.addToBackStack(null); // Add the transaction to the back stack for navigation
-                    transaction3.commit();
+//                    FragmentTransaction transaction3 = requireActivity().getSupportFragmentManager().beginTransaction();
+//                    transaction3.replace(R.id.FCVMain, new AccessibilityFragment());
+//                    transaction3.addToBackStack(null); // Add the transaction to the back stack for navigation
+//                    transaction3.commit();
+                    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.accessibilityFragment);
                     break;
 
                 case "Sign Out":
