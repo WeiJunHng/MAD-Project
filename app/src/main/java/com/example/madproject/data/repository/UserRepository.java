@@ -13,6 +13,7 @@ import com.example.madproject.data.db.FirestoreManager;
 import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.User;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -121,12 +122,23 @@ public class UserRepository {
 
     public EmergencyContact getEmergencyContactByUserId(String userId) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<EmergencyContact> future = executorService.submit(() -> emergencyContactDAO.getByUserId(userId));
+        Future<EmergencyContact> future = executorService.submit(() -> {
+            List<EmergencyContact> contactList = emergencyContactDAO.getByUserId(userId);
+            return contactList.get(0);
+        });
 
         try {
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateEmergencyContactInFirestore(EmergencyContact emergencyContact) {
+        firestoreManager.executeAction(FirestoreManager.Action.UPDATE, "emergencyContact", emergencyContact, context);
+    }
+
+    public void deleteEmergencyContactInFirestore(EmergencyContact emergencyContact) {
+        firestoreManager.executeAction(FirestoreManager.Action.DELETE, "emergencyContact", emergencyContact, context);
     }
 }

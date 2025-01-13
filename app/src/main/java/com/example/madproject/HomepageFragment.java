@@ -117,13 +117,13 @@ public class HomepageFragment extends Fragment {
         });
     }
 
-    private void navigateToChatFragment() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.FCVMain, new fragment_chat())
-                .addToBackStack(null)
-                .commit();
-    }
+//    private void navigateToChatFragment() {
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.FCVMain, new fragment_chat())
+//                .addToBackStack(null)
+//                .commit();
+//    }
 
     private void navigateToLocationFragment() {
         requireActivity().getSupportFragmentManager()

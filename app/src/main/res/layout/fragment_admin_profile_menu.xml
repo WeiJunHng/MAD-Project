@@ -54,7 +54,7 @@
             android:id="@+id/BtnManageUserAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="null"
+            android:background="@android:color/transparent"
             android:textSize="20dp"
             android:text="Manage User Account"
             android:textColor="@color/black" />
@@ -63,7 +63,7 @@
             android:id="@+id/BtnManageContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="null"
+            android:background="@android:color/transparent"
             android:text="Manage Content"
             android:textSize="20dp"
             android:textColor="@color/black" />
@@ -72,7 +72,7 @@
             android:id="@+id/BtnReviewReport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="null"
+            android:background="@android:color/transparent"
             android:textSize="20dp"
             android:text="Review Report"
             android:textColor="@color/black" />
