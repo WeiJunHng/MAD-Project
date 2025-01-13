@@ -18,7 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,10 @@ public class HomepageFragment extends Fragment {
     private soup.neumorphism.NeumorphButton locationButton; // Button for navigating to Location Fragment
     private UserRepository userRepository; // Repository to access emergency contacts
     private SharedPreferences sharedPreferences;
+
+    private int currentDay = 23; // Default to Day
+    private ImageView cycleDayImage; // ImageView for cycle day images
+    private TextView countdownText; // TextView for cycle day information
 
     public HomepageFragment() {
         // Required empty public constructor
@@ -76,16 +82,16 @@ public class HomepageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Initialize the Gemini button
-        geminiButton = view.findViewById(R.id.gemini_button);
-//        geminiButton.setOnClickListener(v -> navigateToChatFragment());
+        /*geminiButton = view.findViewById(R.id.gemini_button);
+        geminiButton.setOnClickListener(v -> navigateToChatFragment());*/
 
         // Initialize the Neumorph Call button
         callButton = view.findViewById(R.id.button);
         callButton.setOnClickListener(v -> {
-            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
                 showContactsDialog();
             } else {
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.READ_CONTACTS}, 1);
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_CONTACTS}, 1);
             }
         });
 
@@ -96,6 +102,19 @@ public class HomepageFragment extends Fragment {
         // Initialize the Emergency Button
         Button emergencyButton = view.findViewById(R.id.button3);
         emergencyButton.setOnClickListener(v -> handleEmergencyButtonClick());
+
+        // Initialize the Cycle Day ImageView and TextView
+        cycleDayImage = view.findViewById(R.id.cycleDayImage);
+        countdownText = view.findViewById(R.id.countdown_text);
+        updateCycleDayImage(); // Set initial image and text
+
+        // Initialize the Start Period Button
+        Button startPeriodButton = view.findViewById(R.id.start_period_button);
+        startPeriodButton.setOnClickListener(v -> {
+            currentDay = 1; // Reset to Day 1
+            updateCycleDayImage();
+            Toast.makeText(requireContext(), "Period started!", Toast.LENGTH_SHORT).show();
+        });
     }
 
 //    private void navigateToChatFragment() {
@@ -184,8 +203,8 @@ public class HomepageFragment extends Fragment {
     }
 
     private void makePhoneCall(String phoneNumber) {
-        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{android.Manifest.permission.CALL_PHONE}, 2);
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.CALL_PHONE}, 2);
         } else {
             try {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -198,7 +217,7 @@ public class HomepageFragment extends Fragment {
     }
 
     private void handleEmergencyButtonClick() {
-        String userId =sharedPreferences.getString("userId",null); // Replace with actual user ID logic
+        String userId = sharedPreferences.getString("userId", null); // Retrieve the user ID from SharedPreferences
 
         // Fetch emergency contact using UserRepository
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -214,7 +233,6 @@ public class HomepageFragment extends Fragment {
             });
         });
     }
-
 
     private void dialEmergencyNumber(String phoneNumber) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -232,6 +250,54 @@ public class HomepageFragment extends Fragment {
         }
     }
 
+    private void updateCycleDayImage() {
+        String drawableName = "day" + currentDay; // e.g., "day1", "day2", ...
+        int drawableResId = getResources().getIdentifier(drawableName, "drawable", requireContext().getPackageName());
+
+        if (drawableResId != 0) { // If the drawable exists
+            cycleDayImage.setImageResource(drawableResId);
+        } else {
+            Toast.makeText(requireContext(), "Image for day " + currentDay + " not found", Toast.LENGTH_SHORT).show();
+        }
+
+        // Update the countdown text
+        countdownText.setText(getCycleDayText(currentDay));
+    }
+
+    private String getCycleDayText(int day) {
+        if (day >= 1 && day <= 5) {
+            int countdown = 5 - day + 1; // Countdown from 5 to 1 for bleeding days
+            return "You're on period.\nStay hydrated!\n" + countdown + " days remaining.";
+        } else if (day >= 6 && day <= 10) {
+            int countdown = 10 - day + 1; // Countdown from 7 to 1 for follicular phase
+            return "Hormones rising.\nCountdown:\n" + countdown + " days to ovulation.";
+        } else if (day >= 11 && day <= 13) {
+            int countdown = 14 - day; // Countdown to ovulation
+            if (countdown == 0) {
+                return "Ovulation tomorrow.\nHigh fertility.";
+            } else {
+                return "Fertile window.\nOvulation in " + countdown + " days.";
+            }
+        } else if (day == 14) {
+            return "Ovulation today.\nHigh fertility.";
+        } else if (day >= 15 && day <= 21) {
+            return "Luteal phase.\nEnergy levels \nmay drop.";
+        } else if (day >= 22 && day <= 28) {
+            int countdown = 28 - day + 1; // Countdown from 7 to 1 before period
+            return "Period in " + countdown + " days.";
+        } else {
+            return "Invalid day.";
+        }
+    }
+
+    private void incrementDay() {
+        if (currentDay < 28) { // Assuming a 28-day cycle
+            currentDay++;
+        } else {
+            currentDay = 1; // Reset to Day 1 after Day 28
+        }
+        updateCycleDayImage();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

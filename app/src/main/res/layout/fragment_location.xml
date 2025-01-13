@@ -17,7 +17,6 @@
         android:id="@+id/textView"
         android:layout_width="207dp"
         android:layout_height="28dp"
-        android:layout_marginTop="32dp"
         android:fontFamily="@font/jacques_francois"
         android:text="Live Location"
         android:textAlignment="center"
@@ -26,76 +25,69 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button_container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.285" />
 
     <LinearLayout
         android:id="@+id/button_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="455dp"
+        android:layout_height="90dp"
         android:background="#EEF6E1"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118">
+        app:layout_constraintVertical_bias="0.054">
 
         <!-- Profile Picture Buttons -->
-        <ImageView
+
+        <ImageButton
             android:id="@+id/profile_button1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/circle_background"
+            android:background="@drawable/circle_background_red"
             android:contentDescription="Profile Picture 1"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder"/>
+            app:iconTintMode="add" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/profile_button2"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/circle_background"
-            android:contentDescription="Profile Picture 2"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder" />
+            android:background="@drawable/circle_background_red"
+            android:backgroundTint="#F84710"
+            android:contentDescription="Profile Picture 2" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/profile_button3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/circle_background"
-            android:contentDescription="Profile Picture 3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder" />
+            android:background="@drawable/circle_background_red"
+            android:backgroundTint="#FF9500"
+            android:contentDescription="Profile Picture 3" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/profile_button4"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/circle_background"
-            android:contentDescription="Profile Picture 4"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder" />
+            android:background="@drawable/circle_background_red"
+            android:backgroundTint="#FFC107"
+            android:contentDescription="Profile Picture 4" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/profile_button5"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:background="@drawable/circle_background"
-            android:contentDescription="Profile Picture 5"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_placeholder" />
+            android:background="@drawable/circle_background_red"
+            android:backgroundTint="#FFEB3B"
+            android:contentDescription="Profile Picture 5" />
 
     </LinearLayout>
 
@@ -108,5 +100,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_container" />
+
+    <Button
+        android:id="@+id/reportUnsafeLocation"
+        android:layout_width="365dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:text="Report Unsafe Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        app:layout_constraintVertical_bias="0.942" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

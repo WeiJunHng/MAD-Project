@@ -26,6 +26,9 @@ public class Discussion extends Identifiable {
     @NonNull
     private String content;
 
+    @Ignore
+    private Boolean isLiked, initialLiked;
+
     public Discussion() {
 
     }
@@ -82,5 +85,29 @@ public class Discussion extends Identifiable {
 
     public void setContent(@NonNull String content) {
         this.content = content;
+    }
+
+    public Boolean _getInitialLiked() {
+        return initialLiked;
+    }
+
+    public Boolean isLiked() {
+        return isLiked;
+    }
+
+    public void _setLiked(boolean isLiked) {
+        this.isLiked = isLiked;
+    }
+
+    public void _setInitialLiked(boolean isLiked) {
+        this.initialLiked = isLiked;
+    }
+
+    public void liked() {
+        this.isLiked = true;
+    }
+
+    public void disliked() {
+        this.isLiked = false;
     }
 }

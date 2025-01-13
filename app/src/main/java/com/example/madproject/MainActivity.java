@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.madproject.data.db.AppDatabase;
+import com.example.madproject.data.db.FirestoreManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,8 @@ import com.example.madproject.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private AppDatabase database;
+    private FirestoreManager firestoreManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         // Use ViewBinding for accessing views
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        database = AppDatabase.getDatabase(getApplicationContext());
+        firestoreManager = new FirestoreManager(database);
+
+        firestoreManager.clearUserTables();
+        firestoreManager.syncUserTable();
 
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.FCVMain);
         NavController navController = host.getNavController();

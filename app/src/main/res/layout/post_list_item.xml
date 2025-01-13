@@ -19,8 +19,20 @@
         android:gravity="center_horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"
-
         android:background="@drawable/light_background">
+
+        <TextView
+            android:id="@+id/TVAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="Author Name"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="start"
+            android:textStyle="bold" />
 
         <soup.neumorphism.NeumorphCardView
             android:id="@+id/CVImage"
@@ -40,19 +52,6 @@
                 android:contentDescription="Post image" />
 
         </soup.neumorphism.NeumorphCardView>
-
-        <TextView
-            android:id="@+id/TVAuthorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:text="Author Name"
-            android:textSize="18sp"
-            android:padding="8dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="start"
-            android:textStyle="bold" />
 
 <!--        <soup.neumorphism.NeumorphCardView-->
 <!--            android:layout_width="wrap_content"-->

@@ -20,7 +20,7 @@ public interface DiscussionCommentDAO extends BaseDAO<DiscussionComment> {
     @Query("SELECT id FROM discussionComment ORDER BY id DESC LIMIT 1")
     String getLastId();
 
-    @Query("DELETE FROM user")
+    @Query("DELETE FROM discussionComment")
     void deleteAll();
 }
 

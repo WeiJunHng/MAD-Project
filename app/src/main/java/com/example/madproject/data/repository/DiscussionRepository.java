@@ -13,6 +13,7 @@ import com.example.madproject.data.model.DiscussionComment;
 import com.example.madproject.data.model.DiscussionLike;
 import com.example.madproject.data.model.User;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +27,8 @@ public class DiscussionRepository {
     private final DiscussionDAO discussionDAO;
     private final DiscussionCommentDAO discussionCommentDAO;
     private final DiscussionLikeDAO discussionLikeDAO;
+    private final UserRepository userRepository;
+    private final HashMap<String, Discussion> discussionMap = new HashMap<>();
 
     public DiscussionRepository(Context context) {
         AppDatabase database = AppDatabase.getDatabase(context);
@@ -34,6 +37,7 @@ public class DiscussionRepository {
         discussionDAO = database.discussionDAO();
         discussionCommentDAO = database.discussionCommentDAO();
         discussionLikeDAO = database.discussionLikeDAO();
+        userRepository = new UserRepository(context);
 //        fetchDiscussions();
     }
 
@@ -110,6 +114,24 @@ public class DiscussionRepository {
         }
     }
 
+    public int getCommentCount(Discussion discussion) {
+        return getAllCommentByDiscussion(discussion.getId()).size();
+    }
+
+    public int getLikeCount(Discussion discussion) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<Integer> future = executorService.submit(() -> {
+            fetchDiscussions();
+            return discussionLikeDAO.getDiscussionLikeCount(discussion.getId());
+        });
+
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean isLiked(Discussion discussion, User user) {
         return discussionLikeDAO.isLiked(discussion.getId(), user.getId());
     }
@@ -126,8 +148,58 @@ public class DiscussionRepository {
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "discussionComment", discussionComment, context);
     }
 
+    public DiscussionLike getDiscussionLike(String discussionId, String userId) {
+        return discussionLikeDAO.getDiscussionLike(discussionId, userId);
+    }
+
     public void insertDiscussionLikeInFirestore(DiscussionLike discussionLike) {
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "discussionLike", discussionLike, context);
+    }
+
+    public void deleteDiscussionLikeInFirestore(DiscussionLike discussionLike) {
+        firestoreManager.executeAction(FirestoreManager.Action.DELETE, "discussionLike", discussionLike, context);
+    }
+
+    public Discussion getDiscussionById(String id) {
+        if (discussionMap.containsKey(id)) {
+            return discussionMap.get(id);
+        }
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<Discussion> future = executorService.submit(() -> {
+            fetchDiscussions();
+            Discussion discussion = discussionDAO.getById(id);
+            discussionMap.put(id, discussion);
+            return discussion;
+        });
+
+//        Discussion discussion = null;
+        try {
+//            discussion = future.get();
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public User getAuthor(Discussion discussion) {
+        return userRepository.getUserById(discussion.getAuthorId());
+    }
+
+    public String getAuthorUsername(Discussion discussion) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<String> future = executorService.submit(() -> {
+            User author = getAuthor(discussion);
+            if(author == null) return null;
+            return author.getFormattedUsername();
+        });
+
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+//            return null;
+            throw new RuntimeException(e);
+        }
     }
 
 }
