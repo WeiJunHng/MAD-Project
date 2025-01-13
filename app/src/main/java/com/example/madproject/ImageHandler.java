@@ -86,20 +86,20 @@ public class ImageHandler {
         requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
-    public static String uploadImageToCloudinary(Context context, Bitmap bitmap) {
-        try {
-            File file = new File(context.getCacheDir(), "temp_profile_pic.jpg");
-//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
-
-            FileOutputStream out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-
-            return CloudinaryUploader.uploadImage(file.getAbsolutePath());
-        } catch (Exception e) {
-            Log.e("Cloudinary", "Error uploading image: " + e.getMessage());
-            return null;
-        }
-    }
+//    public static String uploadImageToCloudinary(Context context, Bitmap bitmap) {
+//        try {
+//            File file = new File(context.getCacheDir(), "temp_profile_pic.jpg");
+////            Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri);
+//
+//            FileOutputStream out = new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+//
+//            return CloudinaryUploader.uploadImage(file.getAbsolutePath());
+//        } catch (Exception e) {
+//            Log.e("Cloudinary", "Error uploading image: " + e.getMessage());
+//            return null;
+//        }
+//    }
 
     public static Drawable getNotAvailableDrawable(Context context) {
         return ContextCompat.getDrawable(context, R.drawable.not_available);
@@ -115,11 +115,9 @@ public class ImageHandler {
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
                 activity.runOnUiThread(() -> imageView.setImageResource(R.drawable.not_available));
-//                imageView.setImageResource(R.drawable.not_available); // Fallback to default avatar
             }
         } else {
             activity.runOnUiThread(() -> imageView.setImageResource(R.drawable.not_available));
-//            imageView.setImageResource(R.drawable.not_available); // Fallback to default avatar
         }
     }
 
