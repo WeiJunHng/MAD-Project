@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/DestHome"
-        android:name="com.example.madproject.ui.home.HomeFragment"
+        android:name="com.example.madproject.HomepageFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_homepage" />
 
     <fragment
         android:id="@+id/DestPrecaution"

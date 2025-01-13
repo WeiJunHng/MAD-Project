@@ -50,7 +50,7 @@
         android:id="@+id/BtnEditProfileIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginStart="250dp"
+        android:layout_marginStart="240dp"
         android:layout_marginTop="200dp"
         android:background="@drawable/ic_edit_profile"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +109,11 @@
 
     <TextView
         android:id="@+id/TVAccountSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="330dp"
+        android:layout_marginEnd="30dp"
         android:fontFamily="@font/iceberg"
         android:shadowColor="#F44336"
         android:shadowDx="10"
@@ -121,17 +122,20 @@
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/AccountSettingsList"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="365dp"
+        android:layout_marginEnd="30dp"
         android:divider="@null"
         android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

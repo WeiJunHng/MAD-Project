@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -24,6 +26,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.UserRepository;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,8 +41,9 @@ public class ImageHandler {
 
 //    private static final int STORAGE_PERMISSION_CODE = 101;
 
-    private final ActivityResultLauncher<Intent> imagePickerLauncher;
+    private final ActivityResultLauncher<Intent> imagePickerLauncher, imagePickerLauncherWithUpdate;
     private final ActivityResultLauncher<String>  requestPermissionLauncher;
+    private boolean withUpdate = false;
 
     public ImageHandler(@NonNull Fragment fragment, @NonNull ImageView imageView) {
         imagePickerLauncher = fragment.registerForActivityResult(
@@ -49,11 +55,28 @@ public class ImageHandler {
                 }
         );
 
+        imagePickerLauncherWithUpdate = fragment.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        imageView.setImageURI(selectedImageUri);
+                        UserRepository userRepository = new UserRepository(fragment.requireContext());
+                        User user = userRepository.getCurrentUser();
+                        user.setProfilePicURL(ImageHandler.encodeImage(imageView));
+                        userRepository.updateUserInFirestore(user);
+                    }
+                }
+        );
+
         requestPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
                         // Launch image picker if permission granted
-                        imagePickerLauncher.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        if(withUpdate) {
+                            imagePickerLauncherWithUpdate.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        } else {
+                            imagePickerLauncher.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        }
                     } else {
                         Toast.makeText(fragment.getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
                     }
@@ -71,11 +94,29 @@ public class ImageHandler {
                 }
         );
 
+        imagePickerLauncherWithUpdate = fragment.registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        Uri selectedImageUri = result.getData().getData();
+                        cardView.setVisibility(View.VISIBLE);
+                        imageView.setImageURI(selectedImageUri);
+                        UserRepository userRepository = new UserRepository(fragment.requireContext());
+                        User user = userRepository.getCurrentUser();
+                        user.setProfilePicURL(ImageHandler.encodeImage(imageView));
+                        userRepository.updateUserInFirestore(user);
+                    }
+                }
+        );
+
         requestPermissionLauncher = fragment.registerForActivityResult(new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
                         // Launch image picker if permission granted
-                        imagePickerLauncher.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        if(withUpdate) {
+                            imagePickerLauncherWithUpdate.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        } else {
+                            imagePickerLauncher.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
+                        }
                     } else {
                         Toast.makeText(fragment.getContext(), "Permission denied", Toast.LENGTH_SHORT).show();
                     }
@@ -83,6 +124,12 @@ public class ImageHandler {
     }
 
     public void launchImagePicker() {
+        withUpdate = false;
+        requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    public void launchImagePickerWithUpdate() {
+        withUpdate = true;
         requestPermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
@@ -147,6 +194,7 @@ public class ImageHandler {
             throw new RuntimeException(e);
         }
     }
+
 
 //    public static void launch(@NonNull Fragment fragment, @NonNull ImageView imageView) {
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

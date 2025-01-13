@@ -15,8 +15,11 @@ import com.example.madproject.data.model.ChatGroup;
 import com.example.madproject.data.model.Discussion;
 import com.example.madproject.data.model.DiscussionComment;
 import com.example.madproject.data.model.DiscussionLike;
+import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.Identifiable;
 import com.example.madproject.data.model.Message;
+import com.example.madproject.data.model.PeriodCycle;
+import com.example.madproject.data.model.PeriodRecord;
 import com.example.madproject.data.model.Report;
 import com.example.madproject.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +60,10 @@ public class FirestoreManager {
         MODEL_CLASS_MAP.put("chatGroup", ChatGroup.class);
         MODEL_CLASS_MAP.put("message", Message.class);
         MODEL_CLASS_MAP.put("report", Report.class);
+        MODEL_CLASS_MAP.put("emergencyContact", EmergencyContact.class);
+        MODEL_CLASS_MAP.put("periodRecord", PeriodRecord.class);
+        MODEL_CLASS_MAP.put("periodCycle", PeriodCycle.class);
+
 
         // Map tablename to SQL execution code
         SQL_EXEC_CODE_MAP.put("user", new String[] {
@@ -118,6 +125,11 @@ public class FirestoreManager {
         DAO_MAP.put("chatGroup", database.chatGroupDAO());
         DAO_MAP.put("message", database.messageDAO());
         DAO_MAP.put("report", database.reportDAO());
+        DAO_MAP.put("emergencyContact", database.emergencyContactDAO());
+        DAO_MAP.put("periodCycle", database.periodCycleDAO());
+        DAO_MAP.put("periodRecord", database.periodRecordDAO());
+
+
     }
 
     public void clearUserTables() {
