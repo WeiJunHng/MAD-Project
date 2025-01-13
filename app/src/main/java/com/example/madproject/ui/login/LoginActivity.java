@@ -17,6 +17,7 @@ import com.example.madproject.MainActivity;
 import com.example.madproject.R;
 import com.example.madproject.data.db.AppDatabase;
 import com.example.madproject.data.db.FirestoreManager;
+import com.example.madproject.data.model.DbLocation;
 import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.PeriodCycle;
 import com.example.madproject.data.model.PeriodRecord;
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "periodRecord", periodRecord, getApplicationContext());
         firestoreManager.executeAction(FirestoreManager.Action.INSERT, "emergencyContact", emergencyContact, getApplicationContext());*/
 
+
+        DbLocation dbLocation = new DbLocation("L000001", "A", 61.7, 71.4);
+        firestoreManager.executeAction(FirestoreManager.Action.INSERT, "location", dbLocation, getApplicationContext());
 
         if(sharedPreferences.getString("userId",null) != null) {
             navigateToHome();
