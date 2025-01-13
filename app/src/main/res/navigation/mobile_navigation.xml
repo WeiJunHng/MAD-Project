@@ -156,4 +156,34 @@
         android:name="com.example.madproject.ui.signup.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/adminProfileMenu"
+        android:name="com.example.madproject.ui.admin.AdminProfileMenu"
+        android:label="fragment_admin_profile_menu"
+        tools:layout="@layout/fragment_admin_profile_menu" />
+    <dialog
+        android:id="@+id/discussionReportDialogFragment"
+        android:name="com.example.madproject.ui.discussion.DiscussionReportDialogFragment"
+        android:label="fragment_discussion_report_dialog"
+        tools:layout="@layout/fragment_discussion_report_dialog" />
+    <fragment
+        android:id="@+id/manageContentDetails"
+        android:name="com.example.madproject.ui.admin.ManageContentDetailsFragment"
+        android:label="fragment_manage_content_details"
+        tools:layout="@layout/fragment_manage_content_details" />
+    <fragment
+        android:id="@+id/manageUserAccountDetails"
+        android:name="com.example.madproject.ui.admin.ManageUserAccountDetails"
+        android:label="fragment_manage_user_account_details"
+        tools:layout="@layout/fragment_manage_user_account_details" />
+    <fragment
+        android:id="@+id/reviewReport"
+        android:name="com.example.madproject.ui.admin.ReviewReport"
+        android:label="fragment_review_report"
+        tools:layout="@layout/fragment_review_report" />
+    <fragment
+        android:id="@+id/manageContentFragment"
+        android:name="com.example.madproject.ui.admin.ManageContentFragment"
+        android:label="fragment_manage_content"
+        tools:layout="@layout/fragment_manage_content" />
 </navigation>
