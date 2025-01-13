@@ -13,10 +13,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.madproject.data.DAO.LocationDAO;
+import com.example.madproject.data.db.AppDatabase;
+import com.example.madproject.data.model.DbLocation;
+import com.example.madproject.data.repository.LocationRepository;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -35,6 +38,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class location extends Fragment implements OnMapReadyCallback {
 
@@ -44,12 +50,15 @@ public class location extends Fragment implements OnMapReadyCallback {
     private static final int LOCATION_PERMISSION_CODE = 102;
     private static final int LOCATION_SETTINGS_REQUEST_CODE = 103;
 
-    private ArrayList<LatLng> unsafeLocations; // List of unsafe locations
+    private LocationRepository locationRepository;
+    private List<LatLng> unsafeLocations; // List of unsafe locations
     private Location userCurrentLocation; // User's current location for distance calculation
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_location, container, false);
+
+        locationRepository = new LocationRepository(requireContext());
 
         // Initialize Map Fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
@@ -68,13 +77,8 @@ public class location extends Fragment implements OnMapReadyCallback {
         ImageButton button5 = view.findViewById(R.id.profile_button5);
         Button reportButton = view.findViewById(R.id.reportUnsafeLocation);
 
-        // Predefined unsafe locations (replace these with data from the database later)
-        unsafeLocations = new ArrayList<>();
-        unsafeLocations.add(new LatLng(3.1390, 101.6869)); // Example: KL city center
-        unsafeLocations.add(new LatLng(3.1569, 101.7123)); // Example: Bukit Bintang
-        unsafeLocations.add(new LatLng(3.1575, 101.7111)); // Example: Jalan Alor
-        unsafeLocations.add(new LatLng(3.1400, 101.6900)); // Example: Petronas Twin Towers
-        unsafeLocations.add(new LatLng(3.1500, 101.7000)); // Example: KLCC Park
+        // Fetch unsafe locations from database
+        loadUnsafeLocations();
 
         // Set button click listeners
         button1.setOnClickListener(v -> showUnsafeLocationWithDistance(0));
@@ -166,8 +170,23 @@ public class location extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    private void loadUnsafeLocations() {
+        unsafeLocations = new ArrayList<>();
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+//            AppDatabase database = AppDatabase.getInstance(requireContext());
+//            LocationDAO locationDAO = database.locationDAO();
+
+//            List<com.example.madproject.data.model.Location> locations = locationDAO.getAll();
+            List<DbLocation> locations = locationRepository.getAllLocation();
+            for (DbLocation loc : locations) {
+                unsafeLocations.add(new LatLng(loc.getLatitude(), loc.getLongitude()));
+            }
+        });
+    }
+
     private void sortUnsafeLocationsByDistance() {
-        if (userCurrentLocation == null) return;
+        if (userCurrentLocation == null || unsafeLocations == null) return;
 
         // Sort unsafe locations based on distance to user's current location
         Collections.sort(unsafeLocations, Comparator.comparingDouble(location -> {
@@ -202,25 +221,32 @@ public class location extends Fragment implements OnMapReadyCallback {
     }
 
     private void enableReportUnsafeLocation() {
-        // Notify the user that they can now long-press to report a location
         Toast.makeText(requireContext(), "You can now report a location by long-pressing on the map.", Toast.LENGTH_LONG).show();
 
         mMap.setOnMapLongClickListener(latLng -> {
-            // Show confirmation dialog
             new androidx.appcompat.app.AlertDialog.Builder(requireContext())
                     .setTitle("Report Unsafe Location")
                     .setMessage("Are you sure you want to report this location as unsafe?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // Add marker and save location
                         mMap.addMarker(new MarkerOptions().position(latLng).title("Reported Unsafe Location"));
-                        unsafeLocations.add(latLng);
-                        Toast.makeText(requireContext(), "Unsafe location reported!", Toast.LENGTH_SHORT).show();
 
-                        // Save location to database (example, uncomment when integrated with Firebase)
-                        // saveLocationToDatabase(latLng);
+                        // Save to database
+                        ExecutorService executorService = Executors.newSingleThreadExecutor();
+                        executorService.execute(() -> {
+//                            AppDatabase database = AppDatabase.getInstance(requireContext());
+//                            LocationDAO locationDAO = database.locationDAO();
+//
+//                            String newId = locationDAO.getLastId();
+//                            int id = (newId == null) ? 1 : Integer.parseInt(newId) + 1;
+                            DbLocation newDbLocation = new DbLocation(
+                                    locationRepository.createLocationId(), "Reported Location", latLng.longitude, latLng.latitude);
+//                            locationDAO.insert(newDbLocation);
+                            locationRepository.insertLocationInFirestore(newDbLocation);
+                        });
+
+                        Toast.makeText(requireContext(), "Unsafe location reported!", Toast.LENGTH_SHORT).show();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-                        // Do nothing if the user cancels
                         Toast.makeText(requireContext(), "Action canceled", Toast.LENGTH_SHORT).show();
                     })
                     .show();

@@ -46,6 +46,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/analytic_button"
+        android:layout_width="49dp"
+        android:layout_height="46dp"
+        android:background="#EEF6E1"
+        android:drawableStart="@drawable/analytics"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036"
+        app:neumorph_backgroundColor="#EEF6E1"
+        app:neumorph_shadowColorDark="#C4C4C4"
+        app:neumorph_shadowColorLight="#F7F7F7"
+        app:neumorph_shadowElevation="3dp"
+        app:neumorph_shapeType="flat" />
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/notification_button"
+        android:layout_width="56dp"
+        android:layout_height="52dp"
+        android:background="#EEF6E1"
+        android:drawableStart="@drawable/notifications"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032"
+        app:neumorph_backgroundColor="#EEF6E1"
+        app:neumorph_shadowColorDark="#C4C4C4"
+        app:neumorph_shadowColorLight="#F7F7F7"
+        app:neumorph_shadowElevation="3dp"
+        app:neumorph_shapeType="flat" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="412dp"
@@ -59,9 +98,9 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/textView4"
-        android:layout_width="137dp"
-        android:layout_height="36dp"
+        android:id="@+id/reminderButton"
+        android:layout_width="130dp"
+        android:layout_height="39dp"
         android:text="Reminder"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -159,7 +198,7 @@
         android:src="@drawable/sec_circle"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent" />
 
     <soup.neumorphism.NeumorphButton

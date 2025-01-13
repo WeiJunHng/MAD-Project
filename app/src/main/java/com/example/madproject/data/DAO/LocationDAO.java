@@ -3,24 +3,24 @@ package com.example.madproject.data.DAO;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.madproject.data.model.Location;
+import com.example.madproject.data.model.DbLocation;
 
 import java.util.List;
 
 @Dao
-public interface LocationDAO extends BaseDAO<Location> {
+public interface LocationDAO extends BaseDAO<DbLocation> {
 
     // Retrieve all locations
     @Query("SELECT * FROM location")
-    List<Location> getAll();
+    List<DbLocation> getAll();
 
     // Retrieve a location by ID
     @Query("SELECT * FROM location WHERE id = :id")
-    Location getById(String id);
+    DbLocation getById(String id);
 
     // Retrieve a location by name
     @Query("SELECT * FROM location WHERE locationName = :locationName")
-    Location getByName(String locationName);
+    DbLocation getByName(String locationName);
 
     // Retrieve the last added location ID
     @Query("SELECT id FROM location ORDER BY id DESC LIMIT 1")

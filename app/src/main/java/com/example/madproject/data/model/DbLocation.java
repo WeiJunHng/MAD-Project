@@ -2,11 +2,10 @@ package com.example.madproject.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "location")
-public class Location extends Identifiable {
+public class DbLocation extends Identifiable {
     @PrimaryKey
     @NonNull
     private String id; // Unique ID for the location
@@ -15,10 +14,10 @@ public class Location extends Identifiable {
     private double longitude; // Longitude of the location
     private double latitude; // Latitude of the location
 
-    public Location() {
+    public DbLocation() {
     }
 
-    public Location(@NonNull String id, @NonNull String locationName, double longitude, double latitude) {
+    public DbLocation(@NonNull String id, @NonNull String locationName, double longitude, double latitude) {
         this.id = id;
         this.locationName = locationName;
         this.longitude = longitude;

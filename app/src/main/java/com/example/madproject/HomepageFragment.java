@@ -31,6 +31,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.madproject.data.model.EmergencyContact;
+import com.example.madproject.data.model.User;
+import com.example.madproject.data.repository.LocationRepository;
 import com.example.madproject.data.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -43,9 +45,11 @@ public class HomepageFragment extends Fragment {
     private soup.neumorphism.NeumorphButton callButton; // NeumorphButton for accessing contacts
     private soup.neumorphism.NeumorphButton locationButton; // Button for navigating to Location Fragment
     private UserRepository userRepository; // Repository to access emergency contacts
+    private LocationRepository locationRepository;
     private SharedPreferences sharedPreferences;
+    private User currentUser;
 
-    private int currentDay = 23; // Default to Day
+    private int currentDay; // Default to Day
     private ImageView cycleDayImage; // ImageView for cycle day images
     private TextView countdownText; // TextView for cycle day information
 
@@ -68,7 +72,9 @@ public class HomepageFragment extends Fragment {
 
         // Initialize UserRepository
         userRepository = new UserRepository(requireContext());
+        locationRepository = new LocationRepository(requireContext());
         sharedPreferences = requireActivity().getSharedPreferences("userPreferences", MODE_PRIVATE);
+        currentUser = userRepository.getCurrentUser();
     }
 
     @Nullable
@@ -95,6 +101,8 @@ public class HomepageFragment extends Fragment {
             }
         });
 
+        currentDay = currentUser.getCurrentDay();
+
         // Initialize the Location button
         locationButton = view.findViewById(R.id.location_button);
         locationButton.setOnClickListener(v -> navigateToLocationFragment());
@@ -112,9 +120,14 @@ public class HomepageFragment extends Fragment {
         Button startPeriodButton = view.findViewById(R.id.start_period_button);
         startPeriodButton.setOnClickListener(v -> {
             currentDay = 1; // Reset to Day 1
+            currentUser.setCurrentDay(1);
             updateCycleDayImage();
             Toast.makeText(requireContext(), "Period started!", Toast.LENGTH_SHORT).show();
         });
+
+        // Initialize the Reminder Button
+        Button reminderButton = view.findViewById(R.id.reminderButton);
+        reminderButton.setOnClickListener(v -> navigateToReminderFragment());
     }
 
 //    private void navigateToChatFragment() {
@@ -124,6 +137,13 @@ public class HomepageFragment extends Fragment {
 //                .addToBackStack(null)
 //                .commit();
 //    }
+private void navigateToReminderFragment() {
+    requireActivity().getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.FCVMain, new Reminder())
+            .addToBackStack(null)
+            .commit();
+}
 
     private void navigateToLocationFragment() {
         requireActivity().getSupportFragmentManager()
@@ -219,19 +239,26 @@ public class HomepageFragment extends Fragment {
     private void handleEmergencyButtonClick() {
         String userId = sharedPreferences.getString("userId", null); // Retrieve the user ID from SharedPreferences
 
+        String phoneNumber = currentUser.getEmergencyContact();
+        if(phoneNumber != null && !phoneNumber.isBlank()) {
+            dialEmergencyNumber(phoneNumber);
+        } else {
+            Toast.makeText(getContext(), "Emergency contact not found", Toast.LENGTH_SHORT).show();
+        }
+
         // Fetch emergency contact using UserRepository
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(() -> {
-            EmergencyContact emergencyContact = userRepository.getEmergencyContactByUserId(userId);
-            requireActivity().runOnUiThread(() -> {
-                if (emergencyContact != null && emergencyContact.getContactInfo() != null) {
-                    String phoneNumber = emergencyContact.getContactInfo();
-                    dialEmergencyNumber(phoneNumber);
-                } else {
-                    Toast.makeText(getContext(), "Emergency contact not found", Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//        executorService.execute(() -> {
+//            EmergencyContact emergencyContact = userRepository.getEmergencyContactByUserId(userId);
+//            requireActivity().runOnUiThread(() -> {
+//                if (emergencyContact != null && emergencyContact.getContactInfo() != null) {
+//                    String phoneNumber = emergencyContact.getContactInfo();
+//                    dialEmergencyNumber(phoneNumber);
+//                } else {
+//                    Toast.makeText(getContext(), "Emergency contact not found", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        });
     }
 
     private void dialEmergencyNumber(String phoneNumber) {

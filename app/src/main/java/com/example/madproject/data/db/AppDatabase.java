@@ -22,11 +22,11 @@ import com.example.madproject.data.DAO.PeriodRecordDAO;
 import com.example.madproject.data.DAO.ReportDAO;
 import com.example.madproject.data.DAO.UserDAO;
 import com.example.madproject.data.model.ChatGroup;
+import com.example.madproject.data.model.DbLocation;
 import com.example.madproject.data.model.Discussion;
 import com.example.madproject.data.model.DiscussionComment;
 import com.example.madproject.data.model.DiscussionLike;
 import com.example.madproject.data.model.EmergencyContact;
-import com.example.madproject.data.model.Location;
 import com.example.madproject.data.model.Message;
 import com.example.madproject.data.model.PeriodCycle;
 import com.example.madproject.data.model.PeriodRecord;
@@ -44,7 +44,7 @@ import com.example.madproject.data.model.User;
         EmergencyContact.class,
         PeriodCycle.class,
         PeriodRecord.class,
-        Location.class
+        DbLocation.class
 },version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
@@ -61,7 +61,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract EmergencyContactDAO emergencyContactDAO();
     public abstract PeriodCycleDAO periodCycleDAO();
     public abstract PeriodRecordDAO periodRecordDAO();
-    public abstract LocationDAO LocationDAO();
+    public abstract LocationDAO locationDAO();
 
 
 
