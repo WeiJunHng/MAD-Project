@@ -128,6 +128,10 @@ public class HomepageFragment extends Fragment {
         // Initialize the Reminder Button
         Button reminderButton = view.findViewById(R.id.reminderButton);
         reminderButton.setOnClickListener(v -> navigateToReminderFragment());
+
+        // Initialize the Broadcast Button
+        Button broadcastButton = view.findViewById(R.id.notification_button);
+        reminderButton.setOnClickListener(v -> navigateToBroadcastFragment());
     }
 
 //    private void navigateToChatFragment() {
@@ -137,6 +141,13 @@ public class HomepageFragment extends Fragment {
 //                .addToBackStack(null)
 //                .commit();
 //    }
+private void navigateToBroadcastFragment() {
+    requireActivity().getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.FCVMain, new Broadcast())
+            .addToBackStack(null)
+            .commit();
+}
 private void navigateToReminderFragment() {
     requireActivity().getSupportFragmentManager()
             .beginTransaction()
