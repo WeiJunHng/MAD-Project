@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.madproject.data.model.EmergencyContact;
 import com.example.madproject.data.model.User;
@@ -131,7 +132,11 @@ public class HomepageFragment extends Fragment {
 
         // Initialize the Broadcast Button
         Button broadcastButton = view.findViewById(R.id.notification_button);
-        reminderButton.setOnClickListener(v -> navigateToBroadcastFragment());
+        broadcastButton.setOnClickListener(v -> navigateToBroadcastFragment());
+
+        // Initialize the Analytic Button
+        Button analyticButton = view.findViewById(R.id.analytic_button);
+        analyticButton.setOnClickListener(v -> navigateToAnalyticFragment());
     }
 
 //    private void navigateToChatFragment() {
@@ -141,27 +146,38 @@ public class HomepageFragment extends Fragment {
 //                .addToBackStack(null)
 //                .commit();
 //    }
+private void navigateToAnalyticFragment() {
+//    requireActivity().getSupportFragmentManager()
+//            .beginTransaction()
+//            .replace(R.id.FCVMain, new PeriodAnalysis())
+//            .addToBackStack(null)
+//            .commit();
+    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.periodAnalysis);
+}
 private void navigateToBroadcastFragment() {
-    requireActivity().getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.FCVMain, new Broadcast())
-            .addToBackStack(null)
-            .commit();
+//    requireActivity().getSupportFragmentManager()
+//            .beginTransaction()
+//            .replace(R.id.FCVMain, new Broadcast())
+//            .addToBackStack(null)
+//            .commit();
+    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.broadcast);
 }
 private void navigateToReminderFragment() {
-    requireActivity().getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.FCVMain, new Reminder())
-            .addToBackStack(null)
-            .commit();
+//    requireActivity().getSupportFragmentManager()
+//            .beginTransaction()
+//            .replace(R.id.FCVMain, new Reminder())
+//            .addToBackStack(null)
+//            .commit();
+    Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.reminder);
 }
 
     private void navigateToLocationFragment() {
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.FCVMain, new location())
-                .addToBackStack(null)
-                .commit();
+//        requireActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.FCVMain, new location())
+//                .addToBackStack(null)
+//                .commit();
+        Navigation.findNavController(requireActivity(), R.id.FCVMain).navigate(R.id.location);
     }
 
     private void showContactsDialog() {

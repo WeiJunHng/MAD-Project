@@ -10,9 +10,9 @@
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/neumorphCardView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="350dp"
+        android:layout_height="243dp"
+        android:layout_marginTop="5dp"
         android:padding="5sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
@@ -38,7 +38,7 @@
         android:id="@+id/neumorphCardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:padding="5sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
@@ -76,7 +76,7 @@
 
         <ImageView
             android:id="@+id/previousCycleLength"
-            android:layout_width="wrap_content"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_previous_cycle_length"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,8 +86,8 @@
 
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/neumorphCardView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="304dp"
+        android:layout_height="139dp"
         android:layout_marginTop="10dp"
         android:padding="5sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,8 +101,8 @@
 
         <ImageView
             android:id="@+id/previousPeriodLength"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="304dp"
+            android:layout_height="139dp"
             android:src="@drawable/ic_previous_period_length"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
