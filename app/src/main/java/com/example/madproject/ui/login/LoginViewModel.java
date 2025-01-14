@@ -19,6 +19,10 @@ public class LoginViewModel extends ViewModel {
         this.userRepository = userRepository; // Assume UserRepository handles data operations
     }
 
+    public void resetUserLiveData() {
+        userLiveData.postValue(null);
+    }
+
     public void setVerificationCode(String code) {
         verificationCode.postValue(code);
     }
