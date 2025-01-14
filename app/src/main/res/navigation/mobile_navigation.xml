@@ -186,4 +186,19 @@
         android:name="com.example.madproject.ui.admin.ManageContentFragment"
         android:label="fragment_manage_content"
         tools:layout="@layout/fragment_manage_content" />
+    <fragment
+        android:id="@+id/periodAnalysis"
+        android:name="com.example.madproject.PeriodAnalysis"
+        android:label="fragment_period_analysis"
+        tools:layout="@layout/fragment_period_analysis" />
+    <fragment
+        android:id="@+id/broadcast"
+        android:name="com.example.madproject.Broadcast"
+        android:label="fragment_broadcast"
+        tools:layout="@layout/fragment_broadcast" />
+    <fragment
+        android:id="@+id/reminder"
+        android:name="com.example.madproject.Reminder"
+        android:label="fragment_reminder"
+        tools:layout="@layout/fragment_reminder" />
 </navigation>
